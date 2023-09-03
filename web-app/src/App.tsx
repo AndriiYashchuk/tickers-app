@@ -5,5 +5,5 @@ interface Props {
 }
 
 export const App = ({ user }: Props) => (
-  <h2>Hi man its new build, {user}</h2>
+  <h2>Its home page your name is, {user}</h2>
 )

@@ -1,0 +1,27 @@
+apiVersion: skaffold/v4beta5
+kind: Config
+metadata:
+  name: tickers-app
+build:
+  local:
+    push: false
+  artifacts:
+    - image: iandrew/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+          - src: '**/*.ts'
+            dest: .
+          - src: '**/*.tsx'
+            dest: .
+manifests:
+  rawYaml:
+    - infra/k8s/client-depl.yaml
+    - infra/k8s/ingress-srv.yaml
+
+
+
