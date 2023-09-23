@@ -23,18 +23,6 @@ const babelOptions = {
 };
 
 module.exports = {
-  entry: './src/index.tsx',
-  output: {
-    path: path.resolve(__dirname, '../client/public/dist'),
-    filename: '[name].[hash].js'
-  },
-  devServer: {
-    open: true,
-    host: 'localhost',
-    client: {
-      overlay: false
-    }
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',

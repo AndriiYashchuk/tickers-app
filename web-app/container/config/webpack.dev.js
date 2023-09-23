@@ -8,9 +8,13 @@ const devConfig = {
   devtool: 'source-map',
   devServer: {
     port: 8080,
+    open: true,
     historyApiFallback: {
       index: 'index.html',
     },
+    client: {
+      overlay: false
+    }
   },
   plugins: [
     new ModuleFederationPlugin({
