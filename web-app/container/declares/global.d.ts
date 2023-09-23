@@ -4,4 +4,10 @@ declare global {
   }
 }
 
+declare module 'dashboard/DashboardApp' {
+  const mount: () => void
+  export { mount };
+}
+
+
 export {}
