@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    path:
-      - 'web-app/container/**'
+    paths:
+      - "web-app/container/**"
 
 defaults:
   run:
@@ -16,7 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci
+      # delete package-lock.json https://stackoverflow.com/questions/67114659/npm-err-code-e401-npm-err-incorrect-or-missing-password
+      - run: rm package-lock.json
+      - run: npm install --registry https://registry.npmjs.org
       - run: npm run build
 
       - uses: shinyinc/action-aws-cli@v1.2
@@ -24,4 +26,4 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ""
+          AWS_DEFAULT_REGION: "eu-north-1"
