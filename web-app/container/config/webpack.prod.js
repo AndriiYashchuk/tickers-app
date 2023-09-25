@@ -3,10 +3,12 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
-const domain = process.env.PRODUCTION_DOMAIN;
+const mode = process.env.MODE;
+const isDevMode = mode === 'development'
+const domain = isDevMode ? `http://localhost:3000` : process.env.PRODUCTION_DOMAIN;
 
 const prodConfig = {
-  mode: 'production',
+  mode: mode || 'production',
   output: {
     filename: '[name].[contenthash].js',
     publicPath: `${domain}/container/latest/`,

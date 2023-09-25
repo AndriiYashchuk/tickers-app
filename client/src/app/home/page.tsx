@@ -2,9 +2,12 @@ import Script from 'next/script'
 import fs from 'fs';
 import path from 'path';
 
+const CONTAINER_PREFIX = '/container/latest';
+const domain = process.env.PRODUCTION_DOMAIN || 'http://localhost:3000'
+
 const scanFilesAndGetDynamicName = async (): Promise<string | undefined> => {
   try {
-    const files = fs.readdirSync(path.join(process.cwd(), 'public/dist'));
+    const files = fs.readdirSync(path.join(process.cwd(), `public/${CONTAINER_PREFIX}`));
 
     const mainScript = files.find((fileName) => fileName.startsWith("main"));
     console.log(mainScript)
@@ -23,10 +26,10 @@ const Home = async () => {
     <h1>
       Hello from home page
     </h1>
-    <div id={"app"}>
+    <div id={"root"}>
 
     </div>
-    {script && <Script src={`/dist/${script}`} type="text/javascript" strategy={'lazyOnload'} />}
+    {script && <Script src={`${domain}${CONTAINER_PREFIX}/${script}`} type="text/javascript" strategy={'lazyOnload'} />}
   </div>
 }
 
