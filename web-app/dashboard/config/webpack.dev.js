@@ -4,6 +4,8 @@ const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const PORT = 8081;
+
 const devConfig = {
   mode: 'development',
   devtool: 'source-map',
@@ -16,6 +18,9 @@ const devConfig = {
     client: {
       overlay: false
     }
+  },
+  output:{
+    publicPath: `http://localhost:${PORT}/`
   },
   plugins: [
     new ModuleFederationPlugin({
