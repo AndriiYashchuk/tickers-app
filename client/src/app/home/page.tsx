@@ -1,26 +1,12 @@
 import Script from 'next/script'
-import fs from 'fs';
-import path from 'path';
-
-const CONTAINER_PREFIX = '/container/latest';
-const domain = process.env.PRODUCTION_DOMAIN || 'http://localhost:3000'
-
-const scanFilesAndGetDynamicName = async (): Promise<string | undefined> => {
-  try {
-    const files = fs.readdirSync(path.join(process.cwd(), `public/${CONTAINER_PREFIX}`));
-
-    const mainScript = files.find((fileName) => fileName.startsWith("main"));
-    console.log(mainScript)
-
-    return mainScript;
-  } catch (e) {
-    console.error(e);
-  }
-}
+import { CONTAINER_PREFIX, domain, isProd } from '../../constants';
+import { scanFilesInPublicAndGetDynamicName, scanInRemote } from '../../helpers';
 
 // `app/page.tsx` is the UI for the `/` URL
 const Home = async () => {
-  const script = await scanFilesAndGetDynamicName()
+  const funcToScanScript = isProd ? scanInRemote : scanFilesInPublicAndGetDynamicName;
+  const script = await funcToScanScript();
+  console.log(`web-app script: ${script}`)
 
   return <div>
     <h1>

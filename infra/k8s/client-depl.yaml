@@ -16,7 +16,7 @@ spec:
         - name: client
           image: iandrew/client
           env:
-            - name: PRODUCTION_DOMAIN
+            - name: WEB_APP_DOMAIN
               value: 'https://d2tyebzd7r2iau.cloudfront.net'
 ---
 apiVersion: v1
