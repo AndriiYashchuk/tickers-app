@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "sh scripts/start.sh",
     "build": "next build",
-    "start": "sh scripts/start.sh",
+    "start": "next build && next start",
     "lint": "next lint"
   },
   "dependencies": {

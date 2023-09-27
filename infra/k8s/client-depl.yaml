@@ -15,6 +15,9 @@ spec:
       containers:
         - name: client
           image: iandrew/client
+          env:
+            - name: PRODUCTION_DOMAIN
+              value: 'https://d2tyebzd7r2iau.cloudfront.net'
 ---
 apiVersion: v1
 kind: Service

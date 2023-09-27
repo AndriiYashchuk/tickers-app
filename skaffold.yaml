@@ -2,6 +2,9 @@ apiVersion: skaffold/v4beta5
 kind: Config
 metadata:
   name: tickers-app
+manifests:
+  rawYaml:
+    - infra/k8s/*
 build:
   local:
     push: false
@@ -18,10 +21,6 @@ build:
             dest: .
           - src: '**/*.tsx'
             dest: .
-manifests:
-  rawYaml:
-    - infra/k8s/client-depl.yaml
-    - infra/k8s/ingress-srv.yaml
 
 
 
