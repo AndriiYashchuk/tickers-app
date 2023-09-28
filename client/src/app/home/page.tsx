@@ -6,17 +6,13 @@ import { scanFilesInPublicAndGetDynamicName, scanInRemote } from '../../helpers'
 const Home = async () => {
   const funcToScanScript = isProd ? scanInRemote : scanFilesInPublicAndGetDynamicName;
   const script = await funcToScanScript();
-  console.log(`web-app script: ${script}`)
+  console.log(`web-app script: ${script}`);
 
-  return <div>
-    <h1>
-      Hello from home page
-    </h1>
-    <div id={"root"}>
-
-    </div>
+  return (
+    <>
+    <div id={"root"} />
     {script && <Script src={`${domain}${CONTAINER_PREFIX}/${script}`} type="text/javascript" strategy={'lazyOnload'} />}
-  </div>
+  </>);
 }
 
 export default Home;
