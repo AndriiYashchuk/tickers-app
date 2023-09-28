@@ -1,14 +1,22 @@
 import React from 'react';
-import DashboardApp from './components/DashboardApp';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+import './utils/ClassNameGenerator';
+import DashboardApp from './apps/DashboardApp';
+import { Header } from './components/Header';
+import { Main } from './components/Main';
+import { Footer } from './components/Footer';
 
 interface Props {
   user: string
 }
 
 export const App = ({ user }: Props) => (
-  <>
-    <h2>Its home page your name is, {user}</h2>
-    <DashboardApp />
-    <h3>© 2023 Andrii Yashchuk.</h3>
-  </>
+  <ThemeProvider theme={theme}>
+    <Header />
+    <Main>
+      <DashboardApp />
+    </Main>
+    <Footer />
+  </ThemeProvider>
 )

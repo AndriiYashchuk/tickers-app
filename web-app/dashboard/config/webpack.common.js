@@ -8,7 +8,7 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 
 const babelOptions = {
   presets: [
-    ['@babel/preset-env', { targets: '> 0.05%, not dead' }],
+    '@babel/preset-env',
     '@babel/preset-typescript',
     '@babel/preset-react',
   ],
@@ -53,7 +53,7 @@ module.exports = {
 
       {
         test: /\.ts(x?)$/,
-        exclude: [/node_modules(?!\/sn-front[.-])/],
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
@@ -70,6 +70,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         options: babelOptions,
       },

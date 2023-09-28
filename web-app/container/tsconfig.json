@@ -11,10 +11,10 @@
     ],
     "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "preserve"
+    "jsx": "preserve",
   },
   "files": [
     "src/index.ts",
-    "declares/global.d.ts"
+    "./declares/dashboard.d.ts"
   ]
 }
