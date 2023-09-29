@@ -1,6 +1,6 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const commonConfig = require('./webpack.common');
+const commonConfig = require('@tickers-app/common-client/webpack/webpack.common');
 const packageJson = require('../package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 

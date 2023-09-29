@@ -1,20 +1,7 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "target": "es6",
-    "allowJs": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "jsx": "preserve",
-  },
+  "extends": "@tickers-app/common/tsconfig.json",
   "files": [
     "src/index.ts",
-    "./declares/dashboard.d.ts"
+    "./node_modules/@tickers-app/common/declares/dashboard.d.ts"
   ]
 }
