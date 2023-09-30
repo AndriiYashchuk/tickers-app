@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf build",
     "build": "npm run clean && tsc",
-    "publish": "npm run build && git add . && git commit -m \"Updates common-client package\" && npm version patch && npm publish"
+    "pub": "npm run build && git add . && git commit -m \"Updates common-client package\" && npm version patch && npm publish"
   },
   "keywords": [],
   "author": "",
