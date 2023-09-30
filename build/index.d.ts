@@ -1,4 +1,4 @@
-export { Footer } from './components/Footer';
-export { Header } from './components/Header';
-export { Main } from './components/Main';
+export * from './components/Footer';
+export * from './components/Header';
+export * from './components/Main';
 export * from './theme';
