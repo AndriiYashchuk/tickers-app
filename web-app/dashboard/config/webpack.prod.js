@@ -1,6 +1,6 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const commonConfig = require('@tickers-app/common-client/webpack/src/webpack.common');
+const commonConfig = require('@tickers-app/common-client/src/webpack/webpack.common');
 const sharedModules = require('@tickers-app/common-client/src/webpack/shared');
 
 const mode = process.env.MODE;
