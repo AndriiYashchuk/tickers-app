@@ -1,7 +1,11 @@
 {
   "extends": "@tickers-app/common/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./build",
+    "declaration": true,
+    "skipLibCheck": true
+  },
   "files": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "src/index.ts"
   ]
 }
