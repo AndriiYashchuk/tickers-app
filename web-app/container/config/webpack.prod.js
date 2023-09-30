@@ -1,7 +1,7 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const commonConfig = require('@tickers-app/common-client/webpack/webpack.common');
-const packageJson = require('../package.json');
+const commonConfig = require('@tickers-app/common-client/src/webpack/webpack.common');
+const sharedModules = require('@tickers-app/common-client/src/webpack/shared');
 
 const mode = process.env.MODE;
 const isDevMode = mode === 'development'
@@ -19,7 +19,7 @@ const prodConfig = {
       remotes: {
         dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
       },
-      shared: packageJson.dependencies,
+      shared: sharedModules,
     }),
   ],
 };

@@ -1,7 +1,7 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const commonConfig = require('@tickers-app/common-client/webpack/webpack.common');
-const packageJson = require('../package.json');
+const commonConfig = require('@tickers-app/common-client/webpack/src/webpack.common');
+const sharedModules = require('@tickers-app/common-client/src/webpack/shared');
 
 const mode = process.env.MODE;
 const isDevMode = mode === 'development'
@@ -20,7 +20,7 @@ const prodConfig = {
       exposes: {
         './DashboardApp': './src/bootstrap',
       },
-      shared: packageJson.dependencies,
+      shared: sharedModules,
     }),
   ],
 };

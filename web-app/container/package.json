@@ -1,7 +1,6 @@
 {
   "name": "container",
   "version": "1.0.0",
-  "main": "src/index.ts",
   "scripts": {
     "clear": "rm -rf dist && rm -rf node_modules",
     "start": "webpack serve --config config/webpack.dev.js",
@@ -9,7 +8,7 @@
     "build:dev": "npm run clear && cross-env MODE=\"development\" webpack --config config/webpack.prod.js"
   },
   "dependencies": {
-    "@tickers-app/common-client": "^1.0.3",
-    "@tickers-app/common": "^1.0.10"
+    "@tickers-app/common-client": "1.0.14",
+    "@tickers-app/common": "1.0.10"
   }
 }
