@@ -1,53 +1,46 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Header = void 0;
-const react_1 = __importDefault(require("react"));
-const AppBar_1 = __importDefault(require("@mui/material/AppBar"));
-const Typography_1 = __importDefault(require("@mui/material/Typography"));
-const Toolbar_1 = __importDefault(require("@mui/material/Toolbar"));
-const Button_1 = __importDefault(require("@mui/material/Button"));
-const Stack_1 = __importDefault(require("@mui/system/Stack"));
-const system_1 = require("@mui/system");
-const Item = (0, system_1.styled)('div')(({ theme }) => ({
+import React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Typography from '@mui/material/Typography';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import Stack from '@mui/system/Stack';
+import { styled, useTheme } from '@mui/system';
+const Item = styled('div')(({ theme }) => ({
     textAlign: 'center',
     borderRadius: 4,
 }));
-const MarginLeft = (0, system_1.styled)('div')(({ theme }) => ({
+const MarginLeft = styled('div')(({ theme }) => ({
     marginLeft: '20px'
 }));
-const Header = () => {
-    const theme = (0, system_1.useTheme)();
-    return (<AppBar_1.default position="static" elevation={0} sx={{
+export const Header = () => {
+    const theme = useTheme();
+    return (<AppBar position="static" elevation={0} sx={{
             backgroundColor: theme.palette.background.default,
             color: theme.palette.primary.main
         }}>
-      <Toolbar_1.default>
-        <Typography_1.default>
+      <Toolbar>
+        <Typography>
           Tickers
-        </Typography_1.default>
+        </Typography>
         <MarginLeft>
-          <Stack_1.default direction="row" spacing={2}>
+          <Stack direction="row" spacing={2}>
             <Item>
-              <Button_1.default size={"medium"}>
+              <Button size={"medium"}>
                 Home
-              </Button_1.default>
+              </Button>
             </Item>
             <Item>
-              <Button_1.default size={"medium"}>
+              <Button size={"medium"}>
                 Profile
-              </Button_1.default>
+              </Button>
             </Item>
             <Item>
-              <Button_1.default size={"medium"}>
+              <Button size={"medium"}>
                 Reports
-              </Button_1.default>
+              </Button>
             </Item>
-          </Stack_1.default>
+          </Stack>
         </MarginLeft>
-      </Toolbar_1.default>
-    </AppBar_1.default>);
+      </Toolbar>
+    </AppBar>);
 };
-exports.Header = Header;

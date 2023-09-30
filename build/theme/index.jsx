@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const styles_1 = require("@mui/material/styles");
-const theme = (0, styles_1.createTheme)({
+import { createTheme } from '@mui/material/styles';
+const theme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
@@ -19,4 +17,4 @@ const theme = (0, styles_1.createTheme)({
         fontFamily: 'Arial, sans-serif', // Шрифт по умолчанию
     },
 });
-exports.default = theme;
+export default theme;
