@@ -1,5 +1,5 @@
-import {Footer} from './components/Footer';
-import {Header} from './components/Header';
-import {Main} from './components/Main';
+export {Footer} from './components/Footer';
+export {Header} from './components/Header';
+export {Main} from './components/Main';
 
-import theme from './theme';
+export * from './theme';
