@@ -23,4 +23,4 @@ cp -a ./dist/. ../../client/public/dashboard/latest/
 cd ../../client/ || exit
 
 
-npm run dev
+next dev

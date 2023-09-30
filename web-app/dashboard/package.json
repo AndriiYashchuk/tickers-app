@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "clear": "rm -rf ./dist && rm -rf node_modules",
+    "clear:all": "rm -rf dist && rm -rf node_modules",
+    "clear": "rm -rf dist",
     "start": "webpack serve --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
     "build:dev": "npm run clear && cross-env MODE=\"development\" webpack --config config/webpack.prod.js"
