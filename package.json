@@ -2,8 +2,8 @@
   "name": "@tickers-app/common-client",
   "version": "1.0.10",
   "description": "",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "clean": "rm -rf build",
     "build": "npm run clean && tsc",
