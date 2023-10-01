@@ -1,0 +1,19 @@
+name: deploy-manifests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'infra/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: digitalocean/action-doctl@v2                        # deploy image to digital ocean cluster
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - run: doctl kubernates cluster kubeconfig save tickers-app # kubeconfig name "tickers-app" get from digital ocean cluster
+      - run: kubectl apply -f infra/k8s                           # restart client deployment "client-depl" name getting from infra/k8s/client-depl.yaml file
