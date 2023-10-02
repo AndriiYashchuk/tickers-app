@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeOptions } from '@mui/material/styles';
 
-const theme = createTheme({
+export const palette: ThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
@@ -15,8 +15,10 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: 'Arial, sans-serif', // Шрифт по умолчанию
+    fontFamily: 'Arial, sans-serif',
   },
-});
+};
+
+const theme = createTheme(palette);
 
 export default theme;
