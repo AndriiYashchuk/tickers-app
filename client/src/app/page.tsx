@@ -1,13 +1,17 @@
-import { Header } from '../components/Header';
+import { Metadata } from 'next';
 
-export default function Page() {
+export const metadata: Metadata = {
+  title: 'tickers-app',
+  description: 'Home page',
+}
+
+const Page = () => {
   return (
   <>
-    <Header />
-    <main>
       <h1>Hello, Index page!</h1>
-    </main>
   </>);
 }
+
+export default Page;
 
 

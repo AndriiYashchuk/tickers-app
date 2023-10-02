@@ -1,27 +1,24 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-// TODO: need to investigate why webpack cant build components from @tickers-app/common-client
-// import { Footer } from '@tickers-app/common-client';
-// import { Header } from '@tickers-app/common-client';
-// import { Main } from '@tickers-app/common-client';
-
-import theme from '@tickers-app/common-client/src/theme/index';
+import { Footer } from '@tickers-app/common-client';
+import { Header } from '@tickers-app/common-client';
+import { Main } from '@tickers-app/common-client';
 import './utils/ClassNameGenerator';
 import DashboardApp from './apps/DashboardApp';
-import { Header } from './components/Header';
-import { Main } from './components/Main';
-import { Footer } from './components/Footer';
 
 interface Props {
   user: string
 }
 
 export const App = ({ user }: Props) => (
-  <ThemeProvider theme={theme}>
-    <Header />
+  <>
+    <Header
+     buttons={['Dashboard', 'About', 'Login']}
+     onClick={console.log}
+    />
     <Main>
       <DashboardApp />
     </Main>
     <Footer />
-  </ThemeProvider>
+  </>
 )

@@ -1,6 +1,12 @@
 import Script from 'next/script'
 import { CONTAINER_PREFIX, domain, isProd } from '../../constants';
 import { scanFilesInPublicAndGetDynamicName, scanInRemote } from '../../helpers';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'tickers-app dashboard',
+}
 
 const Home = async () => {
   const funcToScanScript = isProd ? scanInRemote : scanFilesInPublicAndGetDynamicName;

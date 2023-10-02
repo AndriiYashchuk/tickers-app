@@ -10,7 +10,7 @@
     "build:dev": "npm run clear && cross-env MODE=\"development\" webpack --config config/webpack.prod.js"
   },
   "dependencies": {
-    "@tickers-app/common-client": "1.0.14",
+    "@tickers-app/common-client": "1.0.18",
     "@tickers-app/common": "1.0.10"
   }
 }
