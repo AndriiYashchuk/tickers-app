@@ -10,6 +10,6 @@
     "lib": ["es5", "es6", "dom"]
   },
   "files": [
-    "src/playground/index.tsx"
+    "src/index.ts"
   ]
 }
