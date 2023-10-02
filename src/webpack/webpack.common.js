@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         test: /\.js(x?)$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules(?!\/@tickers-app\/common-client)/],
         loader: 'babel-loader',
         options: babelOptions,
       },
