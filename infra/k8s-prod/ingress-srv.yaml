@@ -6,6 +6,10 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - www.tickers-app.com
+      secretName: ticker-app-tls-secret
   rules:
     - host: www.tickers-app.com
       http:
