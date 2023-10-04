@@ -14,8 +14,15 @@ spec:
     - host: www.tickers-app.com
       http:
         paths:
+          - path: /api/users/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-srv
+                port:
+                  number: 3000
           - path: /?(.*)
-            pathType: ImplementationSpecific
+            pathType: Prefix
             backend:
               service:
                 name: client-srv
