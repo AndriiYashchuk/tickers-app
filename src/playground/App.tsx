@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Header } from '../components/Header';
+import Header from '../components/Header';
 import { Main } from '../components/Main';
 import { Footer } from '../components/Footer';
 
@@ -13,9 +13,14 @@ export const App = () => {
   return (
     <>
       <Header
-        buttons={['Dashboard', 'About', 'Login']}
+        logo={{ title: 'Tickers', to: '/' }}
+        links={[
+          { title: 'Dashboard', to: '/' },
+          { title: 'About', to: '/' },
+          { title: 'Login' }
+        ]}
         onClick={(key) => {
-          if(key === 'Login'){
+          if (key === 'Login') {
             setUser(JohnSmith);
           } else {
             setUser(null)
