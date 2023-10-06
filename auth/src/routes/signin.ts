@@ -1,5 +1,8 @@
+import { BadRequestError, validateRequest } from '@tickers-app/common-server';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
+import jwt from 'jsonwebtoken';
+
 
 const router = express.Router();
 
@@ -14,12 +17,35 @@ router.post(
       .notEmpty()
       .withMessage('You must supply a password')
   ],
-  // validateRequest, todo: implement
+  validateRequest,
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
+    const existingUser = { email, password, id: 1 } // todo implement database, get from database
+    if (!existingUser) {
+      throw new BadRequestError('Invalid credentials');
+    }
 
-    res.status(200).send({ email, password });
+    const passwordsMatch = true; // todo implement passwords hash checking
+    if (!passwordsMatch) {
+      throw new BadRequestError('Invalid Credentials');
+    }
+
+    // Generate JWT
+    const userJwt = jwt.sign(
+      {
+        id: existingUser.id,
+        email: existingUser.email
+      },
+      'abc' // process.env.JWT_KEY! todo: get jwt key from env
+    );
+
+    // Store it on session object
+    req.session = {
+      jwt: userJwt
+    };
+
+    res.status(200).send(existingUser);
   }
 );
 
