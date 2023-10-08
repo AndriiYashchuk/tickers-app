@@ -3,6 +3,8 @@ import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
+import { Password } from '../services/password';
+import { User } from '../models/user';
 
 const router = express.Router();
 
@@ -21,12 +23,15 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const existingUser = { email, password, id: 1 } // todo implement database, get from database
+    const existingUser = await User.findOne({ email });
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
     }
 
-    const passwordsMatch = true; // todo implement passwords hash checking
+    const passwordsMatch = await Password.compare(
+      existingUser.password,
+      password
+    );
     if (!passwordsMatch) {
       throw new BadRequestError('Invalid Credentials');
     }
@@ -37,7 +42,7 @@ router.post(
         id: existingUser.id,
         email: existingUser.email
       },
-      'abc' // process.env.JWT_KEY! todo: get jwt key from env
+      process.env.JWT_KEY!
     );
 
     // Store it on session object
