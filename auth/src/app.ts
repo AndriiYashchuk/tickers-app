@@ -9,6 +9,7 @@ import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
 import { getUsersRouter } from './routes/get-users';
+import { day } from './constants';
 
 const app = express();
 app.set('trust proxy', true);
@@ -17,6 +18,7 @@ app.use(
   cookieSession({
     signed: false,
     secure: false,
+    maxAge: day * 3,
   })
 );
 
