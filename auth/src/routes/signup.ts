@@ -1,6 +1,7 @@
 import { BadRequestError, validateRequest } from '@tickers-app/common-server';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
+import { User } from '../models/user';
 import jwt from 'jsonwebtoken';
 
 const router = express.Router();
@@ -20,13 +21,14 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const existingUser = null //  todo: implement database connection
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       throw new BadRequestError('Email in use');
     }
 
-    const user = {id: 1, email: email}; // todo: implement database connection
+    const user = User.build({ email, password });
+    await user.save();
 
     // Generate JWT
     const userJwt = jwt.sign(
@@ -34,7 +36,7 @@ router.post(
         id: user.id,
         email: user.email
       },
-      'abc', // process.env.JWT_KEY! todo: implement jwt key from env
+      process.env.JWT_KEY!
     );
 
     // Store it on session object
