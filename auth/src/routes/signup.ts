@@ -19,7 +19,7 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password, secret } = req.body;
 
     const existingUser = await User.findOne({ email });
 
@@ -28,16 +28,20 @@ router.post(
     }
 
     const user = User.build({ email, password });
+    if(secret && secret === process.env.JWT_KEY!){
+      user.isAdmin = true;
+    }
     await user.save();
 
     // Generate JWT
-    const userJwt = jwt.sign(
-      {
+    const userData: { id: string, email: string, isAdmin?: boolean } = {
         id: user.id,
-        email: user.email
-      },
-      process.env.JWT_KEY!
-    );
+        email: user.email,
+      };
+    if(user.isAdmin){
+      userData.isAdmin = user.isAdmin
+    }
+    const userJwt = jwt.sign(userData, process.env.JWT_KEY!);
 
     // Store it on session object
     req.session = {

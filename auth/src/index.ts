@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import expressDeclaredTypes from './declared-types/express';
 
 import { app } from './app';
 
