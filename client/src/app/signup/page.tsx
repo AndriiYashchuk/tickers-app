@@ -9,15 +9,15 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import type { Metadata } from 'next'
-import NextLink from 'next/link'
+import NextLink from 'next/link';
 
 
 export const metadata: Metadata = {
-  title: 'Login',
-  description: 'tickers-app login page',
+  title: 'Signup',
+  description: 'tickers-app Signup page',
 }
 
-const Login = () => {
+const Signup = () => {
   return (
     <Container
       style={{
@@ -46,11 +46,34 @@ const Login = () => {
               alignItems: "center"
             }}
           >
-            Sign in
+            Sign up
           </Typography>
         </Grid>
         <form noValidate>
           <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="lname"
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -82,7 +105,7 @@ const Login = () => {
               variant="outlined"
               color="primary"
             >
-              Sign In
+              Sign Up
             </Button>
           </Grid>
           <Grid
@@ -90,15 +113,17 @@ const Login = () => {
             container
             justifyContent={"center"}
           >
-            <NextLink href="/signup">
-              <Link component="span" variant="body2">
-                Do you want sign up? Sign up
-              </Link>
-            </NextLink>
+            <Grid item>
+              <NextLink href="/login">
+                <Link component="span" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </NextLink>
+            </Grid>
           </Grid>
         </form>
       </div>
     </Container>);
 }
 
-export default Login;
+export default Signup;

@@ -20,9 +20,7 @@ export default function RootLayout({
         <div id="root">
           <Header
             buttons={['dashboard', 'about', 'login']}
-            onClick={(route) => {
-              push(route)
-            }}
+            onClick={(route: string): void => push(route)}
           />
           <Main>
             {children}
