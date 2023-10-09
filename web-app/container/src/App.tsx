@@ -1,5 +1,4 @@
 import React from 'react';
-import { ThemeProvider } from '@mui/material/styles';
 import { Footer } from '@tickers-app/common-client';
 import { Header } from '@tickers-app/common-client';
 import { Main } from '@tickers-app/common-client';

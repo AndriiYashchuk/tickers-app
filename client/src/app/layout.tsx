@@ -1,7 +1,6 @@
 'use client';
 import './globals.css'
 import React from 'react';
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Footer, Header, Main } from '@tickers-app/common-client';
 import { useRouter } from 'next/navigation';
@@ -20,9 +19,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <div id="root">
           <Header
-            buttons={['Dashboard', 'About', 'Login']}
-            onClick={() => {
-              push('/web-app')
+            buttons={['dashboard', 'about', 'login']}
+            onClick={(route) => {
+              push(route)
             }}
           />
           <Main>
