@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import type { Metadata } from 'next'
@@ -34,7 +34,7 @@ const Login = () => {
           padding="10px 0"
         >
           <Avatar>
-            <LockOutlinedIcon color="inherit" />
+            <ExitToAppIcon color="inherit" />
           </Avatar>
           <Typography
             component="h3"

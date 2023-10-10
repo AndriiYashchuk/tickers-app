@@ -1,28 +1,40 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import HowToReg from "@mui/icons-material/HowToReg";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import type { Metadata } from 'next'
 import NextLink from 'next/link';
+import axios from 'axios';
 
-
-export const metadata: Metadata = {
-  title: 'Signup',
-  description: 'tickers-app Signup page',
-}
 
 const Signup = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const response = await axios.post('/api/users/signup', { email, password, name, surname });
+    console.log(response.data)
+  }
+
+  const onChanged = (onChange: (value: string) => void) =>
+    (e: any) => onChange(e.target.value);
+  const handleEmail = onChanged(setEmail);
+  const handlePassword = onChanged(setPassword);
+  const handleName = onChanged(setName);
+  const handleSurname = onChanged(setSurname)
+
   return (
     <Container
-      style={{
-        marginTop: "50px"
-      }}
+      style={{ marginTop: "50px" }}
       component="div"
       maxWidth="xs"
     >
@@ -34,7 +46,7 @@ const Signup = () => {
           padding="10px 0"
         >
           <Avatar>
-            <LockOutlinedIcon color="inherit" />
+            <HowToReg color="inherit" />
           </Avatar>
           <Typography
             component="h3"
@@ -49,10 +61,11 @@ const Signup = () => {
             Sign up
           </Typography>
         </Grid>
-        <form noValidate>
+        <form noValidate onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                onChange={handleName}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -65,6 +78,7 @@ const Signup = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                onChange={handleSurname}
                 variant="outlined"
                 required
                 fullWidth
@@ -76,6 +90,7 @@ const Signup = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={handleEmail}
                 variant="outlined"
                 required
                 fullWidth
@@ -87,6 +102,7 @@ const Signup = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={handlePassword}
                 variant="outlined"
                 required
                 fullWidth

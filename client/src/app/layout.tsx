@@ -7,6 +7,12 @@ import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] })
 
+const LOGO = { title: 'Tickers', to: '/' }
+const UNAUTHORIZED_HEADER = [
+  { title: 'dashboard', to: 'web-app' },
+  { title: 'about', to: 'about' },
+  { title: 'login', to: 'login' }]
+
 export default function RootLayout({
   children,
 }: {
@@ -16,18 +22,19 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div id="root">
-          <Header
-            buttons={['dashboard', 'about', 'login']}
-            onClick={(route: string): void => push(route)}
-          />
-          <Main>
-            {children}
-          </Main>
-          <Footer />
-        </div>
-      </body>
+    <body className={inter.className}>
+    <div id="root">
+      <Header
+        logo={LOGO}
+        links={UNAUTHORIZED_HEADER}
+        onClick={({ to = '/' }): void => push(to === 'dashboard' ? '/web-app' : to)}
+      />
+      <Main>
+        {children}
+      </Main>
+      <Footer />
+    </div>
+    </body>
     </html>
   )
 }
