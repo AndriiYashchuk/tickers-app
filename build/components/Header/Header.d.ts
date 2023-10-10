@@ -8,7 +8,7 @@ interface Link {
 }
 interface Props {
     links: Link[];
-    onClick: (selected: string) => void;
+    onClick: (selected: Link) => void;
     logo?: Link;
     user?: {
         name: string;

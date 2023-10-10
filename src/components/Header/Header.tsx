@@ -19,7 +19,7 @@ interface Link {
 
 interface Props {
   links: Link []
-  onClick: (selected: string) => void
+  onClick: (selected: Link) => void
   logo?: Link,
   user?: { name: string, surname: string }
 }
@@ -29,7 +29,6 @@ export const Header = ({
   user,
   onClick,
   logo
-
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
@@ -49,17 +48,13 @@ export const Header = ({
       <Toolbar>
         {logo && (
             <IconButton
+              onClick={() => onClick(logo)}
               size={"large"}
               edge={"start"}
               color={"inherit"}
               aria-label={"logo"}
             >
-              <Link
-                href={logo.to}
-                color={"inherit"}
-              >
                 {logo.icon || <TrendingUpIcon />}
-              </Link>
             </IconButton>)
         }
         {logo && logo.title && (
@@ -98,7 +93,7 @@ export const Header = ({
                 component={to ? "a" : "button"}
                 key={key || title || to}
                 color={"inherit"}
-                onClick={to ? null : () => onClick(title)}
+                onClick={() => onClick({ title, key, to })}
               >
                 {title.toUpperCase()}
               </Link>)

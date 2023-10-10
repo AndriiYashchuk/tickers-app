@@ -23,10 +23,8 @@ export const Header = ({ links, user, onClick, logo }) => {
         : true);
     return (<AppBar position={'static'}>
       <Toolbar>
-        {logo && (<IconButton size={"large"} edge={"start"} color={"inherit"} aria-label={"logo"}>
-              <Link href={logo.to} color={"inherit"}>
+        {logo && (<IconButton onClick={() => onClick(logo)} size={"large"} edge={"start"} color={"inherit"} aria-label={"logo"}>
                 {logo.icon || <TrendingUpIcon />}
-              </Link>
             </IconButton>)}
         {logo && logo.title && (<Typography variant={"h6"} component={"div"} sx={{ flexGrow: 1 }}>
               <Link underline={'none'} href={logo.to} color={"inherit"}>
@@ -40,7 +38,7 @@ export const Header = ({ links, user, onClick, logo }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center'
-            }} sx={{ paddingLeft: '16px' }} variant="subtitle2" underline="hover" component={to ? "a" : "button"} key={key || title || to} color={"inherit"} onClick={to ? null : () => onClick(title)}>
+            }} sx={{ paddingLeft: '16px' }} variant="subtitle2" underline="hover" component={to ? "a" : "button"} key={key || title || to} color={"inherit"} onClick={() => onClick({ title, key, to })}>
                 {title.toUpperCase()}
               </Link>))}
           {user && (<Button id='avatar-button' onClick={handleClick} aria-controls={isOpen ? 'avatar-menu' : undefined} aria-haspopup={'true'} aria-expanded={isOpen || undefined}>
