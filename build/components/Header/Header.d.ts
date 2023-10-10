@@ -11,8 +11,9 @@ interface Props {
     onClick: (selected: Link) => void;
     logo?: Link;
     user?: {
-        name: string;
-        surname: string;
+        name?: string;
+        surname?: string;
+        email: string;
     };
 }
 export declare const Header: ({ links, user, onClick, logo }: Props) => React.JSX.Element;

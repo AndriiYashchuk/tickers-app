@@ -21,7 +21,7 @@ interface Props {
   links: Link []
   onClick: (selected: Link) => void
   logo?: Link,
-  user?: { name: string, surname: string }
+  user?: { name?: string, surname?: string, email: string }
 }
 
 export const Header = ({
