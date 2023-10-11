@@ -1,22 +1,20 @@
+'use client'
 import Script from 'next/script'
-import { CONTAINER_PREFIX, domain, isProd } from '../../constants';
-import { scanFilesInPublicAndGetDynamicName, scanInRemote } from '../../helpers';
-import { Metadata } from 'next';
+import { CONTAINER_PREFIX } from '../../constants';
+import { useEffect, useState } from 'react';
+import { fetchWebAppScript } from '../../helpers';
 
-export const metadata: Metadata = {
-  title: 'Dashboard',
-  description: 'tickers-app dashboard',
-}
+const Home = () => {
+  const [script, setScript] = useState<string | null>(null);
 
-const Home = async () => {
-  const funcToScanScript = isProd ? scanInRemote : scanFilesInPublicAndGetDynamicName;
-  const script = await funcToScanScript();
-  console.log(`web-app script: ${script}`);
+  useEffect(() => {
+    fetchWebAppScript(setScript);
+  }, []);
 
   return (
     <>
     <div id={"root"} />
-    {script && <Script src={`${domain}${CONTAINER_PREFIX}/${script}`} type="text/javascript" strategy={'lazyOnload'} />}
+    {script && <Script src={`${CONTAINER_PREFIX}/${script}`} type="text/javascript" strategy={'lazyOnload'} />}
   </>);
 }
 

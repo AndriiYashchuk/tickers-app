@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build:dev": "sh scripts/start.sh",
+    "build:remote-dev": "sh scripts/start.sh true",
     "build": "next build",
     "start": "next build && next start",
     "lint": "next lint"
