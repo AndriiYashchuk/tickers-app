@@ -13,9 +13,8 @@ const Home = () => {
 
   return (
     <>
-    <div id={"root"} />
-    {script && <Script src={`${CONTAINER_PREFIX}/${script}`} type="text/javascript" strategy={'lazyOnload'} />}
-  </>);
+      {script && <Script src={`${CONTAINER_PREFIX}/${script}`} type="text/javascript" strategy={'lazyOnload'} />}
+    </>);
 }
 
 export default Home;

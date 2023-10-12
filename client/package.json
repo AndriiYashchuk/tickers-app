@@ -13,7 +13,7 @@
   "dependencies": {
     "@babel/preset-react": "^7.22.15",
     "@tickers-app/common": "1.0.10",
-    "@tickers-app/common-client": "^1.0.21",
+    "@tickers-app/common-client": "latest",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",

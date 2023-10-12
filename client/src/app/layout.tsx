@@ -4,6 +4,7 @@ import React from 'react';
 import { Inter } from 'next/font/google'
 import { Footer, Header, Main } from '@tickers-app/common-client';
 import { useRouter } from 'next/navigation';
+import { signinLink } from '../constants';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +12,8 @@ const LOGO = { title: 'Tickers', to: '/' }
 const UNAUTHORIZED_HEADER = [
   { title: 'dashboard', to: 'web-app' },
   { title: 'about', to: 'about' },
-  { title: 'login', to: 'login' }]
+  { title: 'signin', to: signinLink }
+];
 
 export default function RootLayout({
   children,
