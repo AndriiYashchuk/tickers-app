@@ -21,7 +21,7 @@ build:
     - image: iandrew/client
       context: client
       docker:
-        dockerfile: Dockerfile
+        dockerfile: DockerfileDev
       sync:
         manual:
           - src: '**/*.js'
