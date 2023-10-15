@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { User } from '@tickers-app/common/types/User';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
@@ -21,7 +22,7 @@ interface Props {
   links: Link []
   onClick: (selected: Link) => void
   logo?: Link,
-  user?: { name?: string, surname?: string, email: string }
+  user?: User,
 }
 
 export const Header = ({

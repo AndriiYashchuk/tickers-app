@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { User } from '@tickers-app/common/types/User';
 import Link from '@mui/material/Link';
 interface Link {
     title: string;
@@ -10,11 +11,7 @@ interface Props {
     links: Link[];
     onClick: (selected: Link) => void;
     logo?: Link;
-    user?: {
-        name?: string;
-        surname?: string;
-        email: string;
-    };
+    user?: User;
 }
 export declare const Header: ({ links, user, onClick, logo }: Props) => React.JSX.Element;
 export {};
