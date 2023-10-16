@@ -19,10 +19,10 @@ import Stack from '@mui/system/Stack';
 import Button from '@mui/material/Button';
 import LinkComponent from '@mui/material/Link';
 import { generateAvatarColor } from '../../utils/generateAvatarColor';
-export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, handleClose, anchorEl, usersMenu = [], onUserClick }) => {
+export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, handleClose, anchorEl, usersMenu = [], onUserClick, isRenderFromSSR = false }) => {
     return (<AppBar position={'static'}>
       <Toolbar>
-        {logo && (<IconButton onClick={() => onClick && onClick(logo)} size={"large"} edge={"start"} color={"inherit"} aria-label={"logo"}>
+        {logo && (<IconButton onClick={!isRenderFromSSR ? () => onClick && onClick(logo) : undefined} size={"large"} edge={"start"} color={"inherit"} aria-label={"logo"}>
             {logo.icon || <TrendingUpIcon />}
           </IconButton>)}
         {logo && logo.title && (<Typography variant={"h6"} component={"div"} sx={{ flexGrow: 1 }}>
@@ -37,10 +37,10 @@ export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, 
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center'
-            }} sx={{ paddingLeft: '16px' }} variant="subtitle2" underline="hover" component={to ? "a" : "button"} key={key || title || to} color={"inherit"} onClick={() => onClick({ title, key, to })}>
+            }} sx={{ paddingLeft: '16px' }} variant="subtitle2" underline="hover" component={to ? "a" : "button"} key={key || title || to} color={"inherit"} onClick={!isRenderFromSSR ? () => onClick({ title, key, to }) : undefined}>
               {title.toUpperCase()}
             </LinkComponent>))}
-          {user && (<Button id='avatar-button' onClick={handleClick} aria-controls={isOpen ? 'avatar-menu' : undefined} aria-haspopup={'true'} aria-expanded={isOpen || undefined}>
+          {user && (<Button id='avatar-button' onClick={!isRenderFromSSR && handleClick} aria-controls={isOpen ? 'avatar-menu' : undefined} aria-haspopup={'true'} aria-expanded={isOpen || undefined}>
               <Avatar {...generateAvatarColor(`${user.name} ${user.surname}`)}/>
             </Button>)}
         </Stack>

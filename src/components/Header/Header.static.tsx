@@ -29,7 +29,8 @@ export const HeaderStatic = ({
   handleClose,
   anchorEl,
   usersMenu = [],
-  onUserClick
+  onUserClick,
+  isRenderFromSSR = false
 }: Props & DynamicProps) => {
 
   return (
@@ -37,7 +38,9 @@ export const HeaderStatic = ({
       <Toolbar>
         {logo && (
           <IconButton
-            onClick={() => onClick && onClick(logo)}
+            onClick={
+              !isRenderFromSSR ?  () => onClick && onClick(logo): undefined
+          }
             size={"large"}
             edge={"start"}
             color={"inherit"}
@@ -82,7 +85,9 @@ export const HeaderStatic = ({
               component={to ? "a" : "button"}
               key={key || title || to}
               color={"inherit"}
-              onClick={() => onClick({ title, key, to })}
+              onClick={
+                !isRenderFromSSR ?  () => onClick({ title, key, to }) : undefined
+              }
             >
               {title.toUpperCase()}
             </LinkComponent>)
@@ -90,7 +95,7 @@ export const HeaderStatic = ({
           {user && (
             <Button
               id='avatar-button'
-              onClick={handleClick}
+              onClick={!isRenderFromSSR && handleClick}
               aria-controls={isOpen ? 'avatar-menu' : undefined}
               aria-haspopup={'true'}
               aria-expanded={isOpen || undefined}
