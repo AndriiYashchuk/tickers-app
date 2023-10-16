@@ -9,10 +9,10 @@ import GraphicsSection from './GraphicsSection';
 import { Faq } from './Faq';
 
 interface Props {
-  onClickManagePortfolio: () => void
+  onClickManagePortfolio?: () => void
 }
 
-const Index = ({ onClickManagePortfolio }: Props) => (
+const Landing = ({ onClickManagePortfolio }: Props) => (
   <Container>
     <Box my={4}>
       <Typography variant="h3" align="center" gutterBottom>
@@ -48,4 +48,4 @@ const Index = ({ onClickManagePortfolio }: Props) => (
   </Container>
 );
 
-export default Index;
+export default Landing;

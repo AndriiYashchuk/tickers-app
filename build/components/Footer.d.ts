@@ -1,2 +1,6 @@
 import React from 'react';
-export declare const Footer: () => React.JSX.Element;
+interface Props {
+    isFixedBottom?: boolean;
+}
+export declare const Footer: ({ isFixedBottom }: Props) => React.JSX.Element;
+export {};

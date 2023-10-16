@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import GraphicsSection from './GraphicsSection';
 import { Faq } from './Faq';
-const Index = ({ onClickManagePortfolio }) => (<Container>
+const Landing = ({ onClickManagePortfolio }) => (<Container>
     <Box my={4}>
       <Typography variant="h3" align="center" gutterBottom>
         Welcome to Stock Portfolio Manager
@@ -39,4 +39,4 @@ const Index = ({ onClickManagePortfolio }) => (<Container>
       </Paper>
     </Box>
   </Container>);
-export default Index;
+export default Landing;

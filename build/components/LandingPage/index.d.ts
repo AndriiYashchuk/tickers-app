@@ -1,6 +1,6 @@
 import React from 'react';
 interface Props {
-    onClickManagePortfolio: () => void;
+    onClickManagePortfolio?: () => void;
 }
-declare const Index: ({ onClickManagePortfolio }: Props) => React.JSX.Element;
-export default Index;
+declare const Landing: ({ onClickManagePortfolio }: Props) => React.JSX.Element;
+export default Landing;
