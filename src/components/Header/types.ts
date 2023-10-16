@@ -6,7 +6,7 @@ export interface Props {
   links: Link []
   onClick?: (selected: Link) => void
   logo?: Link,
-  user?: User,
+  user?: User | null,
   usersMenu?: Link [];
   onUserClick?: (user: User) => void;
   isRenderFromSSR?: boolean;
