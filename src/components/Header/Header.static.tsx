@@ -77,7 +77,8 @@ export const HeaderStatic = ({
                 padding: '6px 8px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                minWidth: '70px',
               }}
               sx={{ paddingLeft: '16px'}}
               variant="subtitle2"

@@ -36,7 +36,8 @@ export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, 
                 padding: '6px 8px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                minWidth: '70px',
             }} sx={{ paddingLeft: '16px' }} variant="subtitle2" underline="hover" component={to ? "a" : "button"} key={key || title || to} color={"inherit"} onClick={!isRenderFromSSR ? () => onClick({ title, key, to }) : undefined}>
               {title.toUpperCase()}
             </LinkComponent>))}
