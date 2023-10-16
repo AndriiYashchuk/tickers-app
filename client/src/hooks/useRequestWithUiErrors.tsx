@@ -1,5 +1,6 @@
-import { Props, useRequest } from './useRequest';
 import { useMemo } from 'react';
+import Typography from "@mui/material/Typography";
+import { Props, useRequest } from './useRequest';
 
 export const useRequestWithUiErrors = (args: Props) => {
   const { errors, ...rest } = useRequest(args);
@@ -7,15 +8,18 @@ export const useRequestWithUiErrors = (args: Props) => {
     if(!errors) return null;
 
     return (
-      <div>
-        <ul>
-          {errors && errors?.map(({ message}) => (
-            <li key={message}>
+      <ul>
+        {errors && errors?.map(({ message}) => (
+          <li key={message}>
+            <Typography
+              justifyContent="center"
+              color="error"
+            >
               {message}
-            </li>
-          ))}
-        </ul>
-      </div>
+            </Typography>
+          </li>
+        ))}
+      </ul>
     );
   }, [errors])
 

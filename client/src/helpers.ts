@@ -5,5 +5,8 @@ export const fetchWebAppScript = (setScript: (script: string) => void): void => 
     .then((response) => response.json())
     .then((data) => {
       setScript(data.mainScript);
+    })
+    .catch(err => {
+      console.error(err);
     });
 }

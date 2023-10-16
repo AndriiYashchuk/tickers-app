@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import { CONTAINER_PREFIX } from '../../constants';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-const getMainScript = (req: any, res: any): void => {
+const mainScript = (req: NextApiRequest, res: NextApiResponse): void => {
   const publicDir = path.join(process.cwd(), `public/${CONTAINER_PREFIX}`);
   const files = fs.readdirSync(publicDir);
   const mainScript = files.find((file) => file.includes('main'));
@@ -10,4 +11,4 @@ const getMainScript = (req: any, res: any): void => {
   res.status(200).json({ mainScript });
 };
 
-export default getMainScript;
+export default mainScript;

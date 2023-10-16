@@ -3,14 +3,20 @@ import React from 'react';
 import AuthForm from '../../components/AuthForm';
 import { SIGN_UP_PROPS } from '../../components/constants';
 import { ToSignUpFromLink } from '../../components/ToSignUpFromLink';
+import DynamicLayout from '../../components/layouts/main/DynamicLayout';
 
 
 const Signup = () => (
-  <AuthForm
-    {...SIGN_UP_PROPS}
+  <DynamicLayout
+    isFixedBottom
+    currentUser={null}
   >
-    <ToSignUpFromLink isSignUp />
-  </AuthForm>
+    <AuthForm
+      {...SIGN_UP_PROPS}
+    >
+      <ToSignUpFromLink isSignUp />
+    </AuthForm>
+  </DynamicLayout>
 );
 
 export default Signup;

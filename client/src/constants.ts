@@ -1,4 +1,4 @@
 export const CONTAINER_PREFIX = '/container/latest';
-export const domain = process.env.WEB_APP_DOMAIN || '/api/getMainScript'
+export const domain = process.env.WEB_APP_DOMAIN || '/api/main-script'
 export const signinLink = '/signin';
 export const signupLink = '/signup';

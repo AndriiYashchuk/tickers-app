@@ -1,13 +1,10 @@
 import mongoose from 'mongoose';
+import { User } from '@tickers-app/common/types/User';
 import { Password } from '../services/password';
 
 // An interface that describes the properties
 // that are requried to create a new User
-interface UserAttrs {
-  email: string;
-  password: string;
-  isAdmin?: boolean;
-}
+interface UserAttrs extends User { }
 
 // An interface that describes the properties
 // that a User Model has
@@ -21,6 +18,8 @@ interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
   isAdmin?: boolean;
+  surname?: string;
+  name?: string;
 }
 
 const userSchema = new mongoose.Schema(
@@ -36,11 +35,19 @@ const userSchema = new mongoose.Schema(
     isAdmin: {
       type: Boolean,
       required: false,
-    }
+    },
+    name: {
+      type: String,
+      required: false
+    },
+    surname: {
+      type: String,
+      required: false
+    },
   },
   {
     toJSON: {
-      transform(doc, ret) {
+      transform(doc: mongoose.Document, ret) {
         ret.id = ret._id;
         delete ret._id;
         delete ret.password;

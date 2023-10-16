@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useRouter } from 'next/navigation';
 
 export interface Props {
   icon: any;
@@ -19,6 +20,7 @@ export interface Props {
 const AuthFrom = (props: React.PropsWithChildren<Props>) => {
   const {icon, title, isSignup, submitUrl, children} = props;
   const resetFormCallback = useRef<() => void | undefined>();
+  const { push } = useRouter();
   const {
     email, handleEmail,
     password, handlePassword,
@@ -32,7 +34,8 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
     method: 'post',
     body: isSignup
       ? { ...body, name, surname }
-      : body
+      : body,
+    onSuccess: () => push('/web-app')
   });
   resetFormCallback.current = resetErrors;
 
@@ -125,12 +128,7 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
           </Grid>
           {uiErrors && (
             <Grid marginTop="16px">
-              <Typography
-                justifyContent="center"
-                color="error"
-              >
-                {uiErrors}
-              </Typography>
+              {uiErrors}
             </Grid>)}
           <Grid marginTop="16px">
             <Button
