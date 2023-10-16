@@ -9,6 +9,10 @@
     "esModuleInterop": true,
     "lib": ["es5", "es6", "dom"]
   },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
   "files": [
     "src/index.ts"
   ]
