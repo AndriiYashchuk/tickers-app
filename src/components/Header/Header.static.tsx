@@ -122,13 +122,22 @@ export const HeaderStatic = ({
               horizontal: 'right'
             }}
           >
-            <MenuItem onClick={() => onUserClick && onUserClick(user)}>
-              {`${user.name} ${user.surname}`}
+            <MenuItem
+              onClick={() => onUserClick && onUserClick(user)}
+            >
+              {(user.name && user.surname)
+                ? `${user.name} ${user.surname}`
+                : user.email
+              }
             </MenuItem>
             {usersMenu.map(({ title, ...rest }) => (
               <MenuItem
                 key={title}
                 onClick={() => handleClose && handleClose({ ...rest, title })}
+                style={{
+                  justifyContent: 'center',
+                  textTransform: 'uppercase'
+                }}
               >
                 {title}
               </MenuItem>

@@ -54,11 +54,16 @@ export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, 
                 horizontal: 'right'
             }}>
             <MenuItem onClick={() => onUserClick && onUserClick(user)}>
-              {`${user.name} ${user.surname}`}
+              {(user.name && user.surname)
+                ? `${user.name} ${user.surname}`
+                : user.email}
             </MenuItem>
             {usersMenu.map((_a) => {
                 var { title } = _a, rest = __rest(_a, ["title"]);
-                return (<MenuItem key={title} onClick={() => handleClose && handleClose(Object.assign(Object.assign({}, rest), { title }))}>
+                return (<MenuItem key={title} onClick={() => handleClose && handleClose(Object.assign(Object.assign({}, rest), { title }))} style={{
+                        justifyContent: 'center',
+                        textTransform: 'uppercase'
+                    }}>
                 {title}
               </MenuItem>);
             })}
