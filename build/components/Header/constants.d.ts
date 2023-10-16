@@ -8,3 +8,7 @@ export declare const LOGO: {
     to: string;
 };
 export declare const MENU: Link[];
+export declare const AUTHORIZED_HEADER: {
+    title: string;
+    to: string;
+}[];
