@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tickers-app/client-packages": "1.0.2"
+    "@tickers-app/client-packages": "1.0.3"
   },
   "devDependencies": {
     "@tickers-app/common": "1.0.18"
