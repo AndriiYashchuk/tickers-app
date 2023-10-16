@@ -30,5 +30,9 @@ module.exports = {
   '@mui/system': {
     singleton: true,
     requiredVersion: "^5.14.11"
+  },
+  'axios': {
+    singleton: true,
+    "requiredVersion": "^1.5.1"
   }
 }
