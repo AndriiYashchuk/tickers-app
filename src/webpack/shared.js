@@ -33,6 +33,6 @@ module.exports = {
   },
   'axios': {
     singleton: true,
-    "requiredVersion": "^1.5.1"
+    requiredVersion: "^1.5.1"
   }
 }
