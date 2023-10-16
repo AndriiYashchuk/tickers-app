@@ -1,27 +1,41 @@
 import React from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-// TODO: need to investigate why webpack cant build components from @tickers-app/common-client
-// import { Footer } from '@tickers-app/common-client';
-// import { Header } from '@tickers-app/common-client';
-// import { Main } from '@tickers-app/common-client';
-
-import theme from '@tickers-app/common-client/src/theme/index';
+import { AUTHORIZED_HEADER, LOGO, MENU } from '@tickers-app/common-client/build/components/Header/constants';
+import { Footer } from '@tickers-app/common-client/build/components/Footer';
+import { Header } from '@tickers-app/common-client/build/components/Header';
+import { Main } from '@tickers-app/common-client/build/components/Main';
+import { useHistory } from "react-router-dom"
 import './utils/ClassNameGenerator';
+import axios from 'axios';
 import DashboardApp from './apps/DashboardApp';
-import { Header } from './components/Header';
-import { Main } from './components/Main';
-import { Footer } from './components/Footer';
+import { User } from '@tickers-app/common/types/User';
 
 interface Props {
-  user: string
+  user: User
+  pushToPath: (path: string) => void
 }
 
-export const App = ({ user }: Props) => (
-  <ThemeProvider theme={theme}>
-    <Header />
-    <Main>
-      <DashboardApp />
-    </Main>
-    <Footer />
-  </ThemeProvider>
-)
+export const App = ({ user, pushToPath }: Props) => {
+  const history = useHistory();
+  return (
+    <>
+      <Header
+        logo={LOGO}
+        user={user}
+        usersMenu={MENU}
+        links={AUTHORIZED_HEADER}
+        onClick={({ to }) => {
+          if(to === 'signout'){
+            axios.post('/api/users/signout')
+              .then(() => {
+                pushToPath('/')
+              })
+          }
+        }}
+      />
+      <Main>
+        <DashboardApp />
+      </Main>
+      <Footer />
+    </>
+  )
+}

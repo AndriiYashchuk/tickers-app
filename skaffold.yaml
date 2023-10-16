@@ -10,10 +10,18 @@ build:
   local:
     push: false
   artifacts:
+    - image: iandrew/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
     - image: iandrew/client
       context: client
       docker:
-        dockerfile: Dockerfile
+        dockerfile: DockerfileDev
       sync:
         manual:
           - src: '**/*.js'

@@ -1,13 +1,18 @@
-import { Header } from '../components/Header';
+import { Metadata } from 'next';
+import LandingPageComponent from '@tickers-app/common-client/build/components/LandingPage';
+import Layout from '../components/layouts/main';
 
-export default function Page() {
-  return (
-  <>
-    <Header />
-    <main>
-      <h1>Hello, Index page!</h1>
-    </main>
-  </>);
+export const metadata: Metadata = {
+  title: 'Landing',
+  description: 'Landing page',
 }
+
+const LandingPage = () => {
+  return (
+    <LandingPageComponent />
+  );
+}
+
+export default Layout(LandingPage);
 
 
