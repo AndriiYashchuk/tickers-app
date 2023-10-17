@@ -1,9 +1,9 @@
-import { UserPayload } from '@tickers-app/common-server/build/types/UserPayload';
+import { User } from '@tickers-app/common/types/User';
 
 declare global {
   namespace Express {
     interface Request {
-      currentUser?: UserPayload;
+      currentUser?: User;
     }
   }
 }
