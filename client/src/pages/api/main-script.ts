@@ -20,7 +20,7 @@ export const scanInRemote = async (): Promise<string | null> => {
   }
 
 
-  result = `${process.env.WEB_APP_DOMAIN}/${CONTAINER_PREFIX}/${result}`
+  result = `${process.env.WEB_APP_DOMAIN}${CONTAINER_PREFIX}/${result}`
 
   return result;
 }
@@ -32,11 +32,11 @@ const scanInLocal = async (): Promise<string | undefined> => {
   const files = fs.readdirSync(publicDir);
   const mainScript = files.find((file) => file.includes('main'));
 
-  return Promise.resolve(mainScript)
+  return Promise.resolve(`${CONTAINER_PREFIX}/${mainScript}`)
 }
 
 const mainScript = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const fetcher = process.env.NODE_ENV !== 'development'
+  const fetcher = process.env.NODE_ENV === 'development'
     ? scanInLocal
     : scanInRemote
 

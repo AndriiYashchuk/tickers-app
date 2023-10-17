@@ -1,7 +1,7 @@
 {
-  "extends": "@tickers-app/common/tsconfig.json",
+  "extends": "@tickers-app/common-client/tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "files": [
     "src/index.ts",

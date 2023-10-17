@@ -12,7 +12,8 @@ export const StaticLayout = ({ children }: {children: any}) => (
     <HeaderStatic
       logo={LOGO}
       isRenderFromSSR
-      links={[UNAUTHORIZED_HEADER[0], UNAUTHORIZED_HEADER[1], { title: ''}]}
+      isLoading
+      links={[UNAUTHORIZED_HEADER[0], UNAUTHORIZED_HEADER[1]]}
     />
     <Main>
       {children}

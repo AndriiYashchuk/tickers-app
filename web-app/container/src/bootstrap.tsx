@@ -4,27 +4,22 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 
 
-const mount = (devRoot: HTMLElement | null, currentUser: User | null, pushToPath: (path: string) => void) => {
+const mount = (devRoot: HTMLElement | null, currentUser: User | null) => {
   const root = createRoot(devRoot);
   root.render(
     <App
-      pushToPath={pushToPath}
       user={currentUser}
     />);
 }
 
-
-// @ts-ignore // TODO: add d.ts declaration
-window.initWebApp = ({ currentUser }: { currentUser: User | Null }, pushToPath) => {
+window.initWebApp = ({ currentUser }: { currentUser: User | null }) => {
   const elem = document.getElementById('root');
-  mount(elem, currentUser, pushToPath)
+  mount(elem, currentUser)
 }
 
 if(window.location.host.startsWith('localhost')){
-  // @ts-ignore // TODO: add d.ts declaration
-  window.initWebApp({ currentUser: { email: 'tes@gmail.com', id: "42" }}, console.log);
+  window.initWebApp({ currentUser: { email: 'tes@gmail.com', id: "42" }});
 } else {
-  // @ts-ignore // TODO: add d.ts declaration
   window?.onWebAppIsReady()
 }
 
