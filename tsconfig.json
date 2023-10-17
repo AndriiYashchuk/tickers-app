@@ -5,7 +5,7 @@
     "target": "ES2015",
     "declaration": true,
     "skipLibCheck": true,
-    "module": "ES2015",
+    "module": "ES2022",
     "esModuleInterop": true,
     "lib": ["es5", "es6", "dom"]
   },
