@@ -7,5 +7,5 @@ interface DynamicProps {
     anchorEl?: any;
     handleClose?: (link: Link) => void;
 }
-export declare const HeaderStatic: ({ logo, links, user, onClick, handleClick, isOpen, handleClose, anchorEl, usersMenu, onUserClick, isRenderFromSSR }: Props & DynamicProps) => React.JSX.Element;
+export declare const HeaderStatic: ({ logo, links, user, onClick, handleClick, isOpen, handleClose, anchorEl, usersMenu, onUserClick, isRenderFromSSR, isLoading, }: Props & DynamicProps) => React.JSX.Element;
 export {};

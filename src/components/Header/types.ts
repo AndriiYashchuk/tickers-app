@@ -10,4 +10,5 @@ export interface Props {
   usersMenu?: Link [];
   onUserClick?: (user: User) => void;
   isRenderFromSSR?: boolean;
+  isLoading?: boolean
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createBrowserHistory } from 'history';
 import { Route, Switch, Router } from 'react-router';
 import { Header } from '../components/Header';
@@ -8,6 +8,7 @@ import { User } from '@tickers-app/common/types/User';
 import LandingPage from '../components/LandingPage';
 import { Link } from '../types/Link';
 import AboutPage from '../components/AboutPage';
+import { DashboardSkeletons } from '../components/skeletons/DashboardSkeletons';
 
 const JohnSmith: User = {
   id: '1',
@@ -37,6 +38,15 @@ export const history = createBrowserHistory({ basename: '/' });
 
 export const App = () => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+      setUser(JohnSmith)
+    }, 3000)
+  }, []);
+
   const handleClick = (link: Link) => {
     if (link.title === 'signin') {
       setUser(JohnSmith);
@@ -57,13 +67,16 @@ export const App = () => {
         onClick={handleClick}
         usersMenu={user ? authorizedProps.usersMenu : []}
         user={user}
+        isLoading={isLoading}
         onUserClick={() => setUser(null)}
       />
       <Main>
         <Router history={history}>
           <Switch>
             <Route path="/aboute"  exact component={() => (<AboutPage />)} />
-            <Route path="/" component={() => (<LandingPage onClickManagePortfolio={() => console.log('Manage portfolio click')}/>)} />
+            <Route path="/" component={() => (isLoading
+              ? <DashboardSkeletons />
+              : <LandingPage onClickManagePortfolio={() => console.log('Manage portfolio click')}/>)} />
           </Switch>
         </Router>
       </Main>

@@ -10,6 +10,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import * as React from 'react';
+import Skeleton from '@mui/material/Skeleton';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
@@ -19,7 +20,7 @@ import Stack from '@mui/system/Stack';
 import Button from '@mui/material/Button';
 import LinkComponent from '@mui/material/Link';
 import { generateAvatarColor } from '../../utils/generateAvatarColor';
-export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, handleClose, anchorEl, usersMenu = [], onUserClick, isRenderFromSSR = false }) => {
+export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, handleClose, anchorEl, usersMenu = [], onUserClick, isRenderFromSSR = false, isLoading, }) => {
     return (<AppBar position={'static'}>
       <Toolbar>
         {logo && (<IconButton onClick={!isRenderFromSSR ? () => onClick && onClick(logo) : undefined} size={"large"} edge={"start"} color={"inherit"} aria-label={"logo"}>
@@ -44,6 +45,7 @@ export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, 
           {user && (<Button id='avatar-button' onClick={!isRenderFromSSR && handleClick} aria-controls={isOpen ? 'avatar-menu' : undefined} aria-haspopup={'true'} aria-expanded={isOpen || undefined}>
               <Avatar {...generateAvatarColor(`${user.name} ${user.surname}`)}/>
             </Button>)}
+          {isLoading && (<Skeleton variant="circular" width={40} height={40}/>)}
         </Stack>
         {user && (<Menu id='avatar-menu' open={isOpen} anchorEl={anchorEl} MenuListProps={{
                 'aria-labelledby': 'avatar-button'

@@ -11,6 +11,7 @@ export const Header = ({
   logo,
   usersMenu,
   onUserClick,
+  isLoading,
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
@@ -34,6 +35,7 @@ export const Header = ({
       onUserClick={onUserClick}
       handleClick={handleClick}
       handleClose={handleClose}
+      isLoading={isLoading}
     />
   )
 }

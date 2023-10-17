@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Skeleton from '@mui/material/Skeleton';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
@@ -30,7 +31,8 @@ export const HeaderStatic = ({
   anchorEl,
   usersMenu = [],
   onUserClick,
-  isRenderFromSSR = false
+  isRenderFromSSR = false,
+  isLoading,
 }: Props & DynamicProps) => {
 
   return (
@@ -104,6 +106,9 @@ export const HeaderStatic = ({
             >
               <Avatar {...generateAvatarColor(`${user.name} ${user.surname}`)} />
             </Button>)}
+          {
+            isLoading && (<Skeleton variant="circular" width={40} height={40} />)
+          }
         </Stack>
         {user && (
           <Menu

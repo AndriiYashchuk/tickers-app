@@ -13,9 +13,7 @@ interface Props {
 }
 
 const Landing = ({ onClickManagePortfolio }: Props) => (
-  <Container style={{
-    minHeight: '600px'
-  }}>
+  <Container>
     <Box my={4}>
       <Typography variant="h3" align="center" gutterBottom>
         Welcome to Stock Portfolio Manager

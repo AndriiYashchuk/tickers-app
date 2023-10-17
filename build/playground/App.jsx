@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createBrowserHistory } from 'history';
 import { Route, Switch, Router } from 'react-router';
 import { Header } from '../components/Header';
@@ -6,6 +6,7 @@ import { Main } from '../components/Main';
 import { Footer } from '../components/Footer';
 import LandingPage from '../components/LandingPage';
 import AboutPage from '../components/AboutPage';
+import { DashboardSkeletons } from '../components/skeletons/DashboardSkeletons';
 const JohnSmith = {
     id: '1',
     email: 'test@yopmail.com',
@@ -30,6 +31,13 @@ const notAuthorizedProps = {
 export const history = createBrowserHistory({ basename: '/' });
 export const App = () => {
     const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+            setUser(JohnSmith);
+        }, 3000);
+    }, []);
     const handleClick = (link) => {
         if (link.title === 'signin') {
             setUser(JohnSmith);
@@ -42,12 +50,14 @@ export const App = () => {
         }
     };
     return (<>
-      <Header logo={{ title: 'Tickers', to: '/' }} links={user ? authorizedProps.links : notAuthorizedProps.links} onClick={handleClick} usersMenu={user ? authorizedProps.usersMenu : []} user={user} onUserClick={() => setUser(null)}/>
+      <Header logo={{ title: 'Tickers', to: '/' }} links={user ? authorizedProps.links : notAuthorizedProps.links} onClick={handleClick} usersMenu={user ? authorizedProps.usersMenu : []} user={user} isLoading={isLoading} onUserClick={() => setUser(null)}/>
       <Main>
         <Router history={history}>
           <Switch>
             <Route path="/aboute" exact component={() => (<AboutPage />)}/>
-            <Route path="/" component={() => (<LandingPage onClickManagePortfolio={() => console.log('Manage portfolio click')}/>)}/>
+            <Route path="/" component={() => (isLoading
+            ? <DashboardSkeletons />
+            : <LandingPage onClickManagePortfolio={() => console.log('Manage portfolio click')}/>)}/>
           </Switch>
         </Router>
       </Main>

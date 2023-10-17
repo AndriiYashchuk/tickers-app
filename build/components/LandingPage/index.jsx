@@ -6,9 +6,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import GraphicsSection from './GraphicsSection';
 import { Faq } from './Faq';
-const Landing = ({ onClickManagePortfolio }) => (<Container style={{
-        minHeight: '600px'
-    }}>
+const Landing = ({ onClickManagePortfolio }) => (<Container>
     <Box my={4}>
       <Typography variant="h3" align="center" gutterBottom>
         Welcome to Stock Portfolio Manager
