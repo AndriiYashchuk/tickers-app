@@ -11,6 +11,6 @@ code: ${error.code}
 status: ${error.message}
 ${error.response ? 'body: ' + error.response.data : ''}`);
   } else {
-    console.error(error);
+    console.log(error);
   }
 }
