@@ -12,10 +12,6 @@ const WebApp = () => {
   const [script, setScript] = useState<string | null>(null);
   const [user, setUser] = useState(null);
 
-  const pushToPath = useCallback((path: string) => {
-    redirect(path)
-  }, [])
-
   useEffect(() => {
     fetchWebAppScript(setScript);
   }, []);
@@ -27,16 +23,12 @@ const WebApp = () => {
   }, []);
 
   useEffect(() => {
-    // @ts-ignore // TODO: add d.ts declaration
     window.onWebAppIsReady = () => {
-      // @ts-ignore // TODO: add d.ts declaration
-      window.initWebApp({ currentUser: user }, pushToPath);
+      window.initWebApp({ currentUser: user });
     }
 
     return () => {
-      // @ts-ignore // TODO: add d.ts declaration
       window.onWebAppIsReady = undefined;
-      // @ts-ignore // TODO: add d.ts declaration
       window.initWebApp = undefined
     }
   }, [user]);
