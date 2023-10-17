@@ -6,6 +6,7 @@ import { Password } from '../services/password';
 // that are requried to create a new User
 interface UserAttrs extends User { }
 
+
 // An interface that describes the properties
 // that a User Model has
 interface UserModel extends mongoose.Model<UserDoc> {
