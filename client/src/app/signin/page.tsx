@@ -8,7 +8,6 @@ import DynamicLayout from '../../components/layouts/main/DynamicLayout';
 
 const Signin = () => (
   <DynamicLayout
-    isFixedBottom
     currentUser={null}
   >
      <AuthForm

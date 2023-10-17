@@ -15,13 +15,11 @@ import axios from 'axios';
 
 interface Props {
   currentUser: User | null,
-  isFixedBottom?: boolean
 }
 
 const DynamicLayout = ({
   children,
   currentUser,
-  isFixedBottom,
 }: React.PropsWithChildren<Props>) => {
   const [user, setUser] = useState(currentUser);
   const { push } = useRouter();
@@ -50,7 +48,7 @@ const DynamicLayout = ({
       <Main>
         {children}
       </Main>
-      <Footer isFixedBottom={isFixedBottom} />
+      <Footer />
     </>
   )
 }

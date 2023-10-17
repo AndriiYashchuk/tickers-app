@@ -1,6 +1,8 @@
 import { domain } from './constants';
 
-export const fetchWebAppScript = (setScript: (script: string) => void): void => {
+type ScriptSetter = (script: string) => void;
+
+export const fetchWebAppScript = (setScript: ScriptSetter): void => {
   fetch(domain)
     .then((response) => response.json())
     .then((data) => {
@@ -9,4 +11,4 @@ export const fetchWebAppScript = (setScript: (script: string) => void): void => 
     .catch(err => {
       console.error(err);
     });
-}
+};

@@ -2,7 +2,6 @@
 import Script from 'next/script'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { CONTAINER_PREFIX } from '../../constants';
 import { useCallback, useEffect, useState } from 'react';
 import { fetchWebAppScript } from '../../helpers';
 import DynamicLayout from '../../components/layouts/main/DynamicLayout';
@@ -36,16 +35,14 @@ const WebApp = () => {
     return () => {
       // @ts-ignore // TODO: add d.ts declaration
       window.onWebAppIsReady = undefined;
-      // @ts-ignore // TODO: add d.ts declaration
-      window.initWebApp = undefined;
     }
-  }, [user, pushToPath]);
+  }, []);
 
   return (
     <DynamicLayout currentUser={user}>
       {script && (
         <Script
-          src={`${CONTAINER_PREFIX}/${script}`}
+          src={script}
           type="text/javascript"
           strategy={'lazyOnload'}
         />)
