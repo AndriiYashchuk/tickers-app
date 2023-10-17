@@ -5,16 +5,11 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-const fixedButtonStyle = {
-    width: '100%',
-    bottom: '0',
-    position: "absolute"
-};
 const style = {
     backgroundColor: '#f7f7f7',
 };
-export const Footer = ({ isFixedBottom }) => {
-    return (<Box mt={5} py={3} style={isFixedBottom ? Object.assign(Object.assign({}, style), fixedButtonStyle) : style}>
+export const Footer = ({}) => {
+    return (<Box mt={5} py={3} style={style}>
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} md={3}>

@@ -7,24 +7,17 @@ import Box from '@mui/material/Box';
 
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-const fixedButtonStyle = {
-  width: '100%',
-  bottom: '0',
-  position: "absolute"
-}
-
 const style = {
   backgroundColor: '#f7f7f7',
 };
 
 interface Props{
-  isFixedBottom?: boolean
 }
 
-export const Footer = ({ isFixedBottom } : Props) => {
+export const Footer = ({ } : Props) => {
 
   return (
-    <Box mt={5} py={3} style={isFixedBottom ? { ...style, ...fixedButtonStyle} : style }>
+    <Box mt={5} py={3} style={style}>
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} md={3}>
