@@ -1,8 +1,7 @@
 'use client'
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Script from 'next/script'
 import axios from 'axios';
-import { redirect } from 'next/navigation';
 import { DashboardSkeletons } from '@tickers-app/common-client';
 import { AUTHORIZED_HEADER } from '@tickers-app/common-client/build/components/Header/constants';
 import { fetchWebAppScript } from '../../helpers';
@@ -23,12 +22,16 @@ const WebApp = () => {
   }, []);
 
   useEffect(() => {
+    // @ts-ignore // TODO: add d.ts declaration
     window.onWebAppIsReady = () => {
+      // @ts-ignore // TODO: add d.ts declaration
       window.initWebApp({ currentUser: user });
     }
 
     return () => {
+      // @ts-ignore // TODO: add d.ts declaration
       window.onWebAppIsReady = undefined;
+      // @ts-ignore // TODO: add d.ts declaration
       window.initWebApp = undefined
     }
   }, [user]);
