@@ -9,7 +9,7 @@ module.exports = {
   },
   'react-router-dom': {
     singleton: true,
-    requiredVersion: "^5.2.0"
+    requiredVersion: "6.17.0"
   },
   '@emotion/react': {
     singleton: true,
