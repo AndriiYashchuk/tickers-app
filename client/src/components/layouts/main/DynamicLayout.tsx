@@ -12,14 +12,19 @@ import {
 import { Main } from '@tickers-app/common-client/build/components/Main';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { Link } from '@tickers-app/common-client/build/types/Link';
 
 interface Props {
   currentUser: User | null,
+  isLoading?: boolean,
+  links?: Link []
 }
 
 const DynamicLayout = ({
   children,
   currentUser,
+  isLoading,
+  links
 }: React.PropsWithChildren<Props>) => {
   const [user, setUser] = useState(currentUser);
   const { push } = useRouter();
@@ -33,8 +38,9 @@ const DynamicLayout = ({
       <Header
         logo={LOGO}
         user={user}
+        isLoading={isLoading}
         usersMenu={MENU}
-        links={user ? AUTHORIZED_HEADER : UNAUTHORIZED_HEADER}
+        links={links || (user ? AUTHORIZED_HEADER : UNAUTHORIZED_HEADER)}
         onClick={async ({ to = '/' }) => {
           // signout
           if(to === MENU[0].to){

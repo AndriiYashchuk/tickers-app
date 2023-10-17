@@ -1,6 +1,6 @@
 {
   "extends": "@tickers-app/common/tsconfig.json",
   "files": [
-    "src/index.ts",
+    "src/index.ts"
   ]
 }
