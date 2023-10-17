@@ -29,14 +29,6 @@ export const DashboardSkeletons = () => (
         <Skeleton variant="rectangular" width={"100%"} height={100} />
       </Stack>
     </Grid>
-
-    <Grid item xs={12} md={4} xl={3}>
-      <Stack spacing={1} alignItems={'center'} paddingLeft={1} paddingRight={1}>
-        <Skeleton variant="rectangular" width={"100%"} height={200} />
-        <Skeleton variant="rectangular" width={"100%"} height={200} />
-        <Skeleton variant="rectangular" width={"100%"} height={200} />
-      </Stack>
-    </Grid>
   </Grid>
 );
 
