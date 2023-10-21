@@ -21,6 +21,11 @@ import Button from '@mui/material/Button';
 import LinkComponent from '@mui/material/Link';
 import { generateAvatarColor } from '../../utils/generateAvatarColor';
 export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, handleClose, anchorEl, usersMenu = [], onUserClick, isRenderFromSSR = false, isLoading, }) => {
+    const { name = '', surname = '', email = '' } = user || {};
+    const isFullName = !!(name && surname);
+    const avatarProps = isFullName
+        ? generateAvatarColor(`${name} ${surname}`)
+        : { children: `${email[0]}` };
     return (<AppBar position={'static'}>
       <Toolbar>
         {logo && (<IconButton onClick={!isRenderFromSSR ? () => onClick && onClick(logo) : undefined} size={"large"} edge={"start"} color={"inherit"} aria-label={"logo"}>
@@ -43,7 +48,7 @@ export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, 
               {title.toUpperCase()}
             </LinkComponent>))}
           {user && (<Button id='avatar-button' onClick={!isRenderFromSSR && handleClick} aria-controls={isOpen ? 'avatar-menu' : undefined} aria-haspopup={'true'} aria-expanded={isOpen || undefined}>
-              <Avatar {...generateAvatarColor(`${user.name} ${user.surname}`)}/>
+              <Avatar {...avatarProps}/>
             </Button>)}
           {isLoading && (<Skeleton variant="circular" width={40} height={40}/>)}
         </Stack>

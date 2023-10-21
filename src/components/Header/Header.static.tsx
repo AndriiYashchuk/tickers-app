@@ -34,6 +34,11 @@ export const HeaderStatic = ({
   isRenderFromSSR = false,
   isLoading,
 }: Props & DynamicProps) => {
+  const { name = '', surname = '', email = '' } = user || {};
+  const isFullName = !!(name && surname);
+  const avatarProps = isFullName
+    ? generateAvatarColor(`${name} ${surname}`)
+    : { children: `${email[0]}` }
 
   return (
     <AppBar position={'static'}>
@@ -104,7 +109,7 @@ export const HeaderStatic = ({
               aria-expanded={isOpen || undefined}
               //            endIcon={<KeyboardArrowDown color={"secondary"} />}
             >
-              <Avatar {...generateAvatarColor(`${user.name} ${user.surname}`)} />
+              <Avatar  {...avatarProps} />
             </Button>)}
           {
             isLoading && (<Skeleton variant="circular" width={40} height={40} />)

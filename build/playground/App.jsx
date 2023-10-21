@@ -13,6 +13,10 @@ const JohnSmith = {
     name: 'John',
     surname: 'Smith'
 };
+const UserWithEmailOnly = {
+    id: '1',
+    email: 'test@yopmail.com',
+};
 const authorizedProps = {
     links: [
         { title: 'dashboard' },
@@ -35,12 +39,12 @@ export const App = () => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-            setUser(JohnSmith);
+            setUser(UserWithEmailOnly);
         }, 3000);
     }, []);
     const handleClick = (link) => {
         if (link.title === 'signin') {
-            setUser(JohnSmith);
+            setUser(UserWithEmailOnly);
         }
         else {
             setUser(null);
