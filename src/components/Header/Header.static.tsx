@@ -46,8 +46,8 @@ export const HeaderStatic = ({
         {logo && (
           <IconButton
             onClick={
-              !isRenderFromSSR ?  () => onClick && onClick(logo): undefined
-          }
+              !isRenderFromSSR ? () => onClick && onClick(logo) : undefined
+            }
             size={"large"}
             edge={"start"}
             color={"inherit"}
@@ -76,7 +76,7 @@ export const HeaderStatic = ({
           direction={"row"}
           spacing={2}
         >
-          {links.map(({ title, key, to  }) => (
+          {links.map(({ title, key, to }) => (
             <LinkComponent
               href={to}
               style={{
@@ -87,14 +87,14 @@ export const HeaderStatic = ({
                 justifyContent: 'center',
                 minWidth: '70px',
               }}
-              sx={{ paddingLeft: '16px'}}
+              sx={{ paddingLeft: '16px' }}
               variant="subtitle2"
               underline="hover"
               component={to ? "a" : "button"}
               key={key || title || to}
               color={"inherit"}
               onClick={
-                !isRenderFromSSR ?  () => onClick({ title, key, to }) : undefined
+                !isRenderFromSSR ? () => onClick({ title, key, to }) : undefined
               }
             >
               {title.toUpperCase()}
