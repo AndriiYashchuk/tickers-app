@@ -40,7 +40,7 @@ const WebApp = () => {
     <DynamicLayout
       currentUser={user}
       isLoading={!user}
-      links={AUTHORIZED_HEADER}
+      resetUser={() => setUser(null)}
     >
       <DashboardSkeletons />
       {script && (

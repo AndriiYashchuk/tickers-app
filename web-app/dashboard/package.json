@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "@tickers-app/common": "^1.0.10",
-    "@tickers-app/common-client": "1.0.44"
+    "@tickers-app/common-client": "1.0.47"
   }
 }

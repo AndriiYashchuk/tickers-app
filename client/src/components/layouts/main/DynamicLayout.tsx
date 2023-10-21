@@ -15,32 +15,35 @@ import axios from 'axios';
 import { Link } from '@tickers-app/common-client/build/types/Link';
 
 interface Props {
-  currentUser: User | null,
-  isLoading?: boolean,
-  links?: Link []
+  currentUser: User | null;
+  isLoading?: boolean;
+  links?: Link [];
+  resetUser?: () => void;
 }
 
 const DynamicLayout = ({
   children,
   currentUser,
   isLoading,
-  links
+  links,
+  resetUser,
 }: React.PropsWithChildren<Props>) => {
-  const [user, setUser] = useState(currentUser);
   const { push } = useRouter();
   const signOut = async () => {
     await axios.post('/api/users/signout');
-    setUser(null);
+    if(typeof resetUser === 'function'){
+      resetUser();
+    }
   }
 
   return (
     <>
       <Header
         logo={LOGO}
-        user={user}
+        user={currentUser}
         isLoading={isLoading}
         usersMenu={MENU}
-        links={links || (user ? AUTHORIZED_HEADER : UNAUTHORIZED_HEADER)}
+        links={links || (currentUser ? AUTHORIZED_HEADER : UNAUTHORIZED_HEADER)}
         onClick={async ({ to = '/' }) => {
           // signout
           if(to === MENU[0].to){
