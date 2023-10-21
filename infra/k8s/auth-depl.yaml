@@ -23,6 +23,11 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+            - name: RECAPTCHA_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: recaptcha-secret
+                  key: RECAPTCHA_KEY
 
 
 ---

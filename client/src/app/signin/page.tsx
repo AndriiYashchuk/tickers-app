@@ -12,6 +12,7 @@ const Signin = () => (
   >
      <AuthForm
        {...SIGN_IN_PROPS}
+       action={"signin"}
      >
         <ToSignUpFromLink />
      </AuthForm>

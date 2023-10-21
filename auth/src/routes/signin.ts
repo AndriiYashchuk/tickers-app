@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken';
 
 import { Password } from '../services/password';
 import { User } from '../models/user';
+import axios from 'axios';
+import { validateRecaptcha } from '../services/reCaptcha';
 
 const router = express.Router();
 
@@ -21,7 +23,14 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password, token } = req.body;
+    const clientIp = req.ip;
+
+    const isSuccessRecaptchaValidation = validateRecaptcha(token, clientIp);
+
+    if(!isSuccessRecaptchaValidation) {
+      throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');
+    }
 
     const existingUser = await User.findOne({ email });
     if (!existingUser) {

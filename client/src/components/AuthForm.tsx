@@ -9,16 +9,18 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useRouter } from 'next/navigation';
+import { recaptchaPublicApiKey } from '../constants';
 
 export interface Props {
   icon: any;
   submitUrl: string;
   title: string;
-  isSignup?: boolean
+  action: string
+  isSignup?: boolean;
 }
 
 const AuthFrom = (props: React.PropsWithChildren<Props>) => {
-  const {icon, title, isSignup, submitUrl, children} = props;
+  const {icon, title, isSignup, submitUrl, children, action} = props;
   const resetFormCallback = useRef<() => void | undefined>();
   const { push } = useRouter();
   const {
@@ -39,10 +41,13 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
   });
   resetFormCallback.current = resetErrors;
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await doRequest();
+    window.grecaptcha.ready((): void => {
+      window.grecaptcha.execute(recaptchaPublicApiKey, { action })
+        .then((token: string): Promise<void> => doRequest(token));
+    });
   }
 
   return (
@@ -150,6 +155,7 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
           </Grid>
         </form>
       </div>
+      <script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaPublicApiKey}`}></script>
     </Container>);
 }
 

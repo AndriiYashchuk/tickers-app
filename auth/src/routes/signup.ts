@@ -4,6 +4,7 @@ import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { User as UserModel  } from '../models/user';
 import jwt from 'jsonwebtoken';
+import { validateRecaptcha } from '../services/reCaptcha';
 
 const router = express.Router();
 
@@ -20,7 +21,15 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password, secret, name, surname } = req.body;
+    const { email, password, secret, name, surname, token } = req.body;
+    const clientIp = req.ip;
+
+
+    const isSuccessRecaptchaValidation = validateRecaptcha(token, clientIp);
+
+    if(!isSuccessRecaptchaValidation) {
+      throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');
+    }
 
     const existingUser = await UserModel.findOne({ email });
 
