@@ -7,7 +7,7 @@ import {
 import { Main } from '@tickers-app/common-client/build/components/Main';
 import { Footer } from '@tickers-app/common-client/build/components/Footer';
 
-export const StaticLayout = ({ children }: {children: any}) => (
+export const StaticLayout = ({ children }: React.PropsWithChildren<{}>) => (
   <>
     <HeaderStatic
       logo={LOGO}
