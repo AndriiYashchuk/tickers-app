@@ -1,11 +1,10 @@
-import { BadRequestError, validateRequest } from '@tickers-app/common-server';
+import { BadRequestError, ForbiddenError, validateRequest } from '@tickers-app/common-server';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
 import { Password } from '../services/password';
 import { User } from '../models/user';
-import axios from 'axios';
 import { validateRecaptcha } from '../services/reCaptcha';
 
 const router = express.Router();
@@ -35,6 +34,10 @@ router.post(
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
+    }
+
+    if(existingUser.inActive){
+      throw new ForbiddenError('Please confirm you password.');
     }
 
     const passwordsMatch = await Password.compare(

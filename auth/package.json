@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tickers-app/common-server": "1.0.10",
+    "@tickers-app/common-server": "1.0.24",
     "@types/axios": "^0.14.0",
     "@types/cookie-session": "^2.0.45",
     "@types/express": "^4.17.18",

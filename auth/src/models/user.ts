@@ -21,6 +21,7 @@ interface UserDoc extends mongoose.Document {
   isAdmin?: boolean;
   surname?: string;
   name?: string;
+  inActive?: boolean;
 }
 
 const userSchema = new mongoose.Schema(
@@ -43,6 +44,10 @@ const userSchema = new mongoose.Schema(
     },
     surname: {
       type: String,
+      required: false
+    },
+    inActive: {
+      type: Boolean,
       required: false
     },
   },

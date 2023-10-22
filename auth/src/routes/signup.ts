@@ -1,10 +1,16 @@
-import { BadRequestError, validateRequest } from '@tickers-app/common-server';
-import { User } from '@tickers-app/common/types/User';
+import {
+  BadRequestError,
+  validateRequest,
+  UserCreatedEvent,
+  NatsWrapper
+} from '@tickers-app/common-server';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { User as UserModel  } from '../models/user';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { validateRecaptcha } from '../services/reCaptcha';
+import { UserCreatedPublisher } from '../events/publishers/user-created-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -44,22 +50,13 @@ router.post(
     }
     await user.save();
 
-    // Generate JWT
-    const userData: User = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        surname: user.surname,
-      };
-    if(user.isAdmin){
-      userData.isAdmin = user.isAdmin
-    }
-    const userJwt = jwt.sign(userData, process.env.JWT_KEY!);
-
-    // Store it on session object
-    req.session = {
-      jwt: userJwt
-    };
+    // publish to event buss
+    new UserCreatedPublisher(natsWrapper.client).publish({
+      email: user.email,
+      name: user.name || '',
+      surname: user.surname || '',
+      token: ''
+    })
 
     res.status(201).send(user);
   }
