@@ -3,7 +3,6 @@ import { AUTHORIZED_HEADER, LOGO, MENU } from '@tickers-app/common-client/build/
 import { Footer } from '@tickers-app/common-client/build/components/Footer';
 import { Header } from '@tickers-app/common-client/build/components/Header';
 import { Main } from '@tickers-app/common-client/build/components/Main';
-import './utils/ClassNameGenerator';
 import axios from 'axios';
 import DashboardApp from './apps/DashboardApp';
 import { User } from '@tickers-app/common/types/User';

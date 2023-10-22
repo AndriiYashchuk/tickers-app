@@ -3,5 +3,5 @@ import { unstable_ClassNameGenerator as ClassNameGenerator } from '@mui/material
 
 ClassNameGenerator.configure(
   // Do something with the componentName
-  (componentName) => `cn-${componentName}`,
+  (componentName) => `dashboard-${componentName}`,
 );

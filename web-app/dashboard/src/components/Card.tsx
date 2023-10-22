@@ -1,4 +1,7 @@
 // @ts-nocheck
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import React, { useEffect } from 'react';
 
 
@@ -6,7 +9,7 @@ export const CardComponent = () => {
   useEffect(() => {
     // Pie Chart Data
     const pieChart1Data = {
-      labels: ['Label A', 'Label B', 'Label C'],
+      labels: ['SPY', 'VOO', 'IEF'],
       datasets: [{
         data: [30, 40, 30],
         backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(75, 192, 192, 0.6)', 'rgba(255, 205, 86, 0.6)'],
@@ -16,7 +19,7 @@ export const CardComponent = () => {
     };
 
     const pieChart2Data = {
-      labels: ['Label X', 'Label Y', 'Label Z'],
+      labels: ['TSLA', 'NVDA', 'META'],
       datasets: [{
         data: [20, 60, 20],
         backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 159, 64, 0.6)', 'rgba(75, 192, 192, 0.6)'],
@@ -27,9 +30,9 @@ export const CardComponent = () => {
 
     // Histogram Data
     const histogram1Data = {
-      labels: ['Value 1', 'Value 2', 'Value 3', 'Value 4', 'Value 5'],
+      labels: ['2019', '2020', '2021', '2022', '2023'],
       datasets: [{
-        label: 'Histogram 1',
+        label: 'cash-flow',
         data: [10, 20, 5, 30, 15],
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',
@@ -38,9 +41,9 @@ export const CardComponent = () => {
     };
 
     const histogram2Data = {
-      labels: ['Value A', 'Value B', 'Value C', 'Value D', 'Value E'],
+      labels: ['2019', '2020', '2021', '2022', '2023'],
       datasets: [{
-        label: 'Histogram 2',
+        label: 'cash-flow',
         data: [25, 15, 10, 5, 20],
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
         borderColor: 'rgba(255, 99, 132, 1)',
@@ -115,10 +118,10 @@ export const CardComponent = () => {
     new Chart(ctxStockIndex, {
       type: 'line',
       data: {
-        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
+        labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
         datasets: [
           {
-            label: 'Stock Index',
+            label: 'snp500',
             data: generateRandomData(6),
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 2
@@ -132,10 +135,10 @@ export const CardComponent = () => {
     new Chart(ctxStockIndex2, {
       type: 'line',
       data: {
-        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
+        labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
         datasets: [
           {
-            label: 'Stock Index',
+            label: 'dj',
             data: generateRandomData(6),
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 2
@@ -145,47 +148,79 @@ export const CardComponent = () => {
   }, []);
 
   return (
-    <div>
-      <title>Dashboard with Charts</title>
-      <h1>Dashboard with Charts</h1>
-      <div className="dashboard">
-        <div className="box">
-          <h2>Data 1</h2>
-          <p>Some information or data here.</p>
+    <Container>
+      <Grid container spacing={0} mt={1}>
+        <Typography
+          align="center"
+          variant={"h4"}
+        >
+          Dashboard with Charts
+        </Typography>
+      </Grid>
+      <Grid container spacing={0} mt={2}>
+        <Grid
+          spacing={1}
+          className="box"
+          xs={12} md={6} xl={4}
+        >
+          <h2>Main Portfolio</h2>
+          <p>The main portfolio to reach the goals</p>
           <div className="chart-container">
             <canvas id="pieChart1"></canvas>
           </div>
-        </div>
-        <div className="box">
-          <h2>Data 2</h2>
-          <p>More information or data here.</p>
+        </Grid>
+        <Grid
+          spacing={1}
+          className="box"
+          xs={12} md={6} xl={4}
+        >
+          <h2>Risking Portfolio</h2>
+          <p>The portfolio with risking instruments</p>
           <div className="chart-container">
             <canvas id="pieChart2"></canvas>
           </div>
-        </div>
-        <div className="box">
-          <h2>Data 3</h2>
-          <p>Additional information or data here.</p>
+        </Grid>
+        <Grid
+          spacing={1}
+          className="box"
+          xs={12} md={6} xl={4}
+        >
+          <h2>Main Portfolio Report</h2>
+          <p>Cash Flow by years</p>
           <div className="chart-container">
             <canvas id="histogram1"></canvas>
           </div>
-        </div>
-        <div className="box">
-          <h2>Data 4</h2>
-          <p>Even more information or data here.</p>
+        </Grid>
+        <Grid
+          spacing={1}
+          className="box"
+          xs={12} md={6} xl={4}
+        >
+          <h2>Risking Portfolio Report</h2>
+          <p>Cash Flow by years</p>
           <div className="chart-container">
             <canvas id="histogram2"></canvas>
           </div>
-        </div>
-        <div className="box chart-container line-chart">
-          <h2>Stock Index</h2>
+        </Grid>
+        <Grid
+          spacing={1}
+          className="box chart-container line-chart"
+          xs={12} md={6} xl={4}
+        >
+          <h2>SNP 500</h2>
+          <p>SNP 500 by years</p>
           <canvas id="stockIndexChart"></canvas>
-        </div>
-        <div className="box chart-container line-chart">
-          <h2>Chart 2</h2>
+        </Grid>
+        <Grid
+          spacing={1}
+          className="box chart-container line-chart"
+          xs={12} md={6} xl={4}
+        >
+          <h2>Dow Jones index</h2>
+          <p>Dow Jones index by years</p>
           <canvas id="chart2"></canvas>
-        </div>
-      </div>
-    </div>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
