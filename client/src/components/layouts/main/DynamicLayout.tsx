@@ -7,7 +7,7 @@ import {
   LOGO,
   MENU,
   UNAUTHORIZED_HEADER,
-  AUTHORIZED_HEADER,
+  AUTHORIZED_HEADER, BASE_HEADER_OPTIONS,
 } from '@tickers-app/common-client/build/components/Header/constants';
 import { Main } from '@tickers-app/common-client/build/components/Main';
 import { useRouter } from 'next/navigation';
@@ -43,7 +43,9 @@ const DynamicLayout = ({
         user={currentUser}
         isLoading={isLoading}
         usersMenu={MENU}
-        links={links || (currentUser ? AUTHORIZED_HEADER : UNAUTHORIZED_HEADER)}
+        links={isLoading
+          ? BASE_HEADER_OPTIONS
+          : (currentUser ? AUTHORIZED_HEADER : UNAUTHORIZED_HEADER)}
         onClick={async ({ to = '/' }) => {
           // signout
           if(to === MENU[0].to){

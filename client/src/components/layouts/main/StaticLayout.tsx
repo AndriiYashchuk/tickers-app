@@ -2,7 +2,7 @@ import React from 'react';
 import { HeaderStatic } from '@tickers-app/common-client/build/components/Header/Header.static';
 import {
   LOGO,
-  UNAUTHORIZED_HEADER
+  BASE_HEADER_OPTIONS,
 } from '@tickers-app/common-client/build/components/Header/constants';
 import { Main } from '@tickers-app/common-client/build/components/Main';
 import { Footer } from '@tickers-app/common-client/build/components/Footer';
@@ -13,7 +13,7 @@ export const StaticLayout = ({ children }: React.PropsWithChildren<{}>) => (
       logo={LOGO}
       isRenderFromSSR
       isLoading
-      links={[UNAUTHORIZED_HEADER[0], UNAUTHORIZED_HEADER[1]]}
+      links={BASE_HEADER_OPTIONS}
     />
     <Main>
       {children}

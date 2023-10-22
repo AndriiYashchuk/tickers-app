@@ -1,4 +1,5 @@
 import React from 'react';
+import './utils/classNameGenerator';
 import { CardComponent } from './components/Card';
 import useScript from './hooks/useScript';
 
