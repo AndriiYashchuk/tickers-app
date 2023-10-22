@@ -6,6 +6,7 @@ export const BASE_HEADER_OPTIONS = [
 ]
 
 const SIGN_IN_OPTION =  { title: 'signin', to: 'signin' };
+const SIGN_OUT_OPTIONS =   { title: 'signout', to: 'signout' };
 
 export const UNAUTHORIZED_HEADER = [
   ...BASE_HEADER_OPTIONS,
@@ -14,7 +15,7 @@ export const UNAUTHORIZED_HEADER = [
 export const LOGO = { title: 'Tickers', to: '/' }
 
 export const MENU: Link [] = [
-  SIGN_IN_OPTION
+  SIGN_OUT_OPTIONS
 ]
 
 export const AUTHORIZED_HEADER = BASE_HEADER_OPTIONS;
