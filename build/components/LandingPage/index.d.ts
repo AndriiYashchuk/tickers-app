@@ -1,6 +1,3 @@
 import React from 'react';
-interface Props {
-    onClickManagePortfolio?: () => void;
-}
-declare const Landing: ({ onClickManagePortfolio }: Props) => React.JSX.Element;
+declare const Landing: () => React.JSX.Element;
 export default Landing;

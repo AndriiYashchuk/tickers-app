@@ -20,6 +20,7 @@ import Stack from '@mui/system/Stack';
 import Button from '@mui/material/Button';
 import LinkComponent from '@mui/material/Link';
 import { generateAvatarColor } from '../../utils/generateAvatarColor';
+const AVATAR_BUTTON_STYLE = { padding: 0 };
 export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, handleClose, anchorEl, usersMenu = [], onUserClick, isRenderFromSSR = false, isLoading, }) => {
     const { name = '', surname = '', email = '' } = user || {};
     const isFullName = !!(name && surname);
@@ -47,10 +48,12 @@ export const HeaderStatic = ({ logo, links, user, onClick, handleClick, isOpen, 
             }} sx={{ paddingLeft: '16px' }} variant="subtitle2" underline="hover" component={to ? "a" : "button"} key={key || title || to} color={"inherit"} onClick={!isRenderFromSSR ? () => onClick({ title, key, to }) : undefined}>
               {title.toUpperCase()}
             </LinkComponent>))}
-          {user && (<Button id='avatar-button' onClick={!isRenderFromSSR && handleClick} aria-controls={isOpen ? 'avatar-menu' : undefined} aria-haspopup={'true'} aria-expanded={isOpen || undefined}>
+          {user && (<Button style={AVATAR_BUTTON_STYLE} size="small" id='avatar-button' onClick={!isRenderFromSSR && handleClick} aria-controls={isOpen ? 'avatar-menu' : undefined} aria-haspopup={'true'} aria-expanded={isOpen || undefined}>
               <Avatar {...avatarProps}/>
             </Button>)}
-          {isLoading && (<Skeleton variant="circular" width={40} height={40}/>)}
+          {isLoading && (<Button style={AVATAR_BUTTON_STYLE} size="small">
+                <Skeleton variant="circular" width={40} height={40}/>
+              </Button>)}
         </Stack>
         {user && (<Menu id='avatar-menu' open={isOpen} anchorEl={anchorEl} MenuListProps={{
                 'aria-labelledby': 'avatar-button'

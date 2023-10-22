@@ -19,6 +19,7 @@ interface DynamicProps {
   handleClose?: (link: Link) => void
 }
 
+const AVATAR_BUTTON_STYLE = { padding: 0 };
 
 export const HeaderStatic = ({
   logo,
@@ -102,6 +103,8 @@ export const HeaderStatic = ({
           )}
           {user && (
             <Button
+              style={AVATAR_BUTTON_STYLE}
+              size="small"
               id='avatar-button'
               onClick={!isRenderFromSSR && handleClick}
               aria-controls={isOpen ? 'avatar-menu' : undefined}
@@ -112,7 +115,17 @@ export const HeaderStatic = ({
               <Avatar  {...avatarProps} />
             </Button>)}
           {
-            isLoading && (<Skeleton variant="circular" width={40} height={40} />)
+            isLoading && (
+              <Button
+                style={AVATAR_BUTTON_STYLE}
+                size="small"
+              >
+                <Skeleton
+                  variant="circular"
+                  width={40}
+                  height={40}
+                />
+              </Button>)
           }
         </Stack>
         {user && (

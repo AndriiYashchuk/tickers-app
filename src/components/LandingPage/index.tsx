@@ -2,17 +2,15 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 import GraphicsSection from './GraphicsSection';
 import { Faq } from './Faq';
 
-interface Props {
-  onClickManagePortfolio?: () => void
-}
 
-const Landing = ({ onClickManagePortfolio }: Props) => (
+const Landing = () => (
   <Container>
     <Box my={4}>
       <Typography variant="h3" align="center" gutterBottom>
@@ -23,8 +21,10 @@ const Landing = ({ onClickManagePortfolio }: Props) => (
         purchase prices, and current values seamlessly.
       </Typography>
       <Box mt={3} display="flex" justifyContent="center">
-        <Button variant="contained" color="primary" onClick={onClickManagePortfolio}>
-          Manage My Portfolio
+        <Button variant="contained" color="primary">
+          <Link href={"/web-app"} color={"inherit"} underline={"none"}>
+            Manage My Portfolio
+          </Link>
         </Button>
       </Box>
     </Box>

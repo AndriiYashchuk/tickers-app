@@ -1,4 +1,8 @@
 import { Link } from '../../types/Link';
+export declare const BASE_HEADER_OPTIONS: {
+    title: string;
+    to: string;
+}[];
 export declare const UNAUTHORIZED_HEADER: {
     title: string;
     to: string;
