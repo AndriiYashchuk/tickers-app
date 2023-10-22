@@ -30,6 +30,14 @@ build:
             dest: .
           - src: '**/*.tsx'
             dest: .
+    - image: iandrew/mail
+      context: mail
+      docker:
+        dockerfile: DockerfileDev
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
 
 
 
