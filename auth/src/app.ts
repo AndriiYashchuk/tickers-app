@@ -9,6 +9,8 @@ import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
 import { getUsersRouter } from './routes/get-users';
+import { emailConfirmationRouter } from './routes/email-confirm';
+
 import { day } from './constants';
 
 const app = express();
@@ -26,6 +28,7 @@ app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
+app.use(emailConfirmationRouter);
 app.use(getUsersRouter)
 
 app.all('*', async (req, res) => {

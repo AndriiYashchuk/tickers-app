@@ -1,4 +1,11 @@
-export const getBody = ({ domain, name, token }: { domain: string, name: string, token: string }): string => `
+interface Params {
+  domain: string,
+  name: string,
+  token: string,
+  userId: string
+}
+
+export const getBody = ({ domain, name, token, userId }: Params): string => `
 <h1>Ticker app email confirmation</h1>
 <h3>Hello${name}, could you please confirm you email to have all access of application?<h3>
 <p>If you don't do any register actions in our app, please ignore this link</p>
@@ -22,4 +29,4 @@ export const getBody = ({ domain, name, token }: { domain: string, name: string,
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-" href="${domain}/email-confirm/${token}">Confirm registration</a>`
+" href="${domain}/email-confirmation/${token}?id=${userId}">Confirm registration</a>`

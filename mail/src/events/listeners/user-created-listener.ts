@@ -15,7 +15,8 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
       html: getBody({
         name: data.name ? ' ' + data.name : '',
         domain: Mailer.domain,
-        token: data.token
+        token: data.token,
+        userId: data.userId
       })
     });
     msg.ack();

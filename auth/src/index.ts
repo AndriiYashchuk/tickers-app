@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { redisClientInstance } from './services/redis';
 
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
@@ -24,6 +25,10 @@ const start = async () => {
     throw new Error('NATS_CLUSTER_ID must be defined');
   }
 
+  if (!process.env.REDIS_HOST) {
+    throw new Error('REDIS_HOST must be defined');
+  }
+
   try {
     // setup nats connection
     await natsWrapper.connect(
@@ -40,7 +45,9 @@ const start = async () => {
 
     // setup mongo db connection
     await mongoose.connect(process.env.MONGO_URI);
-    console.log('Connected to MongoDb');
+
+    // connect to redis
+    redisClientInstance.init(process.env.REDIS_HOST);
   } catch (err) {
     console.error(err);
   }
