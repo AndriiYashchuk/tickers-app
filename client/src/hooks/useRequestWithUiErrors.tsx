@@ -25,6 +25,7 @@ export const useRequestWithUiErrors = (args: Props) => {
 
   return {
     ...rest,
+    errors,
     uiErrors,
   }
 }

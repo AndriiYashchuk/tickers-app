@@ -4,7 +4,10 @@ import { Password } from '../services/password';
 
 // An interface that describes the properties
 // that are requried to create a new User
-interface UserAttrs extends User { }
+export interface UserAttrs extends Pick<User, 'email' | 'name' | 'surname' | 'isAdmin'> {
+  password: string
+  inActive?: boolean
+}
 
 
 // An interface that describes the properties

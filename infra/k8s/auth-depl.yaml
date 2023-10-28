@@ -36,7 +36,8 @@ spec:
                 secretKeyRef:
                   name: recaptcha-secret
                   key: RECAPTCHA_KEY
-
+            - name: REDIS_HOST
+              value: auth-redis-srv
 
 ---
 apiVersion: v1

@@ -49,13 +49,17 @@ export async function middleware(request: NextRequest) {
   const isWebAppPage = request.nextUrl.pathname.startsWith('/web-app')
   const isSigninPage = request.nextUrl.pathname.startsWith('/signin')
   const isSignupPage = request.nextUrl.pathname.startsWith('/signup')
+  const isConfirmEmailPage = request.nextUrl.pathname.startsWith('/email-confirmation')
+  const isResendEmailPage = request.nextUrl.pathname.startsWith('/resend-email')
 
   if (isWebAppPage && !currentUser) {
     return NextResponse.redirect(`${domain}/signin`);
   }
 
-  if ((isSigninPage || isSignupPage) && currentUser) {
-    return NextResponse.redirect(domain);
+  if(currentUser){
+    if (isSigninPage || isSignupPage || isConfirmEmailPage || isResendEmailPage) {
+      return NextResponse.redirect(domain);
+    }
   }
 
   return NextResponse.next();

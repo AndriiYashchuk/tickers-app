@@ -1,27 +1,22 @@
-import {
-  BadRequestError,
-  validateRequest,
-} from '@tickers-app/common-server';
+import { BadRequestError, validateRequest } from '@tickers-app/common-server';
+import { body, query } from 'express-validator';
 import express, { Request, Response } from 'express';
-import { body } from 'express-validator';
-import { User as UserModel, UserAttrs } from '../models/user';
+
+import { User as UserModel, User } from '../models/user';
+import { getTokenFromRedis, putTokenToRedis } from '../services/email-confirmaton';
+import { getSession } from '../services/get-session';
 import { validateRecaptcha } from '../services/reCaptcha';
 import { UserCreatedPublisher } from '../events/publishers/user-created-publisher';
 import { natsWrapper } from '../nats-wrapper';
-import { putTokenToRedis } from '../services/email-confirmaton';
 
 const router = express.Router();
 
 router.post(
-  '/api/users/signup',
+  '/api/users/resend-email',
   [
     body('email')
       .isEmail()
       .withMessage('Email must be valid'),
-    body('password')
-      .trim()
-      .isLength({ min: 4, max: 20 })
-      .withMessage('Password must be between 4 and 20 characters')
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -34,38 +29,24 @@ router.post(
     if(!isSuccessRecaptchaValidation) {
       throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');
     }
-
     const existingUser = await UserModel.findOne({ email });
 
     if (existingUser) {
       throw new BadRequestError('Email in use');
     }
 
-    const user = UserModel.build({
-      email,
-      password,
-      name,
-      surname,
-      inActive: true,
-    } as UserAttrs);
-    if(secret && secret === process.env.JWT_KEY!){
-      user.isAdmin = true;
-    }
-    await user.save();
+    // TODO: delete old link from redis
+
 
     const emailConfirmationToken = await putTokenToRedis(user.id);
 
     // publish to event bus
     new UserCreatedPublisher(natsWrapper.client).publish({
       email: user.email,
-      name: user.name || '',
-      surname: user.surname || '',
-      token: emailConfirmationToken || '',
-      userId: user.id
     })
 
-    res.status(201).send({});
+    res.status(200).send(existingUser);
   }
 );
 
-export { router as signupRouter };
+export { router as emailConfirmationRouter };

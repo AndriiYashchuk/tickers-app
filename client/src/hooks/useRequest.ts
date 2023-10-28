@@ -5,21 +5,33 @@ export interface Props {
   url: string,
   method: 'post' | 'get' | 'put' | 'patch'
   body?: Record<string, any>;
-  onSuccess?: () => void
+  onSuccess?: () => void;
+  onError?: () => void;
+  params?: Record<string, any>
 }
 
 interface Error {
   message: string
 }
 
-export const useRequest = ({ url, body, method, onSuccess }: Props) => {
+export const useRequest = ({
+  url,
+  body,
+  method,
+  onSuccess,
+  params,
+  onError
+}: Props) => {
   const [errors, setErrors] = useState<Error [] | null>(null);
+  // TODO: change on useReducer
+  const [isLoading, setIsLoading] = useState(true);
 
-  const doRequest = async (token: string) => {
+  const doRequest = async (token?: string) => {
     try{
       const response = await axios[method](url, {
         ...body,
-        token
+        token,
+        params: params
       });
       if (onSuccess){
         onSuccess();
@@ -32,6 +44,8 @@ export const useRequest = ({ url, body, method, onSuccess }: Props) => {
       }
       setErrors(errorState);
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   }
   const resetErrors = () => {
@@ -42,6 +56,7 @@ export const useRequest = ({ url, body, method, onSuccess }: Props) => {
     doRequest,
     errors,
     resetErrors,
+    isLoading
   }
 }
 
