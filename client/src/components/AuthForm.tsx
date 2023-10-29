@@ -143,7 +143,10 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
           </Grid>
         </form>
       </div>
-      <script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaPublicApiKey}`}></script>
+      <script
+        async
+        src={`https://www.google.com/recaptcha/api.js?render=${recaptchaPublicApiKey}`}
+      />
     </Container>);
 }
 
