@@ -38,7 +38,8 @@ spec:
                   key: RECAPTCHA_KEY
             - name: REDIS_HOST
               value: auth-redis-srv
-
+            - name: ADMIN_EMAIL
+              value: tickersapp@gmail.com
 ---
 apiVersion: v1
 kind: Service
