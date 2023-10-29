@@ -151,7 +151,9 @@ const EmailConfirmationPage = () => {
         </Grid>
       </Container>
       <script
-        src={`https://www.google.com/recaptcha/api.js?render=${recaptchaPublicApiKey}`}></script>
+        async
+        src={`https://www.google.com/recaptcha/api.js?render=${recaptchaPublicApiKey}`}
+      />
     </Box>
   );
 }

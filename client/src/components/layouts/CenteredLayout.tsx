@@ -57,8 +57,11 @@ export const CenteredLayout = ({
                       {errorSuggestionText}
                     </Typography>
                     <Grid container spacing={2}>
-                      {actions?.map((action: React.ReactNode) => (
-                        <Grid item>
+                      {actions?.map((action: React.ReactNode, index: number) => (
+                        <Grid
+                          item
+                          key={index}
+                        >
                           {action}
                         </Grid>
                       ))}
