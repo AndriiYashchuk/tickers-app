@@ -48,7 +48,7 @@ router.post(
       surname,
       inActive: true,
     } as UserAttrs);
-    if(secret && secret === process.env.JWT_KEY!){
+    if((secret && secret === process.env.JWT_KEY!) || email === process.env.ADMIN_EMAIL!) {
       user.isAdmin = true;
     }
     await user.save();
