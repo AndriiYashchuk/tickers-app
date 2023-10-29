@@ -1,54 +1,42 @@
 'use client'
-import React, { useRef } from 'react';
-import { useSignupForm } from '../hooks/useSignupForm';
-import { useRequestWithUiErrors } from '../hooks/useRequestWithUiErrors';
+import React from 'react';
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useRouter } from 'next/navigation';
 import { recaptchaPublicApiKey } from '../constants';
 
 export interface Props {
   icon: any;
-  submitUrl: string;
+  onSubmit: (e: React.FormEvent) => void;
   title: string;
-  action: string
+  handleEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  email: string,
+  handlePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  password: string,
   isSignup?: boolean;
+  handleName?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSurname?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  uiErrors?:  React.ReactNode | null;
 }
 
 const AuthFrom = (props: React.PropsWithChildren<Props>) => {
-  const {icon, title, isSignup, submitUrl, children, action} = props;
-  const resetFormCallback = useRef<() => void | undefined>();
-  const { push } = useRouter();
   const {
-    email, handleEmail,
-    password, handlePassword,
-    name, handleName,
-    surname, handleSurname
-  } = useSignupForm(resetFormCallback.current);
-  const body = { email, password }
-
-  const { doRequest, uiErrors, resetErrors } = useRequestWithUiErrors({
-    url: submitUrl,
-    method: 'post',
-    body: isSignup
-      ? { ...body, name, surname }
-      : body,
-    onSuccess: () => push('/web-app')
-  });
-  resetFormCallback.current = resetErrors;
-
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    window.grecaptcha.ready((): void => {
-      window.grecaptcha.execute(recaptchaPublicApiKey, { action })
-        .then((token: string): Promise<void> => doRequest(token));
-    });
-  }
+    icon,
+    title,
+    isSignup,
+    onSubmit,
+    children,
+    handleName,
+    handleSurname,
+    handlePassword,
+    handleEmail,
+    email,
+    password,
+    uiErrors
+  } = props;
 
   return (
     <Container

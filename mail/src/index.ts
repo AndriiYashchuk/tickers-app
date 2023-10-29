@@ -1,6 +1,9 @@
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
 import { UserCreatedListener } from './events/listeners/user-created-listener';
+import {
+  UserResendEmailConfirmationListener
+} from './events/listeners/user-resend-email-confirmation-listener';
 
 const start = async () => {
   if (!process.env.NATS_CLIENT_ID) {
@@ -33,7 +36,9 @@ const start = async () => {
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
 
+    // setup listeners
     new UserCreatedListener(natsWrapper.client).listen();
+    new UserResendEmailConfirmationListener(natsWrapper.client).listen();
 
   } catch (err) {
     console.error(err);

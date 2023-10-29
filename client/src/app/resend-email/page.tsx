@@ -12,7 +12,9 @@ import {
 import Link from 'next/link';
 import { recaptchaPublicApiKey } from '../../constants';
 import { useRequestWithUiErrors } from '../../hooks/useRequestWithUiErrors';
+import { CenteredTextWithIcon } from '../../components/CenteredTextWithIcon';
 
+// todo: reuse this function in singin / signup pages
 const validateEmail = (email: string): boolean => {
   return !email.match(
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -21,21 +23,25 @@ const validateEmail = (email: string): boolean => {
 
 const EmailConfirmationPage = () => {
   const [email, setEmail] = useState('');
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const isLoading = false;
 
   const { doRequest, uiErrors, resetErrors } = useRequestWithUiErrors({
     url: '/api/users/resend-email',
     method: 'post',
     body: { email },
-    onSuccess: () => {}
+    onSuccess: () => {
+      setIsEmailSent(true);
+    }
   });
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     window.grecaptcha.ready((): void => {
-      window.grecaptcha.execute(recaptchaPublicApiKey, { action: 'resend-email' })
-        .then((token: string): Promise<void> => doRequest(token));
+      window.grecaptcha.execute(recaptchaPublicApiKey, { action: 'resend_email' })
+        .then((token: string): Promise<void> => doRequest(token))
+        .catch((err: any) => console.error(err));
     });
   }
 
@@ -63,7 +69,7 @@ const EmailConfirmationPage = () => {
                 ? (
                   <>
                     <Typography variant="body1" color={'error'}>
-                      An error occurred while confirming your email:
+                      An error occurred while sending email to you:
                     </Typography>
                     {uiErrors}
                     <Grid spacing={4}>
@@ -72,49 +78,68 @@ const EmailConfirmationPage = () => {
                       </Typography>
                       <Grid container spacing={2}>
                         <Grid item>
-                          <Link href={'/resend-email'}>
-                            <Button variant="contained" color="primary">
-                              To Resend page
-                            </Button>
-                          </Link>
-                        </Grid>
-                        <Grid item>
-                          <Button variant="outlined">
-                            To landing page
+                          <Button variant="contained" color="primary" onClick={resetErrors}>
+                            Try again
                           </Button>
                         </Grid>
                       </Grid>
                     </Grid>
                   </>
                 )
-                : (
-                  <div>
-                    <form onSubmit={onSubmit}>
-                      <Typography variant="body1">
-                        Enter your email address and we will send you a link to reset your password.
-                      </Typography>
-                      <TextField
-                        style={{ margin: '15px 0' }}
-                        onChange={(e) => setEmail(e.target.value)}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                      />
-                      <Button
-                        disabled={validateEmail(email)}
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                      >
-                        Send Email
-                      </Button>
-                    </form>
-                  </div>
-                ))}
+                : isEmailSent
+                  ? (
+                    <div>
+                      <Grid container marginTop={2} marginBottom={2}>
+                        <CenteredTextWithIcon
+                          text={'We have sent the confirmation email to you. Please check your inbox.'}
+                        />
+                      </Grid>
+                      <Grid container spacing={2}>
+                        <Grid item>
+                          <Link href={'/signin'}>
+                            <Button variant="contained" color="primary">
+                              To signin page
+                            </Button>
+                          </Link>
+                        </Grid>
+                        <Grid item>
+                          <Link href={'/'}>
+                            <Button variant="outlined">
+                              To landing page
+                            </Button>
+                          </Link>
+                        </Grid>
+                      </Grid>
+                    </div>)
+                  : (
+                    <div>
+                      <form onSubmit={onSubmit}>
+                        <Typography variant="body1">
+                          Enter your email address and we will send you a link to reset your
+                          password.
+                        </Typography>
+                        <TextField
+                          style={{ margin: '15px 0' }}
+                          onChange={(e) => setEmail(e.target.value)}
+                          variant="outlined"
+                          required
+                          fullWidth
+                          id="email"
+                          label="Email Address"
+                          name="email"
+                          autoComplete="email"
+                        />
+                        <Button
+                          disabled={validateEmail(email)}
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                        >
+                          Send Email
+                        </Button>
+                      </form>
+                    </div>
+                  ))}
             {isLoading && (
               <div style={{ display: 'flex' }}>
                 <Typography variant="body1" sx={{ textAlign: 'center', m: 1 }}>
@@ -125,7 +150,8 @@ const EmailConfirmationPage = () => {
           </Grid>
         </Grid>
       </Container>
-      <script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaPublicApiKey}`}></script>
+      <script
+        src={`https://www.google.com/recaptcha/api.js?render=${recaptchaPublicApiKey}`}></script>
     </Box>
   );
 }

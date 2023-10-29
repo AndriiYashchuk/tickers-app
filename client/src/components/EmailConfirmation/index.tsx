@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import CheckIcon from '@mui/icons-material/Check';
 import {
   Container,
   Typography,
@@ -11,6 +10,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { useRequestWithUiErrors } from '../../hooks/useRequestWithUiErrors';
 import Link from 'next/link';
+import { CenteredTextWithIcon } from '../CenteredTextWithIcon';
 
 
 const CONFIRM_EMAIL_API = '/api/users/confirm-email';
@@ -101,12 +101,9 @@ const EmailConfirmation = ({ token, userId }: Props) => {
                   </>
                 )
                 : (
-                  <div style={{ display: 'flex' }}>
-                    <Typography variant="body1" sx={{ textAlign: 'center', m: 1 }}>
-                      Your email has been successfully confirmed!
-                    </Typography>
-                    <CheckIcon color="success" fontSize="large" />
-                  </div>
+                  <CenteredTextWithIcon
+                    text={'Your email has been successfully confirmed!'}
+                  />
                 ))}
           </Grid>
         </Grid>

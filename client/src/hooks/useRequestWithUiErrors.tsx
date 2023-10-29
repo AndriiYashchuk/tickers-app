@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 import Typography from "@mui/material/Typography";
 import { Props, useRequest } from './useRequest';
 
 export const useRequestWithUiErrors = (args: Props) => {
   const { errors, ...rest } = useRequest(args);
-  const uiErrors =  useMemo(() => {
+  const uiErrors: ReactNode | null =  useMemo(() => {
     if(!errors) return null;
 
     return (

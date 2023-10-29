@@ -10,6 +10,7 @@ import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
 import { getUsersRouter } from './routes/get-users';
 import { emailConfirmationRouter } from './routes/email-confirm';
+import { resendEmailConfirmationRouter } from './routes/resend-email';
 
 import { day } from './constants';
 
@@ -20,7 +21,7 @@ app.use(
   cookieSession({
     signed: false,
     secure: false,
-    maxAge: day * 3,
+    maxAge: day * 2,
   })
 );
 
@@ -29,6 +30,7 @@ app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
 app.use(emailConfirmationRouter);
+app.use(resendEmailConfirmationRouter);
 app.use(getUsersRouter)
 
 app.all('*', async (req, res) => {

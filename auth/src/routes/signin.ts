@@ -36,10 +36,6 @@ router.post(
       throw new BadRequestError('Invalid credentials');
     }
 
-    if(existingUser.inActive){
-      throw new ForbiddenError('Please confirm you password.');
-    }
-
     const passwordsMatch = await Password.compare(
       existingUser.password,
       password
@@ -47,6 +43,11 @@ router.post(
     if (!passwordsMatch) {
       throw new BadRequestError('Invalid Credentials');
     }
+
+    if(existingUser.inActive){
+      throw new ForbiddenError('Please confirm you email.');
+    }
+
     // Store it on session object
     req.session = await getSession(existingUser.toJSON())
 

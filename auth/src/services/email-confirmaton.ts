@@ -27,3 +27,10 @@ export const getTokenFromRedis = async (userId: string): Promise<string | null> 
   const token = await redisClient!.get(key);
   return token;
 }
+
+// Delete a token from Redis
+export const deleteTokenFromRedis = async (userId: string): Promise<void> => {
+  const redisClient = redisClientInstance.redis;
+  const key = getKey(userId);
+  await redisClient!.del(key);
+}
