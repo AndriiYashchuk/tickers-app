@@ -1,18 +1,11 @@
-import mongoose from 'mongoose';
-import { redisClientInstance } from './services/redis';
-
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
+import { UserCreatedListener } from './events/listeners/user-created-listener';
+import {
+  UserResendEmailConfirmationListener
+} from './events/listeners/user-resend-email-confirmation-listener';
 
 const start = async () => {
-  if (!process.env.JWT_KEY) {
-    throw new Error('Env variable JWT_KEY must be defined');
-  }
-
-  if (!process.env.MONGO_URI) {
-    throw new Error('Env variable MONGO_URI must be defined');
-  }
-
   if (!process.env.NATS_CLIENT_ID) {
     throw new Error('NATS_CLIENT_ID must be defined');
   }
@@ -25,8 +18,8 @@ const start = async () => {
     throw new Error('NATS_CLUSTER_ID must be defined');
   }
 
-  if (!process.env.REDIS_HOST) {
-    throw new Error('REDIS_HOST must be defined');
+  if(!process.env.EMAIL || !process.env.EMAIL_KEY){
+    throw new Error('There isn`t emails configuration. Needs process.env.EMAIL and process.env.EMAIL_KEY');
   }
 
   try {
@@ -43,11 +36,10 @@ const start = async () => {
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
 
-    // setup mongo db connection
-    await mongoose.connect(process.env.MONGO_URI);
+    // setup listeners
+    new UserCreatedListener(natsWrapper.client).listen();
+    new UserResendEmailConfirmationListener(natsWrapper.client).listen();
 
-    // connect to redis
-    redisClientInstance.init(process.env.REDIS_HOST);
   } catch (err) {
     console.error(err);
   }

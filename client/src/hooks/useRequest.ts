@@ -1,33 +1,53 @@
 import {useState} from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export interface Props {
   url: string,
   method: 'post' | 'get' | 'put' | 'patch'
   body?: Record<string, any>;
-  onSuccess?: () => void
+  onSuccess?: () => void;
+  onError?: () => void;
+  params?: Record<string, any>
 }
 
 interface Error {
   message: string
 }
 
-export const useRequest = ({ url, body, method, onSuccess }: Props) => {
+export const useRequest = ({
+  url,
+  body,
+  method,
+  onSuccess,
+  params,
+  onError
+}: Props) => {
   const [errors, setErrors] = useState<Error [] | null>(null);
+  // TODO: change on useReducer
+  const [isLoading, setIsLoading] = useState(true);
 
-  const doRequest = async () => {
+  const doRequest = async (token?: string) => {
     try{
-      const response = await axios[method](url, body);
+      const response = await axios[method](url, {
+        ...body,
+        token,
+        params: params
+      });
       if (onSuccess){
         onSuccess();
       }
       return response.data;
-    } catch (error: any){
-      console.error(error);
-      const errorState = error.response?.data?.errors || [{ message: 'Sorry, something went wrong, please try again later' }];
+    } catch (error: unknown){
+      let errorState = [{ message: 'Sorry, something went wrong, please try again later' }];
+      if (error instanceof AxiosError){
+        errorState = error.response?.data?.errors;
+      }
       setErrors(errorState);
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }
   const resetErrors = () => {
     setErrors(null);
   }
@@ -36,6 +56,7 @@ export const useRequest = ({ url, body, method, onSuccess }: Props) => {
     doRequest,
     errors,
     resetErrors,
+    isLoading
   }
 }
 

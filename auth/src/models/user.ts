@@ -4,7 +4,10 @@ import { Password } from '../services/password';
 
 // An interface that describes the properties
 // that are requried to create a new User
-interface UserAttrs extends User { }
+export interface UserAttrs extends Pick<User, 'email' | 'name' | 'surname' | 'isAdmin'> {
+  password: string
+  inActive?: boolean
+}
 
 
 // An interface that describes the properties
@@ -21,6 +24,7 @@ interface UserDoc extends mongoose.Document {
   isAdmin?: boolean;
   surname?: string;
   name?: string;
+  inActive?: boolean;
 }
 
 const userSchema = new mongoose.Schema(
@@ -43,6 +47,10 @@ const userSchema = new mongoose.Schema(
     },
     surname: {
       type: String,
+      required: false
+    },
+    inActive: {
+      type: Boolean,
       required: false
     },
   },

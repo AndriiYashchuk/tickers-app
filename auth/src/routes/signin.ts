@@ -1,10 +1,11 @@
-import { BadRequestError, validateRequest } from '@tickers-app/common-server';
+import { BadRequestError, ForbiddenError, validateRequest } from '@tickers-app/common-server';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
 
 import { Password } from '../services/password';
 import { User } from '../models/user';
+import { validateRecaptcha } from '../services/reCaptcha';
+import { getSession } from '../services/get-session';
 
 const router = express.Router();
 
@@ -21,7 +22,14 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password, token } = req.body;
+    const clientIp = req.ip;
+
+    const isSuccessRecaptchaValidation = validateRecaptcha(token, clientIp);
+
+    if(!isSuccessRecaptchaValidation) {
+      throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');
+    }
 
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
@@ -36,20 +44,12 @@ router.post(
       throw new BadRequestError('Invalid Credentials');
     }
 
-    // Generate JWT
-    const userJwt = jwt.sign(
-      {
-        id: existingUser.id,
-        email: existingUser.email,
-        isAdmin: existingUser.isAdmin,
-      },
-      process.env.JWT_KEY!
-    );
+    if(existingUser.inActive){
+      throw new ForbiddenError('Please confirm you email.');
+    }
 
     // Store it on session object
-    req.session = {
-      jwt: userJwt
-    };
+    req.session = await getSession(existingUser.toJSON())
 
     res.status(200).send(existingUser);
   }

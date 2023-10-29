@@ -1,9 +1,14 @@
-import { BadRequestError, validateRequest } from '@tickers-app/common-server';
-import { User } from '@tickers-app/common/types/User';
+import {
+  BadRequestError,
+  validateRequest,
+} from '@tickers-app/common-server';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { User as UserModel  } from '../models/user';
-import jwt from 'jsonwebtoken';
+import { User as UserModel, UserAttrs } from '../models/user';
+import { validateRecaptcha } from '../services/reCaptcha';
+import { UserCreatedPublisher } from '../events/publishers/user-created-publisher';
+import { natsWrapper } from '../nats-wrapper';
+import { putTokenToRedis } from '../services/email-confirmaton';
 
 const router = express.Router();
 
@@ -20,7 +25,15 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password, secret, name, surname } = req.body;
+    const { email, password, secret, name, surname, token } = req.body;
+    const clientIp = req.ip;
+
+
+    const isSuccessRecaptchaValidation = validateRecaptcha(token, clientIp);
+
+    if(!isSuccessRecaptchaValidation) {
+      throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');
+    }
 
     const existingUser = await UserModel.findOne({ email });
 
@@ -28,31 +41,30 @@ router.post(
       throw new BadRequestError('Email in use');
     }
 
-    // @ts-ignore
-    const user = UserModel.build({ email, password, name, surname });
+    const user = UserModel.build({
+      email,
+      password,
+      name,
+      surname,
+      inActive: true,
+    } as UserAttrs);
     if(secret && secret === process.env.JWT_KEY!){
       user.isAdmin = true;
     }
     await user.save();
 
-    // Generate JWT
-    const userData: User = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        surname: user.surname,
-      };
-    if(user.isAdmin){
-      userData.isAdmin = user.isAdmin
-    }
-    const userJwt = jwt.sign(userData, process.env.JWT_KEY!);
+    const emailConfirmationToken = await putTokenToRedis(user.id);
 
-    // Store it on session object
-    req.session = {
-      jwt: userJwt
-    };
+    // publish to event bus
+    new UserCreatedPublisher(natsWrapper.client).publish({
+      email: user.email,
+      name: user.name || '',
+      surname: user.surname || '',
+      token: emailConfirmationToken || '',
+      userId: user.id
+    })
 
-    res.status(201).send(user);
+    res.status(201).send({});
   }
 );
 

@@ -23,7 +23,21 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: tickers-app
+            - name: RECAPTCHA_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: recaptcha-secret
+                  key: RECAPTCHA_KEY
+            - name: REDIS_HOST
+              value: auth-redis-srv
 
 ---
 apiVersion: v1
