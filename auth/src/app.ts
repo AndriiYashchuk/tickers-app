@@ -31,9 +31,9 @@ app.use(signoutRouter);
 app.use(signupRouter);
 app.use(emailConfirmationRouter);
 app.use(resendEmailConfirmationRouter);
-app.use(getUsersRouter)
+app.use(getUsersRouter);
 
-app.all('*', async (req, res) => {
+app.all('*', async () => {
   throw new NotFoundError();
 });
 

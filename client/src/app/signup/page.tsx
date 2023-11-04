@@ -1,10 +1,12 @@
-'use client'
+'use client';
+
 import React, { useRef, useState } from 'react';
 import {
   Button,
   Grid,
 } from '@mui/material';
 
+import Link from 'next/link';
 import AuthForm from '../../components/AuthForm';
 import { SIGN_UP_PROPS } from '../../components/constants';
 import { ToSignUpFromLink } from '../../components/ToSignUpFromLink';
@@ -14,8 +16,6 @@ import { useRequestWithUiErrors } from '../../hooks/useRequestWithUiErrors';
 import { recaptchaPublicApiKey } from '../../constants';
 import { CenteredLayout } from '../../components/layouts/CenteredLayout';
 import { CenteredTextWithIcon } from '../../components/CenteredTextWithIcon';
-import Link from 'next/link';
-
 
 const Signup = () => {
   const resetFormCallback = useRef<() => void | undefined>();
@@ -26,7 +26,7 @@ const Signup = () => {
     name, handleName,
     surname, handleSurname
   } = useSignupForm(resetFormCallback.current);
-  const body = { email, password }
+  const body = { email, password };
 
   const { doRequest, uiErrors, resetErrors } = useRequestWithUiErrors({
     url: SIGN_UP_PROPS.submitUrl,
@@ -46,7 +46,7 @@ const Signup = () => {
         .then((token: string): Promise<void> => doRequest(token))
         .catch((err: any) => console.error(err));
     });
-  }
+  };
 
   return (
     <DynamicLayout
@@ -55,7 +55,7 @@ const Signup = () => {
       {isRegistered
         ? (
           <CenteredLayout titleText={'Email was sent.'}>
-            <CenteredTextWithIcon text={"Email successfully sent. Please check you inbox to confirm"}/>
+            <CenteredTextWithIcon text={'Email successfully sent. Please check you inbox to confirm'} />
             <Grid container spacing={2} marginTop={2}>
               <Grid item>
                 <Link href={'/signin'}>
@@ -92,6 +92,6 @@ const Signup = () => {
           </AuthForm>)}
     </DynamicLayout>
   );
-}
+};
 
 export default Signup;

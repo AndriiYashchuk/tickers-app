@@ -1,5 +1,6 @@
-'use client'
-import React  from 'react';
+'use client';
+
+import React from 'react';
 import EmailConfirmation from '../../../components/EmailConfirmation';
 
 interface Props {
@@ -18,8 +19,8 @@ const EmailConfirmationPage = (props: Props) => {
   } = props;
 
   return (
-      <EmailConfirmation token={token} userId={userId} />
+    <EmailConfirmation token={token} userId={userId} />
   );
-}
+};
 
 export default EmailConfirmationPage;

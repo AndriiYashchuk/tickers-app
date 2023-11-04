@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import React, { useState } from 'react';
 import {
   Container,
@@ -17,7 +18,7 @@ import { CenteredTextWithIcon } from '../../components/CenteredTextWithIcon';
 // todo: reuse this function in singin / signup pages
 const validateEmail = (email: string): boolean => {
   return !email.match(
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   );
 };
 
@@ -43,7 +44,7 @@ const EmailConfirmationPage = () => {
         .then((token: string): Promise<void> => doRequest(token))
         .catch((err: any) => console.error(err));
     });
-  }
+  };
 
   // TODO: split layout from resend-email and email-confirmation pages into separate components
   return (
@@ -120,7 +121,7 @@ const EmailConfirmationPage = () => {
                         </Typography>
                         <TextField
                           style={{ margin: '15px 0' }}
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={e => setEmail(e.target.value)}
                           variant="outlined"
                           required
                           fullWidth
@@ -156,6 +157,6 @@ const EmailConfirmationPage = () => {
       />
     </Box>
   );
-}
+};
 
 export default EmailConfirmationPage;

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 
 export interface Props {
@@ -20,26 +20,25 @@ export const useRequest = ({
   method,
   onSuccess,
   params,
-  onError
 }: Props) => {
   const [errors, setErrors] = useState<Error [] | null>(null);
   // TODO: change on useReducer
   const [isLoading, setIsLoading] = useState(true);
 
   const doRequest = async (token?: string) => {
-    try{
+    try {
       const response = await axios[method](url, {
         ...body,
         token,
-        params: params
+        params
       });
-      if (onSuccess){
+      if (onSuccess) {
         onSuccess();
       }
       return response.data;
-    } catch (error: unknown){
+    } catch (error: unknown) {
       let errorState = [{ message: 'Sorry, something went wrong, please try again later' }];
-      if (error instanceof AxiosError){
+      if (error instanceof AxiosError) {
         errorState = error.response?.data?.errors;
       }
       setErrors(errorState);
@@ -47,16 +46,15 @@ export const useRequest = ({
     } finally {
       setIsLoading(false);
     }
-  }
+  };
   const resetErrors = () => {
     setErrors(null);
-  }
+  };
 
   return {
     doRequest,
     errors,
     resetErrors,
     isLoading
-  }
-}
-
+  };
+};

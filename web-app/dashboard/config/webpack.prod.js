@@ -4,7 +4,6 @@ const commonConfig = require('@tickers-app/common-client/src/webpack/webpack.com
 const sharedModules = require('@tickers-app/common-client/src/webpack/shared');
 
 const mode = process.env.MODE;
-const isDevMode = mode === 'development'
 const domain = process.env.PRODUCTION_DOMAIN || 'http://localhost:3000';
 
 const prodConfig = {

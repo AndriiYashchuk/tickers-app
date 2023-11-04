@@ -6,15 +6,15 @@ const presets = [
 ];
 
 const nextConfig = {
-  webpack: (config, options) => {
+  webpack: config => {
     config.module.rules.push({
       test: /node_modules\/@tickers-app\/common-client\//,
       loader: 'babel-loader',
       options: { presets },
     });
 
-    return config
+    return config;
   }
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -1,25 +1,26 @@
-'use client'
+'use client';
+
 import React from 'react';
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import { recaptchaPublicApiKey } from '../constants';
 
 export interface Props {
   icon: any;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: () => void;
   title: string;
-  handleEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleEmail: () => void;
   email: string,
-  handlePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePassword: () => void;
   password: string,
   isSignup?: boolean;
-  handleName?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSurname?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  uiErrors?:  React.ReactNode | null;
+  handleName?: () => void;
+  handleSurname?: () => void;
+  uiErrors?: React.ReactNode | null;
 }
 
 const AuthFrom = (props: React.PropsWithChildren<Props>) => {
@@ -40,14 +41,14 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
 
   return (
     <Container
-      style={{ marginTop: "50px" }}
+      style={{ marginTop: '50px' }}
       component="div"
       maxWidth="xs"
     >
       <div>
         <Grid
           container
-          justifyContent={"center"}
+          justifyContent={'center'}
           padding="10px 0"
         >
           <Avatar>
@@ -58,9 +59,9 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
             variant="h5"
             justifyContent="center"
             style={{
-              marginLeft: "10px",
-              display: "flex",
-              alignItems: "center"
+              marginLeft: '10px',
+              display: 'flex',
+              alignItems: 'center'
             }}
           >
             {title}
@@ -137,7 +138,7 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
           <Grid
             marginTop="16px"
             container
-            justifyContent={"center"}
+            justifyContent={'center'}
           >
             {children}
           </Grid>
@@ -148,6 +149,6 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
         src={`https://www.google.com/recaptcha/api.js?render=${recaptchaPublicApiKey}`}
       />
     </Container>);
-}
+};
 
 export default AuthFrom;

@@ -1,9 +1,9 @@
-'use client'
+'use client';
+
 import React, { useEffect, useState } from 'react';
-import Script from 'next/script'
+import Script from 'next/script';
 import axios from 'axios';
 import { DashboardSkeletons } from '@tickers-app/common-client';
-import { AUTHORIZED_HEADER } from '@tickers-app/common-client/build/components/Header/constants';
 import { fetchWebAppScript } from '../../helpers';
 import DynamicLayout from '../../components/layouts/main/DynamicLayout';
 
@@ -16,9 +16,9 @@ const WebApp = () => {
   }, []);
 
   useEffect(() => {
-   axios.get('/api/current-user')
-     .then(({ data }) => setUser(data.currentUser))
-     .catch((err) => console.error(err));
+    axios.get('/api/current-user')
+      .then(({ data }) => setUser(data.currentUser))
+      .catch(err => console.error(err));
   }, []);
 
   useEffect(() => {
@@ -26,14 +26,14 @@ const WebApp = () => {
     window.onWebAppIsReady = () => {
       // @ts-ignore // TODO: add d.ts declaration
       window.initWebApp({ currentUser: user });
-    }
+    };
 
     return () => {
       // @ts-ignore // TODO: add d.ts declaration
       window.onWebAppIsReady = undefined;
       // @ts-ignore // TODO: add d.ts declaration
-      window.initWebApp = undefined
-    }
+      window.initWebApp = undefined;
+    };
   }, [user]);
 
   return (
@@ -51,6 +51,6 @@ const WebApp = () => {
         />)
       }
     </DynamicLayout>);
-}
+};
 
 export default WebApp;

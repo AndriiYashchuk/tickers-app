@@ -5,7 +5,7 @@ import { getCurrentUser } from '../../../utils/get-current-user';
 
 export default function Layout(Component: any) {
   const MainLayoutDynamic = dynamic(() => import('./DynamicLayout'), {
-    ssr: false,  // This component won't be rendered on the server
+    ssr: false, // This component won't be rendered on the server
     loading: () => (
       <StaticLayout>
         <Component />
@@ -19,6 +19,6 @@ export default function Layout(Component: any) {
       <MainLayoutDynamic currentUser={currentUser}>
         <Component />
       </MainLayoutDynamic>
-    )
-  }
+    );
+  };
 }

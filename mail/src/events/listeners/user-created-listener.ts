@@ -6,6 +6,7 @@ import { getBody } from '../../templates/confirmation';
 
 export class UserCreatedListener extends Listener<UserCreatedEvent> {
   queueGroupName = queueGroupName;
+
   subject: Subjects.UserCreated = Subjects.UserCreated;
 
   async onMessage(data: UserCreatedEvent['data'], msg: Message): Promise<void> {

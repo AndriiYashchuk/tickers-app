@@ -20,4 +20,4 @@ export const StaticLayout = ({ children }: React.PropsWithChildren<{}>) => (
     </Main>
     <Footer />
   </>
-)
+);

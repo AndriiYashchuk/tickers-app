@@ -28,10 +28,9 @@ router.post(
     const { email, password, secret, name, surname, token } = req.body;
     const clientIp = req.ip;
 
-
     const isSuccessRecaptchaValidation = validateRecaptcha(token, clientIp);
 
-    if(!isSuccessRecaptchaValidation) {
+    if (!isSuccessRecaptchaValidation) {
       throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');
     }
 
@@ -48,7 +47,7 @@ router.post(
       surname,
       inActive: true,
     } as UserAttrs);
-    if((secret && secret === process.env.JWT_KEY!) || email === process.env.ADMIN_EMAIL!) {
+    if ((secret && secret === process.env.JWT_KEY!) || email === process.env.ADMIN_EMAIL!) {
       user.isAdmin = true;
     }
     await user.save();
@@ -62,7 +61,7 @@ router.post(
       surname: user.surname || '',
       token: emailConfirmationToken || '',
       userId: user.id
-    })
+    });
 
     res.status(201).send({});
   }

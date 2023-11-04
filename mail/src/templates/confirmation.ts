@@ -1,10 +1,10 @@
 import { getNameString } from '../utils';
 
 interface Params {
-  domain: string,
-  name: string,
-  token: string,
-  userId: string
+  domain: string;
+  name: string;
+  token: string;
+  userId: string;
 }
 
 export const getBody = ({ domain, name, token, userId }: Params): string => `
@@ -41,4 +41,4 @@ touch-action: manipulation;
 <p style="font-size: 12px; font-weight: 400;">
   If you don't do any register actions in our app, please ignore this link
 </p>
-`
+`;

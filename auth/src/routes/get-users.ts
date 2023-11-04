@@ -8,8 +8,8 @@ router.get('/api/users',
   currentUser,
   checkIsAdmin,
   async (req: Request, res: Response) => {
-  const users  = await User.find({ });
-  res.status(200).send({ users });
-});
+    const users = await User.find({ });
+    res.status(200).send({ users });
+  });
 
 export { router as getUsersRouter };

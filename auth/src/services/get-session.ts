@@ -1,6 +1,12 @@
 import jwt from 'jsonwebtoken';
 
-export const getSession = async (user: {id: string; email: string; isAdmin: boolean}): Promise<{ jwt: string }> => {
+interface Params {
+  id: string;
+  email: string;
+  isAdmin: boolean;
+}
+
+export const getSession = async (user: Params): Promise<{ jwt: string }> => {
   // Generate JWT
   const userJwt = jwt.sign(
     {
@@ -14,4 +20,4 @@ export const getSession = async (user: {id: string; email: string; isAdmin: bool
   return {
     jwt: userJwt
   };
-}
+};

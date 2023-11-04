@@ -19,7 +19,7 @@ router.get(
   validateRequest,
   async (req: Request, res: Response) => {
     // Retrieve the token from the URL parameters
-    const token = req.params.token;
+    const { token } = req.params;
     const { id: userId } = req.query;
 
     const existingUser = await User.findById(userId);
@@ -32,7 +32,7 @@ router.get(
       throw new BadRequestError('Email already confirmed');
     }
 
-    const storedToken = await getTokenFromRedis(userId!.toString())
+    const storedToken = await getTokenFromRedis(userId!.toString());
 
     if (!storedToken) {
       throw new BadRequestError('Confirmation token is expired');

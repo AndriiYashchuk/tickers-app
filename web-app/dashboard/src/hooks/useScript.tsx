@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useScript = (url: string) => {
-  const [isLoad, setIsLoad] = useState(false)
+  const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -14,7 +14,7 @@ const useScript = (url: string) => {
 
     return () => {
       document.body.removeChild(script);
-    }
+    };
   }, [url]);
 
   return isLoad;
