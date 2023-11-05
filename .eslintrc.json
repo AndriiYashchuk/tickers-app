@@ -183,6 +183,13 @@
         "react/prop-types": 0,
         "react/jsx-no-useless-fragment": 0
       }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-unused-vars": 0,
+        "@typescript-eslint/no-unused-vars": ["error"]
+      }
     }
   ]
 }

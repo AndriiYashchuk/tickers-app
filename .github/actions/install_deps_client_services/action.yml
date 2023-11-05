@@ -29,5 +29,5 @@ runs:
 
 
     # Install your dependencies
-    - run: npm ci --prefix ./web-app/${{ inputs.service-name }}/ --loglevel verbose.
+    - run: npm ci --prefix ./web-app/${{ inputs.service-name }}/
       shell: bash

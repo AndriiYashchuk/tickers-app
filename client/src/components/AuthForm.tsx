@@ -11,15 +11,15 @@ import { recaptchaPublicApiKey } from '../constants';
 
 export interface Props {
   icon: any;
-  onSubmit: () => void;
+  onSubmit: (e: React.FormEvent) => void;
   title: string;
-  handleEmail: () => void;
+  handleEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   email: string,
-  handlePassword: () => void;
+  handlePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   password: string,
   isSignup?: boolean;
-  handleName?: () => void;
-  handleSurname?: () => void;
+  handleName?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSurname?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   uiErrors?: React.ReactNode | null;
 }
 
