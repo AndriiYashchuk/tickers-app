@@ -2,7 +2,7 @@ name: Install dependencies in web-app/ services
 description: Install dependencies in web-app/ services
 
 inputs:
-  mpm-token:
+  npm-token:
     description: NPM token
     required: true
   github-workspace:
@@ -23,6 +23,11 @@ runs:
         echo 'always-auth=true' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc 
         echo '//registry.npmjs.org/:_authToken=${{ inputs.npm-token  }}' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc
       shell: bash
+
+    # Run ls
+    - run: ls -la ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/
+      shell: bash
+
 
     # Install your dependencies
     - run: npm ci --prefix ./web-app/${{ inputs.service-name }}/

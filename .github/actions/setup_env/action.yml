@@ -2,7 +2,7 @@ name: Setup environment
 description: Setup environment for Node.js project
 
 inputs:
-  mpm-token:
+  npm-token:
     description: NPM token
     required: true
   github-workspace:

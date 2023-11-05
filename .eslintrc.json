@@ -134,7 +134,7 @@
         "react"
       ],
       "parserOptions": {
-        "project": "web-app/container/tsconfig.json"
+        "project": "web-app/container/tsconfig-ci.json"
       },
       "extends": ["./ts-eslint-config.json"]
     },
@@ -145,7 +145,7 @@
         "react"
       ],
       "parserOptions": {
-        "project": "web-app/dashboard/tsconfig.json"
+        "project": "web-app/dashboard/tsconfig-ci.json"
       },
       "extends": ["./ts-eslint-config.json"]
     },
