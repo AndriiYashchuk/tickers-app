@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export const useSignupForm = (resetForm?: () => void) => {
   const [email, setEmail] = useState('');
@@ -8,7 +8,7 @@ export const useSignupForm = (resetForm?: () => void) => {
 
   // eslint-disable-next-line no-unused-vars
   const onChanged = (onChange: (value: string) => void) =>
-    (e: any) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       if (resetForm) {
         resetForm();
       }
