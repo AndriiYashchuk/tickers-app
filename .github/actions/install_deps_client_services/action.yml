@@ -16,6 +16,14 @@ runs:
   using: composite
   steps:
 
+    # Create .npmrc
+    - name: Create .npmrc
+      run: |
+        echo 'registry=https://registry.npmjs.org/' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc
+        echo 'always-auth=true' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc 
+        echo '//registry.npmjs.org/:_authToken=${{ inputs.npm-token  }}' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc
+      shell: bash
+
     # Run ls
     - run: ls -la ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/
       shell: bash
