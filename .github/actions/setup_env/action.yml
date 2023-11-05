@@ -3,10 +3,10 @@ description: Setup environment for Node.js project
 
 inputs:
   mpm-token:
-    description: 'NPM token'
+    description: NPM token
     required: true
   github-workspace:
-    description: 'Github workspace'
+    description: Github workspace
     required: true
 
 runs:
@@ -25,6 +25,8 @@ runs:
         echo 'registry=https://registry.npmjs.org/' >> ${{ inputs.github-workspace }}/.npmrc
         echo 'always-auth=true' >> ${{ inputs.github-workspace }}/.npmrc 
         echo '//registry.npmjs.org/:_authToken=${{ inputs.npm-token  }}' >> ${{ inputs.github-workspace }}/.npmrc
+      shell: bash
 
     # Install your dependencies
     - run: npm ci
+      shell: bash
