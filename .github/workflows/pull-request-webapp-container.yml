@@ -18,6 +18,12 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
 
+      # install dependencies in web-app/container service
+      - name: Install dependencies in web-app/container service
+        run: npm ci --prefix ./web-app/container/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       # Run ESLint
       - name: Run ESLint for web-app/container service
         run:  npx eslint --c .eslintrc.json ./web-app/container/

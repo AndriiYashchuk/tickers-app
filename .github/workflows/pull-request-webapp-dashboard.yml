@@ -18,6 +18,12 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
 
+      # install dependencies in web-app/dashboard service
+      - name: Install dependencies in web-app/dashboard service
+        run: npm ci --prefix ./web-app/dashboard/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       # Run ESLint
       - name: Run ESLint for web-app/dashboard service
         run:  npx eslint --c .eslintrc.json ./web-app/dashboard/

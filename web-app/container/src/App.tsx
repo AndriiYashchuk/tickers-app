@@ -11,14 +11,14 @@ interface Props {
   user: User;
 }
 
-export const App = ({ user }: Props) => (
+export const App = ({ user }: Props): JSX.Element => (
   <>
     <Header
       logo={LOGO}
       user={user}
       usersMenu={MENU}
       links={AUTHORIZED_HEADER}
-      onClick={async ({ to }) => {
+      onClick={async ({ to }): Promise<void> => {
         if (to === 'signout') {
           await axios.post('/api/users/signout');
           window.location.href = '/';

@@ -49,7 +49,7 @@ const initAuthClient = () => {
   // We must be on the browser
   const instance = axios.create({
     baseURL: '/',
-  })
+  });
 
   return getApi(instance);
 };
