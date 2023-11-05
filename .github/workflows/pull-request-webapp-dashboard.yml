@@ -1,0 +1,23 @@
+name: Check web-app/dashboard service on Pull Requests
+
+on:
+  - pull_request
+
+jobs:
+  lint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+
+      # Run ESLint
+      - name: Run ESLint for web-app/dashboard service
+        run:  npx eslint --c .eslintrc.json ./web-app/dashboard/

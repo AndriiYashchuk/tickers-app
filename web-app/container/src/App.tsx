@@ -8,7 +8,7 @@ import { User } from '@tickers-app/common/types/User';
 import DashboardApp from './apps/DashboardApp';
 
 interface Props {
-  user: User
+  user: User;
 }
 
 export const App = ({ user }: Props) => (

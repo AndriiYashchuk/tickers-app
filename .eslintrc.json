@@ -128,7 +128,7 @@
       "extends": ["next/core-web-vitals"]
     },
     {
-      "files": "web-app/container/*.{ts,tsx}",
+      "files": "web-app/container/**/*.{ts,tsx}",
       "plugins": [
         "react-hooks",
         "react"
@@ -139,7 +139,7 @@
       "extends": ["./ts-eslint-config.json"]
     },
     {
-      "files": "web-app/dashboard/*.{ts,tsx}",
+      "files": "web-app/dashboard/**/*.{ts,tsx}",
       "plugins": [
         "react-hooks",
         "react"
