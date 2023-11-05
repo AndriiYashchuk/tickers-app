@@ -3,7 +3,7 @@ import './utils/classNameGenerator';
 import { CardComponent } from './components/Card';
 import useScript from './hooks/useScript';
 
-const App = () => {
+const App = (): JSX.Element => {
   const isLoad = useScript('https://cdn.jsdelivr.net/npm/chart.js');
 
   return (
@@ -36,7 +36,8 @@ const App = () => {
       }}
       />
       {isLoad && <CardComponent />}
-    </div>);
+    </div>
+  );
 };
 
 export default App;

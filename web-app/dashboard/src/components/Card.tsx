@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import React, { useEffect } from 'react';
 
-export const CardComponent = () => {
+export const CardComponent = (): JSX.Element => {
   useEffect(() => {
     // Pie Chart Data
     const pieChart1Data = {
@@ -104,7 +104,7 @@ export const CardComponent = () => {
     });
 
     // Simulate stock index data
-    function generateRandomData(count) {
+    function generateRandomData(count): number [] {
       const data = [];
       for (let i = 0; i < count; i++) {
         data.push(Math.random() * 1000);
@@ -150,7 +150,7 @@ export const CardComponent = () => {
       <Grid container spacing={0} mt={1}>
         <Typography
           align="center"
-          variant={'h4'}
+          variant="h4"
         >
           Dashboard with Charts
         </Typography>
