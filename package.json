@@ -1,0 +1,32 @@
+{
+  "name": "tickers-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndriiYashchuk/tickers-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndriiYashchuk/tickers-app/issues"
+  },
+  "homepage": "https://github.com/AndriiYashchuk/tickers-app#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-next": "^14.0.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint": "8.22.0",
+    "eslint-config-airbnb": "^19.0.4"
+  }
+}

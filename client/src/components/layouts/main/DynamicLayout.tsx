@@ -1,6 +1,7 @@
-'use client'
+'use client';
+
 import { User } from '@tickers-app/common/types/User';
-import React, { useState } from 'react';
+import React from 'react';
 import { Footer } from '@tickers-app/common-client/build/components/Footer';
 import { Header } from '@tickers-app/common-client/build/components/Header/Header';
 import {
@@ -25,16 +26,15 @@ const DynamicLayout = ({
   children,
   currentUser,
   isLoading,
-  links,
   resetUser,
 }: React.PropsWithChildren<Props>) => {
   const { push } = useRouter();
   const signOut = async () => {
     await axios.post('/api/users/signout');
-    if(typeof resetUser === 'function'){
+    if (typeof resetUser === 'function') {
       resetUser();
     }
-  }
+  };
 
   return (
     <>
@@ -48,11 +48,11 @@ const DynamicLayout = ({
           : (currentUser ? AUTHORIZED_HEADER : UNAUTHORIZED_HEADER)}
         onClick={async ({ to = '/' }) => {
           // signout
-          if(to === MENU[0].to){
+          if (to === MENU[0].to) {
             await signOut();
             push('/');
           } else {
-            push(to === 'dashboard' ? '/web-app' : to)
+            push(to === 'dashboard' ? '/web-app' : to);
           }
         }}
       />
@@ -61,6 +61,6 @@ const DynamicLayout = ({
       </Main>
       <Footer />
     </>
-  )
-}
+  );
+};
 export default DynamicLayout;

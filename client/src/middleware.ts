@@ -1,4 +1,4 @@
-import type { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import axios, { AxiosRequestConfig } from 'axios';
 import fetchAdapter from '../api/fetch-adapter';
@@ -13,13 +13,12 @@ const withCache = (fn: Function, cacheTime = 1000) => {
     if (!res) {
       res = await fn(request);
       setTimeout(() => {
-        res = null
+        res = null;
       }, cacheTime);
     }
     return res;
-  }
-}
-
+  };
+};
 
 const fetchCurrentUser = withCache(async (request: NextRequest) => {
   const sessionCookie = request.cookies.get('session');
@@ -32,7 +31,7 @@ const fetchCurrentUser = withCache(async (request: NextRequest) => {
   } as AxiosRequestConfig;
 
   try {
-    const { data } = await axios.get(`http://client-srv:3000/api/current-user`, config);
+    const { data } = await axios.get('http://client-srv:3000/api/current-user', config);
 
     return data;
   } catch (error) {
@@ -42,21 +41,21 @@ const fetchCurrentUser = withCache(async (request: NextRequest) => {
   return {
     currentUser: null
   };
-})
+});
 
 export async function middleware(request: NextRequest) {
   const { currentUser } = await fetchCurrentUser(request);
-  const isWebAppPage = request.nextUrl.pathname.startsWith('/web-app')
-  const isSigninPage = request.nextUrl.pathname.startsWith('/signin')
-  const isSignupPage = request.nextUrl.pathname.startsWith('/signup')
-  const isConfirmEmailPage = request.nextUrl.pathname.startsWith('/email-confirmation')
-  const isResendEmailPage = request.nextUrl.pathname.startsWith('/resend-email')
+  const isWebAppPage = request.nextUrl.pathname.startsWith('/web-app');
+  const isSigninPage = request.nextUrl.pathname.startsWith('/signin');
+  const isSignupPage = request.nextUrl.pathname.startsWith('/signup');
+  const isConfirmEmailPage = request.nextUrl.pathname.startsWith('/email-confirmation');
+  const isResendEmailPage = request.nextUrl.pathname.startsWith('/resend-email');
 
   if (isWebAppPage && !currentUser) {
     return NextResponse.redirect(`${domain}/signin`);
   }
 
-  if(currentUser){
+  if (currentUser) {
     if (isSigninPage || isSignupPage || isConfirmEmailPage || isResendEmailPage) {
       return NextResponse.redirect(domain);
     }
@@ -64,4 +63,3 @@ export async function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
-

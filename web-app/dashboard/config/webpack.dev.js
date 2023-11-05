@@ -19,7 +19,7 @@ const devConfig = {
       overlay: false
     }
   },
-  output:{
+  output: {
     publicPath: `http://localhost:${PORT}/`
   },
   plugins: [

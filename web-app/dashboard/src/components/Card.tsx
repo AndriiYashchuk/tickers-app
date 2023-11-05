@@ -1,11 +1,11 @@
+/* eslint-disable no-undef,no-new */
 // @ts-nocheck
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import React, { useEffect } from 'react';
 
-
-export const CardComponent = () => {
+export const CardComponent = (): JSX.Element => {
   useEffect(() => {
     // Pie Chart Data
     const pieChart1Data = {
@@ -63,7 +63,7 @@ export const CardComponent = () => {
     });
 
     const ctxPieChart2 = document.getElementById('pieChart2').getContext('2d');
-    const pieChart2 = new Chart(ctxPieChart2, {
+    new Chart(ctxPieChart2, {
       type: 'pie',
       data: pieChart2Data,
       options: {
@@ -104,10 +104,9 @@ export const CardComponent = () => {
     });
 
     // Simulate stock index data
-    function generateRandomData(count) {
+    function generateRandomData(count): number [] {
       const data = [];
-      for (let i = 0; i < count; i++)
-      {
+      for (let i = 0; i < count; i++) {
         data.push(Math.random() * 1000);
       }
       return data;
@@ -128,7 +127,6 @@ export const CardComponent = () => {
           }]
       }
     });
-
 
     // chart 2 Data
     const ctxStockIndex2 = document.getElementById('chart2').getContext('2d');
@@ -152,7 +150,7 @@ export const CardComponent = () => {
       <Grid container spacing={0} mt={1}>
         <Typography
           align="center"
-          variant={"h4"}
+          variant="h4"
         >
           Dashboard with Charts
         </Typography>
@@ -161,66 +159,78 @@ export const CardComponent = () => {
         <Grid
           spacing={1}
           className="box"
-          xs={12} md={6} xl={4}
+          xs={12}
+          md={6}
+          xl={4}
         >
           <h2>Main Portfolio</h2>
           <p>The main portfolio to reach the goals</p>
           <div className="chart-container">
-            <canvas id="pieChart1"></canvas>
+            <canvas id="pieChart1" />
           </div>
         </Grid>
         <Grid
           spacing={1}
           className="box"
-          xs={12} md={6} xl={4}
+          xs={12}
+          md={6}
+          xl={4}
         >
           <h2>Risking Portfolio</h2>
           <p>The portfolio with risking instruments</p>
           <div className="chart-container">
-            <canvas id="pieChart2"></canvas>
+            <canvas id="pieChart2" />
           </div>
         </Grid>
         <Grid
           spacing={1}
           className="box"
-          xs={12} md={6} xl={4}
+          xs={12}
+          md={6}
+          xl={4}
         >
           <h2>Main Portfolio Report</h2>
           <p>Cash Flow by years</p>
           <div className="chart-container">
-            <canvas id="histogram1"></canvas>
+            <canvas id="histogram1" />
           </div>
         </Grid>
         <Grid
           spacing={1}
           className="box"
-          xs={12} md={6} xl={4}
+          xs={12}
+          md={6}
+          xl={4}
         >
           <h2>Risking Portfolio Report</h2>
           <p>Cash Flow by years</p>
           <div className="chart-container">
-            <canvas id="histogram2"></canvas>
+            <canvas id="histogram2" />
           </div>
         </Grid>
         <Grid
           spacing={1}
           className="box chart-container line-chart"
-          xs={12} md={6} xl={4}
+          xs={12}
+          md={6}
+          xl={4}
         >
           <h2>SNP 500</h2>
           <p>SNP 500 by years</p>
-          <canvas id="stockIndexChart"></canvas>
+          <canvas id="stockIndexChart" />
         </Grid>
         <Grid
           spacing={1}
           className="box chart-container line-chart"
-          xs={12} md={6} xl={4}
+          xs={12}
+          md={6}
+          xl={4}
         >
           <h2>Dow Jones index</h2>
           <p>Dow Jones index by years</p>
-          <canvas id="chart2"></canvas>
+          <canvas id="chart2" />
         </Grid>
       </Grid>
     </Container>
   );
-}
+};

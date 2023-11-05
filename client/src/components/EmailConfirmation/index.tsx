@@ -8,10 +8,9 @@ import {
   Grid,
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useRequestWithUiErrors } from '../../hooks/useRequestWithUiErrors';
 import Link from 'next/link';
+import { useRequestWithUiErrors } from '../../hooks/useRequestWithUiErrors';
 import { CenteredTextWithIcon } from '../CenteredTextWithIcon';
-
 
 const CONFIRM_EMAIL_API = '/api/users/confirm-email';
 const EMAIL_IN_USE_ERROR = 'Email already confirmed';
@@ -24,7 +23,7 @@ interface Props {
 const EmailConfirmation = ({ token, userId }: Props) => {
   const { push } = useRouter();
   const [isEmailInUse, setEmailInUse] = useState(false);
-  const { doRequest, uiErrors, isLoading, errors, resetErrors } = useRequestWithUiErrors({
+  const { doRequest, uiErrors, isLoading, errors } = useRequestWithUiErrors({
     url: `${CONFIRM_EMAIL_API}/${token}`,
     method: 'get',
     onSuccess: () => setTimeout(() => push('/web-app'), 1000),
@@ -38,7 +37,7 @@ const EmailConfirmation = ({ token, userId }: Props) => {
 
   useEffect(() => {
     setEmailInUse(
-      () => !!errors && !!errors.find((error) => error.message === EMAIL_IN_USE_ERROR)
+      () => !!errors && !!errors.find(error => error.message === EMAIL_IN_USE_ERROR)
     );
   }, [errors]);
   // TODO: split layout from resend-email and email-confirmation pages into separate components
@@ -91,7 +90,7 @@ const EmailConfirmation = ({ token, userId }: Props) => {
                         </Grid>
                         <Grid item>
                           <Link href={'/'}>
-                            <Button variant={isEmailInUse ? "contained" : "outlined"}>
+                            <Button variant={isEmailInUse ? 'contained' : 'outlined'}>
                               To landing page
                             </Button>
                           </Link>

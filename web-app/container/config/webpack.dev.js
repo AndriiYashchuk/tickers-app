@@ -3,7 +3,7 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('@tickers-app/common-client/src/webpack/webpack.common');
 const sharedModules = require('@tickers-app/common-client/src/webpack/shared');
 
-const PORT = 8080
+const PORT = 8080;
 
 const devConfig = {
   mode: 'development',
@@ -18,7 +18,7 @@ const devConfig = {
       overlay: false
     }
   },
-  output:{
+  output: {
     publicPath: `http://localhost:${PORT}/`
   },
   plugins: [

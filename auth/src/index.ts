@@ -4,7 +4,7 @@ import { redisClientInstance } from './services/redis';
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
 
-const start = async () => {
+const start = async (): Promise<void> => {
   if (!process.env.JWT_KEY) {
     throw new Error('Env variable JWT_KEY must be defined');
   }

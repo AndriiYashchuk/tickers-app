@@ -3,9 +3,8 @@ import './utils/classNameGenerator';
 import { CardComponent } from './components/Card';
 import useScript from './hooks/useScript';
 
-
-const App = () => {
-  const isLoad = useScript('https://cdn.jsdelivr.net/npm/chart.js')
+const App = (): JSX.Element => {
+  const isLoad = useScript('https://cdn.jsdelivr.net/npm/chart.js');
 
   return (
     <div>
@@ -34,11 +33,11 @@ const App = () => {
              height: 400px;
           }
         `
-      }}>
-      </style>
+      }}
+      />
       {isLoad && <CardComponent />}
-    </div>)
-}
-
+    </div>
+  );
+};
 
 export default App;

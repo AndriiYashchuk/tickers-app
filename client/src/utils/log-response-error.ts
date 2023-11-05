@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 
 export const logResponseError = (error: unknown): void => {
-  if(error instanceof AxiosError){
+  if (error instanceof AxiosError) {
     console.error(`
 AXIOS ERROR:
 ${error.config ? 'baseUrl: ' + error.config.baseURL : ''}
@@ -13,4 +13,4 @@ ${error.response ? 'body: ' + error.response.data : ''}`);
   } else {
     console.log(error);
   }
-}
+};

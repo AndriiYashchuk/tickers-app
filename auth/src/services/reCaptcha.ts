@@ -5,7 +5,7 @@ const RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
 export const validateRecaptcha = async (token: string, clientIp?: string): Promise<boolean> => {
   const secretKey = process.env.RECAPTCHA_KEY;
 
-  try{
+  try {
     const { data } = await axios.post(RECAPTCHA_URL, {
       secret: secretKey,
       response: token,
@@ -17,8 +17,8 @@ export const validateRecaptcha = async (token: string, clientIp?: string): Promi
     });
 
     return data.success;
-  } catch (e){
+  } catch (e) {
     console.error(e);
     return false;
   }
-}
+};

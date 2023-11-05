@@ -5,7 +5,7 @@ import {
   UserResendEmailConfirmationListener
 } from './events/listeners/user-resend-email-confirmation-listener';
 
-const start = async () => {
+const start = async (): Promise<void> => {
   if (!process.env.NATS_CLIENT_ID) {
     throw new Error('NATS_CLIENT_ID must be defined');
   }
@@ -18,7 +18,7 @@ const start = async () => {
     throw new Error('NATS_CLUSTER_ID must be defined');
   }
 
-  if(!process.env.EMAIL || !process.env.EMAIL_KEY){
+  if (!process.env.EMAIL || !process.env.EMAIL_KEY) {
     throw new Error('There isn`t emails configuration. Needs process.env.EMAIL and process.env.EMAIL_KEY');
   }
 
@@ -39,7 +39,6 @@ const start = async () => {
     // setup listeners
     new UserCreatedListener(natsWrapper.client).listen();
     new UserResendEmailConfirmationListener(natsWrapper.client).listen();
-
   } catch (err) {
     console.error(err);
   }

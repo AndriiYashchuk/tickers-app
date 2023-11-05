@@ -5,14 +5,14 @@ import { logResponseError } from './log-response-error';
 export const getCurrentUser = async (): Promise<null | User> => {
   const client = buildAuthClient();
   const promise = client.getCurrentUser();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(async () => {
-      try{
+      try {
         const { data: { currentUser } } = await promise;
         resolve(currentUser);
-      } catch (error: unknown){
+      } catch (error: unknown) {
         logResponseError(error);
       }
     });
-  })
+  });
 };

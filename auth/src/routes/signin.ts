@@ -27,7 +27,7 @@ router.post(
 
     const isSuccessRecaptchaValidation = validateRecaptcha(token, clientIp);
 
-    if(!isSuccessRecaptchaValidation) {
+    if (!isSuccessRecaptchaValidation) {
       throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');
     }
 
@@ -44,12 +44,12 @@ router.post(
       throw new BadRequestError('Invalid Credentials');
     }
 
-    if(existingUser.inActive){
+    if (existingUser.inActive) {
       throw new ForbiddenError('Please confirm you email.');
     }
 
     // Store it on session object
-    req.session = await getSession(existingUser.toJSON())
+    req.session = await getSession(existingUser.toJSON());
 
     res.status(200).send(existingUser);
   }

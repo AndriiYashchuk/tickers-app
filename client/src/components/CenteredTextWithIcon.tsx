@@ -14,5 +14,5 @@ export const CenteredTextWithIcon = ({ text }: Props) => {
       </Typography>
       <CheckIcon color="success" fontSize="large" />
     </div>
-  )
-}
+  );
+};

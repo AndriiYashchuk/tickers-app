@@ -1,9 +1,8 @@
-import './globals.css'
+import './globals.css';
 import React from 'react';
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] })
-
+const inter = Inter({ subsets: ['latin'] });
 
 const Layout = async function RootLayout({
   children,
@@ -18,7 +17,7 @@ const Layout = async function RootLayout({
         </div>
       </body>
     </html>
-  )
-}
+  );
+};
 
 export default Layout;

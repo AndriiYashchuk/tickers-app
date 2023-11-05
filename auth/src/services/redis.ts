@@ -1,8 +1,10 @@
-const IoRedis = require('ioredis');
 import { Redis } from 'ioredis';
+
+const IoRedis = require('ioredis');
 
 class RedisClient {
   static instance: RedisClient | null = null;
+
   private _redis: Redis | null = null;
 
   init(host: string): RedisClient {
@@ -14,7 +16,7 @@ class RedisClient {
     return RedisClient.instance;
   }
 
-  get redis() {
+  get redis(): Redis | null {
     return this._redis;
   }
 }

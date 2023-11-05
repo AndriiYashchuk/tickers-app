@@ -1,20 +1,20 @@
-'use client'
+'use client';
+
 import React, { useRef } from 'react';
 import {
   Button,
   Grid,
 } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import AuthForm from '../../components/AuthForm';
 import { SIGN_IN_PROPS } from '../../components/constants';
 import { ToSignUpFromLink } from '../../components/ToSignUpFromLink';
 import DynamicLayout from '../../components/layouts/main/DynamicLayout';
-import { useRouter } from 'next/navigation';
 import { useSignupForm } from '../../hooks/useSignupForm';
 import { useRequestWithUiErrors } from '../../hooks/useRequestWithUiErrors';
 import { recaptchaPublicApiKey } from '../../constants';
 import { CenteredLayout } from '../../components/layouts/CenteredLayout';
-import Link from 'next/link';
-
 
 const Signin = () => {
   const resetFormCallback = useRef<() => void | undefined>();
@@ -23,7 +23,7 @@ const Signin = () => {
     email, handleEmail,
     password, handlePassword,
   } = useSignupForm(resetFormCallback.current);
-  const body = { email, password }
+  const body = { email, password };
 
   const { doRequest, uiErrors, resetErrors, errors } = useRequestWithUiErrors({
     url: SIGN_IN_PROPS.submitUrl,
@@ -42,7 +42,7 @@ const Signin = () => {
         .then((token: string): Promise<void> => doRequest(token))
         .catch((err: any) => console.error(err));
     });
-  }
+  };
 
   return (
     <DynamicLayout
@@ -68,7 +68,9 @@ const Signin = () => {
             titleText={'Account is not confirmed'}
           >
             <p>Please go to you email inbox, to confirm yours email.</p>
-            <p>If you cant find the confirmation email link in yours inbox we can send the new one.</p>
+            <p>
+              If you cant find the confirmation email link in yours inbox we can send the new one.
+            </p>
             <Grid container spacing={2} marginTop={2}>
               <Grid item>
                 <Link href={'/resend-email'}>
@@ -88,6 +90,6 @@ const Signin = () => {
           </CenteredLayout>)}
     </DynamicLayout>
   );
-}
+};
 
 export default Signin;

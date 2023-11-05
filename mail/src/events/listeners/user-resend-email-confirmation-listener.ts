@@ -6,6 +6,7 @@ import { getBody } from '../../templates/confirmation';
 
 export class UserResendEmailConfirmationListener extends Listener<UserResendEmailEvent> {
   queueGroupName = queueGroupName;
+
   subject: Subjects.UserSendEmailConfirmation = Subjects.UserSendEmailConfirmation;
 
   async onMessage(data: UserResendEmailEvent['data'], msg: Message): Promise<void> {
