@@ -20,7 +20,6 @@ runs:
     - name: Create .npmrc
       run: |
         echo 'registry=https://registry.npmjs.org/' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc
-        echo 'always-auth=true' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc 
         echo 'https://registry.npmjs.org/:_authToken=${{ inputs.npm-token  }}' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc
       shell: bash
 
@@ -30,5 +29,5 @@ runs:
 
 
     # Install your dependencies
-    - run: npm ci --prefix ./web-app/${{ inputs.service-name }}/
+    - run: npm ci --prefix ./web-app/${{ inputs.service-name }}/ --loglevel verbose.
       shell: bash
