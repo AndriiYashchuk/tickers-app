@@ -3,7 +3,7 @@ import { User } from '@tickers-app/common/types/User';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 
-const mount = (devRoot: HTMLElement | null, currentUser: User | null) => {
+const mount = (devRoot: HTMLElement | null, currentUser: User | null): void => {
   const root = createRoot(devRoot);
   root.render(
     <App
@@ -11,7 +11,7 @@ const mount = (devRoot: HTMLElement | null, currentUser: User | null) => {
     />);
 };
 
-window.initWebApp = ({ currentUser }: { currentUser: User | null }) => {
+window.initWebApp = ({ currentUser }: { currentUser: User | null }): void => {
   const elem = document.getElementById('root');
   mount(elem, currentUser);
 };

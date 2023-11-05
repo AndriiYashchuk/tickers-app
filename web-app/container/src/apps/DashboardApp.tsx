@@ -1,7 +1,7 @@
 import { mount } from 'dashboard/DashboardApp';
 import React, { useRef, useEffect } from 'react';
 
-export default () => {
+export default (): JSX.Element => {
   const ref = useRef(null);
 
   useEffect(() => {

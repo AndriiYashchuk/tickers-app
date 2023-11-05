@@ -20,9 +20,11 @@ jobs:
 
       # install dependencies in web-app/dashboard service
       - name: Install dependencies in web-app/dashboard service
-        run: npm ci --prefix ./web-app/dashboard/
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        uses: ./.github/actions/install_deps_client_services
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+          service-name: dashboard
 
       # Run ESLint
       - name: Run ESLint for web-app/dashboard service
