@@ -12,11 +12,15 @@ const style = {
 };
 
 interface Props{
+  email?: string;
+  phone?: string;
+  author?: {
+    link: string
+    name: string
+  }
 }
 
-export const Footer = ({ } : Props) => {
-
-  return (
+export const Footer = ({ email, phone, author } : Props) => (
     <Box mt={5} py={3} style={style}>
       <Container>
         <Grid container spacing={3}>
@@ -38,28 +42,29 @@ export const Footer = ({ } : Props) => {
           <Grid item xs={12} md={3}>
             <Typography variant="h6">Contact Us</Typography>
             <Box mt={1}>
-              <Typography variant="body2">Email: support@spm.com</Typography>
-              <Typography variant="body2">Phone: +1-123-456-7890</Typography>
+              {email && <Typography variant="body2">Email: {email}</Typography>}
+              {phone && <Typography variant="body2">Phone: {phone}</Typography>}
             </Box>
           </Grid>
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6">Developed By</Typography>
-            <Box mt={1}>
-              <Link
-                href="https://www.linkedin.com/in/andrii-yashchuk"
-                target="_blank"
-                rel="noopener"
-                variant="body2"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center'
-                }}
-              >
-                <Typography variant="body2">Andrii Yashchuk</Typography>
-                <LinkedInIcon />
-              </Link>
-            </Box>
-          </Grid>
+          {author && (
+            <Grid item xs={12} md={3}>
+              <Typography variant="h6">Developed By</Typography>
+              <Box mt={1}>
+                <Link
+                  href={author.link}
+                  target="_blank"
+                  rel="noopener"
+                  variant="body2"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}
+                >
+                  <Typography variant="body2">{author.name}</Typography>
+                  <LinkedInIcon />
+                </Link>
+              </Box>
+            </Grid>)}
         </Grid>
         <Box mt={3} borderTop={1} borderColor="divider" pt={2}>
           <Typography variant="body2" align="center">
@@ -71,6 +76,5 @@ export const Footer = ({ } : Props) => {
       </Container>
     </Box>
   );
-}
 
 
