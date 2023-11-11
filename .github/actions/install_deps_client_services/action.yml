@@ -23,11 +23,6 @@ runs:
         echo 'https://registry.npmjs.org/:_authToken=${{ inputs.npm-token  }}' >> ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/.npmrc
       shell: bash
 
-    # Run ls
-    - run: ls -la ${{ inputs.github-workspace }}/web-app/${{ inputs.service-name }}/
-      shell: bash
-
-
     # Install your dependencies
     - run: npm ci --prefix ./web-app/${{ inputs.service-name }}/
       shell: bash
