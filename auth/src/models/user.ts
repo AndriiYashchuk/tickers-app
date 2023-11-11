@@ -74,7 +74,8 @@ userSchema.pre('save', async function preSave(done) {
   done();
 });
 
-const User: UserModel = mongoose.model<UserDoc, UserModel>('User', userSchema);
+// eslint-disable-next-line @typescript-eslint/no-use-before-define
 userSchema.statics.build = (attrs: UserAttrs): UserDoc => new User(attrs);
+const User: UserModel = mongoose.model<UserDoc, UserModel>('User', userSchema);
 
 export { User };

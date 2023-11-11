@@ -19,6 +19,10 @@ router.post(
     body('email')
       .isEmail()
       .withMessage('Email must be valid'),
+    body('token')
+      .trim()
+      .notEmpty()
+      .withMessage('There isn`t recaptcha token'),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
