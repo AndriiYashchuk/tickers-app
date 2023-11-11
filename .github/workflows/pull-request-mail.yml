@@ -21,3 +21,25 @@ jobs:
       # Run ESLint
       - name: Run ESLint for mail service
         run:  npx eslint --c .eslintrc.json ./mail/
+
+  compilation:
+    name: Compile mail service by Typescript
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+
+      # install dependencies in mail service
+      - name: Install dependencies in mail service
+        run: npm run ci:mail
+
+      # Compile service by Typescript
+      - name: Run Typescript compiler for mail service
+        run: npm run compile:mail

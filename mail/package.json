@@ -6,6 +6,8 @@
   "scripts": {
     "start": "ts-node-dev --poll src/index.ts",
     "dev": "cross-env MODE=\"development\" ts-node-dev --poll src/index.ts",
+    "compile": "tsc --noEmit",
+    "ci": "npm ci",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

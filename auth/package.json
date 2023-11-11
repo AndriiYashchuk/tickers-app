@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev --poll src/index.ts",
+    "compile": "tsc --noEmit",
+    "ci": "npm ci",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tickers-app/common-server": "1.0.28",
+    "@tickers-app/common-server": "1.0.29",
     "axios": "^1.5.1",
     "bcrypt": "^5.1.1",
     "cookie-session": "^2.0.0",
