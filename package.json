@@ -1,6 +1,6 @@
 {
   "name": "@tickers-app/common-client",
-  "version": "1.0.50",
+  "version": "1.0.51",
   "description": "",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -8,7 +8,6 @@
     "clear": "rm -rf build && rm -rf node_modules",
     "start": "webpack serve --config ./src/webpack.dev.js",
     "clean": "rm -rf build",
-
     "build": "npm run clean && tsc",
     "pub": "npm run build && git add . && git commit -m \"Updates common-client package\" && npm version patch && npm publish"
   },
