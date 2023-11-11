@@ -21,7 +21,11 @@ router.post(
     body('password')
       .trim()
       .isLength({ min: 4, max: 20 })
-      .withMessage('Password must be between 4 and 20 characters')
+      .withMessage('Password must be between 4 and 20 characters'),
+    body('token')
+      .trim()
+      .notEmpty()
+      .withMessage('There isn`t recaptcha token'),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
