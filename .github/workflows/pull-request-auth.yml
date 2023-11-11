@@ -40,6 +40,12 @@ jobs:
       - name: Install dependencies in auth service
         run: npm run ci:auth
 
+      # install @tickers-app/common dependencies // TODO: remove this step after
+      - name: install @tickers-app/common dependencies
+        run: |
+            cd ./auth
+            npm install @tickers-app/common
+
       # Compile service by Typescript
       - name: Run Typescript compiler for auth service
         run: npm run compile:auth

@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import mongoose from 'mongoose';
-import { User as UserType } from '@tickers-app/common/types/User';
+import { type User as UserType } from '@tickers-app/common/types/User';
 import { Password } from '../services/password';
 
 // An interface that describes the properties
