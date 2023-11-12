@@ -111,6 +111,17 @@
     },
     {
       "files": [
+        "auth/**/*.test.{ts,tsx}",
+        "auth/src/test/*.{ts,tsx}",
+        "auth/**/__mocks__/*.{ts,tsx}"
+      ],
+      "parserOptions": {
+        "project": "auth/tsconfig-test.json"
+      },
+      "extends": ["./ts-eslint-config.json"]
+    },
+    {
+      "files": [
         "mail/**/*.{ts,tsx}"
       ],
       "parserOptions": {

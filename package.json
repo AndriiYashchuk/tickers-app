@@ -20,7 +20,8 @@
     "compile:mail": "npm run compile -w mail",
     "build:client": "npm run build -w client",
     "build:web-app/container": "npm run build -w web-app/container",
-    "build:web-app/dashboard": "npm run build -w web-app/dashboard"
+    "build:web-app/dashboard": "npm run build -w web-app/dashboard",
+    "test:auth": "npm run test:check -w auth"
   },
   "repository": {
     "type": "git",

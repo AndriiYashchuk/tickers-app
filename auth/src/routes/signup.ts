@@ -32,8 +32,7 @@ router.post(
     const { email, password, secret, name, surname, token } = req.body;
     const clientIp = req.ip;
 
-    const isSuccessRecaptchaValidation = validateRecaptcha(token, clientIp);
-
+    const isSuccessRecaptchaValidation = await validateRecaptcha(token, clientIp);
     if (!isSuccessRecaptchaValidation) {
       throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');
     }
