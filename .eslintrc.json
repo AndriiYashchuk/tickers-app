@@ -131,7 +131,7 @@
     },
     {
       "files": [
-        "client/**/*.{ts,tsx}"
+        "client/client/**/*.{ts,tsx}"
       ],
       "parserOptions": {
         "project": "client/tsconfig.json"
