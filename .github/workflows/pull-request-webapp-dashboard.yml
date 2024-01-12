@@ -1,7 +1,9 @@
 name: Check web-app/dashboard service on Pull Requests
 
 on:
-  - pull_request
+  pull_request:
+    paths:
+      - 'web-app/dashboard/**'
 
 jobs:
   lint:

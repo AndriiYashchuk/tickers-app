@@ -9,7 +9,7 @@ import {
 } from '../services/email-confirmaton';
 import { validateRecaptcha } from '../services/reCaptcha';
 import { natsWrapper } from '../nats-wrapper';
-import { UserResendEmailPublisher } from '../events/publishers/user-resen-email-publisher';
+import { UserResendEmailPublisher } from '../events/publishers/user-resend-email-publisher';
 
 const router = express.Router();
 
@@ -29,7 +29,7 @@ router.post(
     const { email, token } = req.body;
     const clientIp = req.ip;
 
-    const isSuccessRecaptchaValidation = validateRecaptcha(token, clientIp);
+    const isSuccessRecaptchaValidation = await validateRecaptcha(token, clientIp);
 
     if (!isSuccessRecaptchaValidation) {
       throw new BadRequestError('We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.');

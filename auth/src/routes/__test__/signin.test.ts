@@ -1,7 +1,8 @@
-import request from 'supertest';
+import request = require('supertest');
 import { app } from '../../app';
 import { User as UserModel, UserAttrs } from '../../models/user';
 import { validateRecaptcha } from '../../services/reCaptcha';
+import { isIncludeErrorMessage } from '../../helpers/is-include-error-message';
 
 const testUserInDb = {
   email: 'test@gmail.com',
@@ -9,6 +10,18 @@ const testUserInDb = {
   name: 'name',
   surname: 'surname',
 };
+
+it('check reCaptcha', async () => {
+  const response = await request(app)
+    .post('/api/users/resend-email')
+    .send({
+      email: testUserInDb.email,
+      password: testUserInDb.password,
+      token: 'error',
+    })
+    .expect(400);
+  expect(isIncludeErrorMessage(response, 'We couldn\'t validate your submission with reCAPTCHA. Ensure you\'re not using any tools that might interfere, like certain browser extensions.')).toBeTruthy();
+});
 
 it('should check validation email password and token', async () => {
   // check email
