@@ -3,6 +3,12 @@
   "include": [
     "src/**/__test__/*.ts",
     "src/**/__mocks__/*.ts",
-    "src/**/test/*.ts"
+    "src/**/test/*.ts",
+  ],
+  "files": [
+    "src/test/setup.ts",
+    "src/test/*.ts",
+    "src/declared-types/global.d.ts",
+    "src/declared-types/express.d.ts"
   ]
 }

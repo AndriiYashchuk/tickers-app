@@ -8,7 +8,7 @@ import { getSession } from '../services/get-session';
 
 const router = express.Router();
 
-router.get(
+router.put(
   '/api/users/confirm-email/:token',
   [
     query('id')

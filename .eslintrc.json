@@ -113,7 +113,8 @@
       "files": [
         "auth/**/*.test.{ts,tsx}",
         "auth/src/test/*.{ts,tsx}",
-        "auth/**/__mocks__/*.{ts,tsx}"
+        "auth/**/__mocks__/*.{ts,tsx}",
+        "auth/src/helpers/is-include-error-message.ts"
       ],
       "parserOptions": {
         "project": "auth/tsconfig-test.json"

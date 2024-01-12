@@ -1,7 +1,9 @@
 name: Check mail service on Pull Requests
 
 on:
-  - pull_request
+  pull_request:
+    paths:
+      - 'mail/**'
 
 jobs:
   lint:

@@ -1,7 +1,9 @@
 name: Check client service on Pull Requests
 
 on:
-  - pull_request
+  pull_request:
+    paths:
+      - 'client/**'
 
 jobs:
   lint:
@@ -19,7 +21,7 @@ jobs:
           github-workspace: ${{ github.workspace }}
 
       # Run ESLint
-      - name: Run ESLint for auth service
+      - name: Run ESLint for client service
         run:  npx eslint --c .eslintrc.json ./client/
 
   build:
@@ -37,7 +39,7 @@ jobs:
           github-workspace: ${{ github.workspace }}
 
       # install dependencies in client service
-      - name: Install dependencies in auth service
+      - name: Install dependencies in client service
         run: npm run ci:client
 
       # Compile service by Typescript

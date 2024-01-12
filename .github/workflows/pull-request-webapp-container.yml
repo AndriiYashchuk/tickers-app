@@ -1,7 +1,9 @@
 name: Check web-app/container service on Pull Requests
 
 on:
-  - pull_request
+  pull_request:
+    paths:
+      - 'web-app/container/**'
 
 jobs:
   lint:

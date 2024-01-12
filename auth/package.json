@@ -15,7 +15,12 @@
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
       "./src/test/setup.ts"
-    ]
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig-test.json"
+      }
+    }
   },
   "author": "",
   "license": "ISC",

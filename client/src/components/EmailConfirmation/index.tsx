@@ -25,7 +25,7 @@ const EmailConfirmation = ({ token, userId }: Props) => {
   const [isEmailInUse, setEmailInUse] = useState(false);
   const { doRequest, uiErrors, isLoading, errors } = useRequestWithUiErrors({
     url: `${CONFIRM_EMAIL_API}/${token}`,
-    method: 'get',
+    method: 'put',
     onSuccess: () => setTimeout(() => push('/web-app'), 1000),
     params: { id: userId },
   });
