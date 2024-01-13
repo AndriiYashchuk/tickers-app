@@ -1,3 +1,4 @@
+import { withRetry } from '@tickers-app/common';
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
 import { UserCreatedListener } from './events/listeners/user-created-listener';
@@ -22,29 +23,28 @@ const start = async (): Promise<void> => {
     throw new Error('There isn`t emails configuration. Needs process.env.EMAIL and process.env.EMAIL_KEY');
   }
 
-  try {
-    // setup nats connection
-    await natsWrapper.connect(
-      process.env.NATS_CLUSTER_ID,
-      process.env.NATS_CLIENT_ID,
-      process.env.NATS_URL
-    );
-    natsWrapper.client.on('close', () => {
-      console.log('NATS connection closed!');
-      process.exit();
-    });
-    process.on('SIGINT', () => natsWrapper.client.close());
-    process.on('SIGTERM', () => natsWrapper.client.close());
+  // setup nats connection
+  await natsWrapper.connect(
+    process.env.NATS_CLUSTER_ID,
+    process.env.NATS_CLIENT_ID,
+    process.env.NATS_URL
+  );
+  natsWrapper.client.on('close', () => {
+    console.log('NATS connection closed!');
+    process.exit();
+  });
+  process.on('SIGINT', () => natsWrapper.client.close());
+  process.on('SIGTERM', () => natsWrapper.client.close());
 
-    // setup listeners
-    new UserCreatedListener(natsWrapper.client).listen();
-    new UserResendEmailConfirmationListener(natsWrapper.client).listen();
-  } catch (err) {
-    console.error(err);
-  }
+  // setup listeners
+  new UserCreatedListener(natsWrapper.client).listen();
+  new UserResendEmailConfirmationListener(natsWrapper.client).listen();
+
   app.listen(3000, () => {
     console.log('Listening on port: 3000');
   });
 };
 
-start();
+const FIVE_MINUTE = 5 * 60 * 1000;
+
+withRetry(start, FIVE_MINUTE, console.error);

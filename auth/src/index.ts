@@ -1,3 +1,4 @@
+import { withRetry } from '@tickers-app/common';
 import mongoose from 'mongoose';
 import { redisClientInstance } from './services/redis';
 
@@ -29,31 +30,30 @@ const start = async (): Promise<void> => {
     throw new Error('REDIS_HOST must be defined');
   }
 
-  try {
-    // setup nats connection
-    await natsWrapper.connect(
-      process.env.NATS_CLUSTER_ID,
-      process.env.NATS_CLIENT_ID,
-      process.env.NATS_URL
-    );
-    natsWrapper.client.on('close', () => {
-      console.log('NATS connection closed!');
-      process.exit();
-    });
-    process.on('SIGINT', () => natsWrapper.client.close());
-    process.on('SIGTERM', () => natsWrapper.client.close());
+  // setup nats connection
+  await natsWrapper.connect(
+    process.env.NATS_CLUSTER_ID,
+    process.env.NATS_CLIENT_ID,
+    process.env.NATS_URL
+  );
+  natsWrapper.client.on('close', () => {
+    console.log('NATS connection closed!');
+    process.exit();
+  });
+  process.on('SIGINT', () => natsWrapper.client.close());
+  process.on('SIGTERM', () => natsWrapper.client.close());
 
-    // setup mongo db connection
-    await mongoose.connect(process.env.MONGO_URI);
+  // setup mongo db connection
+  await mongoose.connect(process.env.MONGO_URI);
 
-    // connect to redis
-    redisClientInstance.init(process.env.REDIS_HOST);
-  } catch (err) {
-    console.error(err);
-  }
+  // connect to redis
+  redisClientInstance.init(process.env.REDIS_HOST);
+
   app.listen(3000, () => {
     console.log('Listening on port: 3000');
   });
 };
 
-start();
+const FIVE_MINUTE = 5 * 60 * 1000;
+
+withRetry(start, FIVE_MINUTE, console.error);
