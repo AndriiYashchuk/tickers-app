@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tickers-app/common-server": "1.0.28",
+    "@tickers-app/common-server": "1.0.32",
     "express": "^4.18.2",
     "nodemailer": "^6.9.7"
   },

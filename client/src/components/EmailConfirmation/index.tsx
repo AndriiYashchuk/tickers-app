@@ -24,10 +24,9 @@ const EmailConfirmation = ({ token, userId }: Props) => {
   const { push } = useRouter();
   const [isEmailInUse, setEmailInUse] = useState(false);
   const { doRequest, uiErrors, isLoading, errors } = useRequestWithUiErrors({
-    url: `${CONFIRM_EMAIL_API}/${token}`,
+    url: `${CONFIRM_EMAIL_API}/${token}?id=${userId}`,
     method: 'put',
     onSuccess: () => setTimeout(() => push('/web-app'), 1000),
-    params: { id: userId },
   });
 
   useEffect(() => {
