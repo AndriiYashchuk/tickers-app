@@ -9,6 +9,7 @@
   },
   "files": [
     "src/index.ts",
-    "src/declared-types/express.d.ts"
+    "src/declared-types/express.d.ts",
+    "src/declared-types/global.d.ts"
   ]
 }
