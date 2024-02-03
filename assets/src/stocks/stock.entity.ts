@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
 
 @Entity()
 export class Stock {
@@ -22,4 +22,10 @@ export class Stock {
 
   @Column({ nullable: true })
   notice: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  private async capitalizeTicker() {
+    this.ticker = this.ticker.toUpperCase();
+  }
 }

@@ -1,4 +1,10 @@
-import { IsString, IsInt, IsNumber, IsMongoId, IsOptional } from 'class-validator';
+import {
+  IsString,
+  IsInt,
+  IsNumber,
+  IsMongoId,
+  IsOptional,
+} from 'class-validator';
 
 export class CreateStockDto {
   @IsMongoId()
@@ -15,9 +21,9 @@ export class CreateStockDto {
 
   @IsString()
   @IsOptional()
-  label: string;
+  label?: string;
 
   @IsString()
   @IsOptional()
-  notice: string;
+  notice?: string;
 }
