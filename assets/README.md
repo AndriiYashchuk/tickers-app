@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The main service to track yours assets. It used [Nest](https://github.com/nestjs/nest) framework TypeScript
 
 ## Installation
 
@@ -64,10 +64,6 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Andrii Yashchuk](https://www.linkedin.com/in/andrii-yashchuk/)
+- WebSite - [Tickers app](https://tickers-app.com/)
 
-## License
-
-Nest is [MIT licensed](LICENSE).
