@@ -8,14 +8,17 @@ import {
   Patch,
   Post,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateStockDto } from './dtos/create-stock.dto';
 import { StocksService } from './stocks.service';
 import { UpdateStockDto } from './dtos/update-stock.dto';
 import { StockDto } from './dtos/stock.dto';
 import { Serialize } from '../incerceptors/serialize.interceptors';
+import { CurrentUserFromJwtInterceptor } from '../incerceptors/current-user-from-jwt.interceptor';
 
 @Controller('/api/assets/stocks')
+@UseInterceptors(CurrentUserFromJwtInterceptor)
 export class StocksController {
   constructor(private stocksService: StocksService) {}
 
