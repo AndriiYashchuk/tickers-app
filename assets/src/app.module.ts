@@ -1,6 +1,7 @@
 import { JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StocksModule } from './stocks/stocks.module';
@@ -20,6 +21,14 @@ const isDevEnv = process.env.npm_lifecycle_event === 'start:dev';
     StocksModule,
   ],
   controllers: [AppController],
-  providers: [AppService, CurrentUserFromJwtInterceptor, JwtService],
+  providers: [
+    AppService,
+    CurrentUserFromJwtInterceptor,
+    JwtService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CurrentUserFromJwtInterceptor,
+    },
+  ],
 })
 export class AppModule {}
