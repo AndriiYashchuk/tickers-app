@@ -1,15 +1,6 @@
-import {
-  IsString,
-  IsInt,
-  IsNumber,
-  IsMongoId,
-  IsOptional,
-} from 'class-validator';
+import { IsString, IsInt, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateStockDto {
-  @IsMongoId()
-  userId: string;
-
   @IsString()
   ticker: string;
 

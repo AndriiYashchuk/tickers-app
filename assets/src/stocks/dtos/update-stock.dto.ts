@@ -3,21 +3,21 @@ import { IsString, IsOptional, IsInt, IsNumber } from 'class-validator';
 export class UpdateStockDto {
   @IsString()
   @IsOptional()
-    ticker: string;
+  ticker: string;
 
   @IsString()
   @IsOptional()
-    label: string;
+  label: string;
 
   @IsString()
   @IsOptional()
-    notice: string;
+  notice: string;
 
   @IsInt()
   @IsOptional()
-    purchaseDate: number;
+  purchaseDate: number;
 
   @IsNumber()
   @IsOptional()
-    price: number;
+  price: number;
 }
