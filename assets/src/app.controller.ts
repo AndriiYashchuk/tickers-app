@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './types/User';
 import { CurrentUserFromJwtInterceptor } from './incerceptors/current-user-from-jwt.interceptor';
+import { IsCurrentUserAdminInterceptor } from './incerceptors/is-current-user-admin.interceptor';
 
 @Controller({
   version: '1',
@@ -15,5 +16,12 @@ export class AppController {
   @Get('/whoami')
   whoAmI(@CurrentUser() user: User): User {
     return user;
+  }
+
+  @Get('/healthcheck')
+  @UseInterceptors(IsCurrentUserAdminInterceptor)
+  healthCheck(): { status: string } {
+    // TODO: response by getting logs file with errors
+    return { status: 'ok' };
   }
 }
