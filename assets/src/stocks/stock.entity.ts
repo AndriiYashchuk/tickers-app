@@ -1,13 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, Column, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { AssetEntity } from '../entities/asset.entity';
 
 @Entity()
-export class Stock {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column({ name: 'user_id', type: 'varchar' })
-  userId: string;
-
+export class Stock extends AssetEntity {
   @Column()
   ticker: string;
 
@@ -17,15 +12,9 @@ export class Stock {
   @Column({ type: 'double' })
   price: number;
 
-  @Column({ nullable: true })
-  label: string;
-
-  @Column({ nullable: true })
-  notice: string;
-
   @BeforeInsert()
   @BeforeUpdate()
-  private async capitalizeTicker() {
+  private async capitalizeTicker(): Promise<void> {
     this.ticker = this.ticker.toUpperCase();
   }
 }
