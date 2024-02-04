@@ -14,14 +14,19 @@ import { StocksService } from './stocks.service';
 import { UpdateStockDto } from './dtos/update-stock.dto';
 import { StockDto } from './dtos/stock.dto';
 import { Serialize } from '../incerceptors/serialize.interceptors';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import { User } from '../types/User';
 
 @Controller('/api/assets/stocks')
 export class StocksController {
   constructor(private stocksService: StocksService) {}
 
   @Post()
-  createStock(@Body() body: CreateStockDto): Promise<StockDto> {
-    return this.stocksService.create(body);
+  createStock(
+    @CurrentUser() user: User,
+    @Body() body: CreateStockDto,
+  ): Promise<StockDto> {
+    return this.stocksService.create(body, user.id);
   }
 
   @Get('/:id')
@@ -38,10 +43,10 @@ export class StocksController {
   @Get()
   @Serialize(StockDto)
   findAllStocks(
-    @Query('userId') userId: string,
+    @CurrentUser() user: User,
     @Query('ticker') ticker: string,
   ): Promise<StockDto[]> {
-    return this.stocksService.find(userId, ticker);
+    return this.stocksService.find(user.id, ticker);
   }
 
   @Delete('/:id')

@@ -6,14 +6,17 @@ import { CreateStockDto } from './dtos/create-stock.dto';
 
 @Injectable()
 export class StocksService {
-  constructor(@InjectRepository(Stock) private repo: Repository<Stock>) {}
+  constructor(
+    @InjectRepository(Stock)
+    private repo: Repository<Stock>,
+  ) {}
 
   async findAll(): Promise<Stock[]> {
     return this.repo.find();
   }
 
-  async create(stock: CreateStockDto): Promise<Stock> {
-    const newStock = this.repo.create(stock);
+  async create(stock: CreateStockDto, userId: string): Promise<Stock> {
+    const newStock = this.repo.create({ ...stock, userId });
 
     return this.repo.save(newStock);
   }
