@@ -50,9 +50,12 @@ export class StocksController {
   }
 
   @Delete('/:id')
-  removeStock(@Param('id') id: string): Promise<StockDto | null> {
+  removeStock(
+    @CurrentUser() user: User,
+    @Param('id') id: string,
+  ): Promise<StockDto | null> {
     try {
-      return this.stocksService.remove(id);
+      return this.stocksService.remove(id, user.id);
     } catch (e) {
       throw new NotFoundException(e.message);
     }
@@ -60,11 +63,12 @@ export class StocksController {
 
   @Patch('/:id')
   updateStock(
+    @CurrentUser() user: User,
     @Param('id') id: string,
     @Body() attrs: UpdateStockDto,
   ): Promise<StockDto | null> {
     try {
-      return this.stocksService.update(id, attrs);
+      return this.stocksService.update(id, attrs, user.id);
     } catch (e) {
       throw new NotFoundException(e.message);
     }

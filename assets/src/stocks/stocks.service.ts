@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Stock } from './stock.entity';
@@ -33,20 +33,28 @@ export class StocksService {
     return this.repo.find({ where: query });
   }
 
-  async update(id: string, attrs: Partial<Stock>): Promise<Stock | null> {
+  isUserSockOwner(stock: Stock, userId: string): boolean {
+    return stock && stock.userId === userId;
+  }
+
+  async update(
+    id: string,
+    attrs: Partial<Stock>,
+    userId: string,
+  ): Promise<Stock | null> {
     const stock = await this.findOne(id);
-    if (!stock) {
-      throw new Error(`stock with ${id} not found`);
+    if (!this.isUserSockOwner(stock, userId)) {
+      throw new NotFoundException();
     }
 
     Object.assign(stock, attrs);
     return this.repo.save(stock);
   }
 
-  async remove(id: string): Promise<Stock | null> {
+  async remove(id: string, userId: string): Promise<Stock | null> {
     const stock = await this.findOne(id);
-    if (!stock) {
-      throw new Error(`stock with id ${id} not found`);
+    if (!this.isUserSockOwner(stock, userId)) {
+      throw new NotFoundException();
     }
 
     return this.repo.remove(stock);
