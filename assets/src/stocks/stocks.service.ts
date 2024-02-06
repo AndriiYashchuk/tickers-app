@@ -11,8 +11,8 @@ export class StocksService {
     private repo: Repository<Stock>,
   ) {}
 
-  async findAll(): Promise<Stock[]> {
-    return this.repo.find();
+  async findAll(userId: string): Promise<Stock[]> {
+    return this.repo.find({ where: { userId } });
   }
 
   async create(stock: CreateStockDto, userId: string): Promise<Stock> {
@@ -21,8 +21,8 @@ export class StocksService {
     return this.repo.save(newStock);
   }
 
-  async findOne(id: string): Promise<Stock | null> {
-    return this.repo.findOneBy({ id });
+  async findOne(id: string, userId: string): Promise<Stock | null> {
+    return this.repo.findOneBy({ id, userId });
   }
 
   async find(userId: string, ticker?: string): Promise<Stock[]> {
@@ -42,7 +42,7 @@ export class StocksService {
     attrs: Partial<Stock>,
     userId: string,
   ): Promise<Stock | null> {
-    const stock = await this.findOne(id);
+    const stock = await this.findOne(id, userId);
     if (!this.isUserSockOwner(stock, userId)) {
       throw new NotFoundException();
     }
@@ -52,7 +52,7 @@ export class StocksService {
   }
 
   async remove(id: string, userId: string): Promise<Stock | null> {
-    const stock = await this.findOne(id);
+    const stock = await this.findOne(id, userId);
     if (!this.isUserSockOwner(stock, userId)) {
       throw new NotFoundException();
     }

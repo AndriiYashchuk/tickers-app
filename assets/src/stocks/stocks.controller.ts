@@ -31,8 +31,11 @@ export class StocksController {
 
   @Get('/:id')
   @Serialize(StockDto)
-  async findStock(@Param('id') id: string): Promise<StockDto | null> {
-    const stock = await this.stocksService.findOne(id);
+  async findStock(
+    @CurrentUser() user: User,
+    @Param('id') id: string,
+  ): Promise<StockDto | null> {
+    const stock = await this.stocksService.findOne(id, user.id);
     if (stock) {
       throw new NotFoundException(`Stock with id ${id} not found`);
     }

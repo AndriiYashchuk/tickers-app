@@ -22,9 +22,10 @@ describe('StocksService', () => {
   let service: StocksService;
   const fakeStocksRepo = {
     // Mock implementation of find method
-    find: jest
-      .fn()
-      .mockResolvedValue([{ userId, ...stockAAPLDto }, stockTSLADto]),
+    find: jest.fn().mockResolvedValue([
+      { userId, ...stockAAPLDto },
+      { userId, ...stockTSLADto },
+    ]),
     // Add mock implementations for other methods as needed
     findOneBy: jest
       .fn()
@@ -68,19 +69,26 @@ describe('StocksService', () => {
 
   it('should find one stock by id', async () => {
     const stockId = '1';
-    const stock = await service.findOne(stockId);
-    expect(stock).toEqual({
+    const stock = await service.findOne(stockId, userId);
+    const expected = {
       ...stockAAPLDto,
       userId,
       id: stockId,
+    };
+    expect(stock).toEqual(expected);
+    expect(fakeStocksRepo.findOneBy).toHaveBeenCalledWith({
+      userId,
+      id: stockId,
     });
-    expect(fakeStocksRepo.findOneBy).toHaveBeenCalledWith({ id: stockId });
   });
 
   it('should find stocks by userId and optional ticker', async () => {
     const ticker = 'TSLA';
     const stocks = await service.find(userId, ticker);
-    expect(stocks).toEqual([{ userId, ...stockAAPLDto }, stockTSLADto]);
+    expect(stocks).toEqual([
+      { userId, ...stockAAPLDto },
+      { userId, ...stockTSLADto },
+    ]);
     expect(fakeStocksRepo.find).toHaveBeenCalledWith({
       where: { userId, ticker },
     });
@@ -153,5 +161,12 @@ describe('StocksService', () => {
 
     expect(service.isUserSockOwner(stock1 as Stock, currentUserId)).toBe(true);
     expect(service.isUserSockOwner(stock2 as Stock, currentUserId)).toBe(false);
+  });
+
+  it('should find all stocks', async () => {
+    const all = await service.findAll(userId);
+    all.forEach(({ userId: ownerId }) => {
+      expect(ownerId).toEqual(userId);
+    });
   });
 });
