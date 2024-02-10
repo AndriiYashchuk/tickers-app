@@ -43,6 +43,10 @@ export class StocksService {
     userId: string,
   ): Promise<Stock | null> {
     const stock = await this.findOne(id, userId);
+    if (!stock) {
+      throw new NotFoundException();
+    }
+
     if (!this.isUserSockOwner(stock, userId)) {
       throw new NotFoundException();
     }

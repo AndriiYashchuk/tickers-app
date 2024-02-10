@@ -36,7 +36,7 @@ export class StocksController {
     @Param('id') id: string,
   ): Promise<StockDto | null> {
     const stock = await this.stocksService.findOne(id, user.id);
-    if (stock) {
+    if (!stock) {
       throw new NotFoundException(`Stock with id ${id} not found`);
     }
 
@@ -47,33 +47,25 @@ export class StocksController {
   @Serialize(StockDto)
   findAllStocks(
     @CurrentUser() user: User,
-    @Query('ticker') ticker: string,
+    @Query('ticker') ticker?: string,
   ): Promise<StockDto[]> {
     return this.stocksService.find(user.id, ticker);
   }
 
   @Delete('/:id')
-  removeStock(
+  async removeStock(
     @CurrentUser() user: User,
     @Param('id') id: string,
   ): Promise<StockDto | null> {
-    try {
-      return this.stocksService.remove(id, user.id);
-    } catch (e) {
-      throw new NotFoundException(e.message);
-    }
+    return this.stocksService.remove(id, user.id);
   }
 
   @Patch('/:id')
-  updateStock(
+  async updateStock(
     @CurrentUser() user: User,
     @Param('id') id: string,
     @Body() attrs: UpdateStockDto,
   ): Promise<StockDto | null> {
-    try {
-      return this.stocksService.update(id, attrs, user.id);
-    } catch (e) {
-      throw new NotFoundException(e.message);
-    }
+    return this.stocksService.update(id, attrs, user.id);
   }
 }

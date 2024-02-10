@@ -127,7 +127,19 @@ describe('StocksService', () => {
     expect(fakeStocksRepo.remove).toHaveBeenCalledWith(expectedValue);
   });
 
-  it('should throw error if stock to update not found', async () => {
+  it('should throw error if not stock owner try to update stock', async () => {
+    const stockId = 'non-existent';
+    fakeStocksRepo.findOneBy.mockResolvedValueOnce({
+      userId: 'abc',
+      ticker: 'AAPL',
+    });
+
+    await expect(
+      service.update(stockId, { price: 20 }, userId),
+    ).rejects.toThrow(NotFoundException);
+  });
+
+  it("should throw error if there isn't stock with id", async () => {
     const stockId = 'non-existent';
     fakeStocksRepo.findOneBy.mockResolvedValueOnce(null);
 

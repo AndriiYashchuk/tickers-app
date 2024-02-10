@@ -18,4 +18,7 @@ export class StockDto {
 
   @Expose()
   notice: string;
+
+  @Expose()
+  userId: string;
 }
