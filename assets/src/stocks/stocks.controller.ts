@@ -16,8 +16,9 @@ import { StockDto } from './dtos/stock.dto';
 import { Serialize } from '../incerceptors/serialize.interceptors';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { User } from '../types/User';
+import { BASE } from '../contants/routes';
 
-@Controller('/api/assets/stocks')
+@Controller(`${BASE}/stocks`)
 export class StocksController {
   constructor(private stocksService: StocksService) {}
 

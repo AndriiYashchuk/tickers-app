@@ -9,6 +9,9 @@ import { Stock } from './stocks/stock.entity';
 import { CurrentUserFromJwtInterceptor } from './incerceptors/current-user-from-jwt.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { IsCurrentUserAdminInterceptor } from './incerceptors/is-current-user-admin.interceptor';
+import { PortfoliosModule } from './portfolios/portfolios.module';
+import { LabelsModule } from './labels/labels.module';
+import { Label } from './labels/label.entity';
 
 const isDevEnv = process.env.npm_lifecycle_event === 'start:dev';
 
@@ -17,10 +20,12 @@ const isDevEnv = process.env.npm_lifecycle_event === 'start:dev';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
-      entities: [Stock],
+      entities: [Stock, Label],
       synchronize: isDevEnv,
     }),
     StocksModule,
+    PortfoliosModule,
+    LabelsModule,
   ],
   controllers: [AppController],
   providers: [

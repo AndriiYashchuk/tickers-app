@@ -1,14 +1,12 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { UserOwnerEntity } from './user-owner.entity';
 
-export class AssetEntity {
+export class AssetEntity extends UserOwnerEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ nullable: true })
   name: string;
-
-  @Column({ name: 'user_id', type: 'varchar' })
-  userId: string;
 
   @Column({ nullable: true })
   label: string;

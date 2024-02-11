@@ -1,5 +1,5 @@
 // TODO: move in common js package
-export const base64UrlDecode = (input: string): string => {
+const base64UrlDecode = (input: string): string => {
   // Convert Base64Url to regular Base64
   let base64 = input.replace(/-/g, '+').replace(/_/g, '/');
   // Add padding if needed

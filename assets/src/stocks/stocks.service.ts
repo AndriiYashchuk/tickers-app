@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Stock } from './stock.entity';
 import { CreateStockDto } from './dtos/create-stock.dto';
+import { isUserEntityOwner } from '../utils/is-user-entity-owner';
 
 @Injectable()
 export class StocksService {
@@ -33,10 +34,6 @@ export class StocksService {
     return this.repo.find({ where: query });
   }
 
-  isUserSockOwner(stock: Stock, userId: string): boolean {
-    return stock && stock.userId === userId;
-  }
-
   async update(
     id: string,
     attrs: Partial<Stock>,
@@ -47,7 +44,7 @@ export class StocksService {
       throw new NotFoundException();
     }
 
-    if (!this.isUserSockOwner(stock, userId)) {
+    if (!isUserEntityOwner(stock, userId)) {
       throw new NotFoundException();
     }
 
@@ -57,7 +54,7 @@ export class StocksService {
 
   async remove(id: string, userId: string): Promise<Stock | null> {
     const stock = await this.findOne(id, userId);
-    if (!this.isUserSockOwner(stock, userId)) {
+    if (!isUserEntityOwner(stock, userId)) {
       throw new NotFoundException();
     }
 
