@@ -4,10 +4,11 @@ import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './types/User';
 import { CurrentUserFromJwtInterceptor } from './incerceptors/current-user-from-jwt.interceptor';
 import { IsCurrentUserAdminInterceptor } from './incerceptors/is-current-user-admin.interceptor';
+import { BASE } from './contants/routes';
 
 @Controller({
   version: '1',
-  path: '/api/assets',
+  path: BASE,
 })
 @UseInterceptors(CurrentUserFromJwtInterceptor)
 export class AppController {
