@@ -2,7 +2,7 @@ import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './types/User';
-import { CurrentUserFromJwtInterceptor } from './incerceptors/current-user-from-jwt.interceptor';
+import { CheckUserInterceptor } from './incerceptors/check-user-interceptor.service';
 import { IsCurrentUserAdminInterceptor } from './incerceptors/is-current-user-admin.interceptor';
 import { BASE } from './contants/routes';
 
@@ -10,7 +10,7 @@ import { BASE } from './contants/routes';
   version: '1',
   path: BASE,
 })
-@UseInterceptors(CurrentUserFromJwtInterceptor)
+@UseInterceptors(CheckUserInterceptor)
 export class AppController {
   constructor(private readonly appService: AppService) {}
 

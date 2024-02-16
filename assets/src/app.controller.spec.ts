@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { JwtService } from '@nestjs/jwt';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CurrentUserFromJwtInterceptor } from './incerceptors/current-user-from-jwt.interceptor';
+import { CheckUserInterceptor } from './incerceptors/check-user-interceptor.service';
 import { MockCurrentUserFromJwtInterceptor } from './incerceptors/__mocks__/current-user-from-jwt.interceptor';
 import { IsCurrentUserAdminInterceptor } from './incerceptors/is-current-user-admin.interceptor';
 import { MockIsCurrentUserAdminInterceptor } from './incerceptors/__mocks__/is-current-user-admin.interceptor';
@@ -22,7 +22,7 @@ describe('AppController', () => {
       providers: [
         AppService,
         {
-          provide: CurrentUserFromJwtInterceptor,
+          provide: CheckUserInterceptor,
           useClass: MockCurrentUserFromJwtInterceptor,
         },
         {
