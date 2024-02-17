@@ -1,7 +1,7 @@
 import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { User } from './types/User';
+import { JwtUser } from './types/JwtUser';
 import { CheckUserInterceptor } from './incerceptors/check-user-interceptor.service';
 import { IsCurrentUserAdminInterceptor } from './incerceptors/is-current-user-admin.interceptor';
 import { BASE } from './contants/routes';
@@ -15,7 +15,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('/whoami')
-  whoAmI(@CurrentUser() user: User): User {
+  whoAmI(@CurrentUser() user: JwtUser): JwtUser {
     return user;
   }
 

@@ -6,7 +6,7 @@ import { CheckUserInterceptor } from './incerceptors/check-user-interceptor.serv
 import { MockCurrentUserFromJwtInterceptor } from './incerceptors/__mocks__/current-user-from-jwt.interceptor';
 import { IsCurrentUserAdminInterceptor } from './incerceptors/is-current-user-admin.interceptor';
 import { MockIsCurrentUserAdminInterceptor } from './incerceptors/__mocks__/is-current-user-admin.interceptor';
-import { User } from './types/User';
+import { JwtUser } from './types/JwtUser';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -45,7 +45,7 @@ describe('AppController', () => {
   });
 
   it('should return currentUser', () => {
-    const currentUser: User = {
+    const currentUser: JwtUser = {
       id: 'test',
       email: 'test@gmail.com',
       iat: 123445,

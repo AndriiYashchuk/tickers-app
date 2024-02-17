@@ -5,7 +5,7 @@ import {
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
-import { User } from '../types/User';
+import { JwtUser } from '../types/JwtUser';
 
 @Injectable()
 export class IsCurrentUserAdminInterceptor implements NestInterceptor {
@@ -14,7 +14,7 @@ export class IsCurrentUserAdminInterceptor implements NestInterceptor {
     handler: CallHandler,
   ): Promise<any> {
     const request = context.switchToHttp().getRequest();
-    const user: User = request.currentUser;
+    const user: JwtUser = request.currentUser;
 
     if (!user.isAdmin) {
       throw new ForbiddenException();

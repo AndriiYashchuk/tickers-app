@@ -4,7 +4,7 @@ import {
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
-import { User } from '../../types/User';
+import { JwtUser } from '../../types/JwtUser';
 
 @Injectable()
 export class MockCurrentUserFromJwtInterceptor implements NestInterceptor {
@@ -18,7 +18,7 @@ export class MockCurrentUserFromJwtInterceptor implements NestInterceptor {
       isAdmin: false,
       iat: 123455,
       email: 'test@gmail.com',
-    } as User;
+    } as JwtUser;
 
     return handler.handle();
   }

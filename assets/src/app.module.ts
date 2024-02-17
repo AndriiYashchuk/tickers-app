@@ -31,9 +31,11 @@ const isDevEnv = process.env.npm_lifecycle_event === 'start:dev';
   controllers: [AppController],
   providers: [
     AppService,
-    CheckUserInterceptor,
-    IsCurrentUserAdminInterceptor,
     JwtService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: IsCurrentUserAdminInterceptor,
+    },
     {
       provide: APP_INTERCEPTOR,
       useClass: CheckUserInterceptor,
