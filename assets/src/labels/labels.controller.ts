@@ -1,13 +1,12 @@
 import {
   Body,
   Controller,
-  Delete,
+  Delete, ForbiddenException,
   Get,
   NotFoundException,
   Param,
   Patch,
   Post,
-  Put,
   Query,
 } from '@nestjs/common';
 import { LabelsService } from './labels.service';
@@ -24,9 +23,12 @@ export class LabelsController {
   @Post()
   createLabel(
     @CurrentUser() user: JwtUser,
-    @Body() body: LabelDto,
+    @Body() labelDto: LabelDto,
   ): Promise<Label> {
-    return this.labelsService.create(body, user.id);
+    if (labelDto.isSystem && !user.isAdmin) {
+      throw new ForbiddenException('Only admins can create system labels');
+    }
+    return this.labelsService.create(labelDto, user.id);
   }
 
   @Get('/:id')
@@ -46,8 +48,9 @@ export class LabelsController {
   findAllLabels(
     @CurrentUser() user: JwtUser,
     @Query('name') name?: string,
+    @Query('withSystem') withSystem?: boolean,
   ): Promise<Label[]> {
-    return this.labelsService.find(user.id, name);
+    return this.labelsService.find(user.id, name, withSystem);
   }
 
   @Delete('/:id')

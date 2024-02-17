@@ -36,7 +36,7 @@ export class StocksController {
   async findStock(
     @CurrentUser() user: JwtUser,
     @Param('id') id: string,
-  ): Promise<StockDto | null> {
+  ): Promise<StockDto> {
     const stock = await this.stocksService.findOne(id, user.id);
     if (!stock) {
       throw new NotFoundException(`Stock with id ${id} not found`);

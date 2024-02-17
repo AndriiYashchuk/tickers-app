@@ -63,9 +63,15 @@ export class StocksService {
   }
 
   async remove(id: string, userId: string): Promise<Stock | null> {
-    const stock = await this.findOneBy(id, userId);
+    const stock = await this.findOne(id, userId);
     if (!isUserEntityOwner(stock, userId)) {
       throw new NotFoundException();
+    }
+
+    // Remove all labels from stock
+    if (stock.labels.length > 0) {
+      stock.labels = [];
+      await this.stocksRepo.save(stock);
     }
 
     return this.stocksRepo.remove(stock);

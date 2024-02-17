@@ -15,9 +15,6 @@ export class StockDto {
   price: number;
 
   @Expose()
-  notice: string;
-
-  @Expose()
   userId: string;
 
   // eslint-disable-next-line
@@ -28,4 +25,7 @@ export class StockDto {
   )
   @Expose()
   labels: Label[];
+
+  @Expose()
+  notice?: string;
 }

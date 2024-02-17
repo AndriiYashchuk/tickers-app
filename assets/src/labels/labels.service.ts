@@ -12,8 +12,14 @@ export class LabelsService {
     private repo: Repository<Label>,
   ) {}
 
-  async findAll(userId: string): Promise<Label[]> {
-    return this.repo.find({ where: { userId } });
+  async findAll(userId: string, withSystem?: boolean): Promise<Label[]> {
+    const userLabels = await this.repo.find({ where: { userId } });
+    if (withSystem) {
+      const systemLabels = await this.repo.find({ where: { isSystem: true } });
+      return userLabels.concat(systemLabels);
+    }
+
+    return userLabels;
   }
 
   async create(label: LabelDto, userId: string): Promise<Label> {
@@ -23,15 +29,27 @@ export class LabelsService {
   }
 
   async findOne(id: string, userId: string): Promise<Label | null> {
-    return this.repo.findOneBy({ id, userId });
+    return this.repo.findOneBy({ id, userId, isSystem: true });
   }
 
-  async find(userId: string, name?: string): Promise<Label[]> {
+  async find(
+    userId: string,
+    name?: string,
+    withSystem?: boolean,
+  ): Promise<Label[]> {
     const query = {
       userId,
       ...(name ? { name: name.toLowerCase() } : {}),
     };
-    return this.repo.find({ where: query });
+    const userLabels = await this.repo.find({ where: query });
+
+    if (withSystem) {
+      const systemLabels = await this.repo.find({ where: { isSystem: true } });
+
+      return userLabels.concat(systemLabels);
+    }
+
+    return userLabels;
   }
 
   async update(

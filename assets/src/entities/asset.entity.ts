@@ -9,8 +9,8 @@ export class AssetEntity extends UserOwnerEntity {
   name: string;
 
   @Column({ nullable: true })
-  label: string;
+  description?: string;
 
   @Column({ nullable: true })
-  notice: string;
+  notice?: string;
 }

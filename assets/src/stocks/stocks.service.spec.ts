@@ -3,6 +3,7 @@ import { NotFoundException } from '@nestjs/common';
 import { StocksService } from './stocks.service';
 import { CreateStockDto } from './dtos/create-stock.dto';
 import { Stock } from './stock.entity';
+import { isUserEntityOwner } from '../utils/is-user-entity-owner';
 
 const stockAAPLDto: CreateStockDto = {
   ticker: 'AAPL',
@@ -171,8 +172,8 @@ describe('StocksService', () => {
       userId: 'abc',
     };
 
-    expect(service.isUserSockOwner(stock1 as Stock, currentUserId)).toBe(true);
-    expect(service.isUserSockOwner(stock2 as Stock, currentUserId)).toBe(false);
+    expect(isUserEntityOwner(stock1 as Stock, currentUserId)).toBe(true);
+    expect(isUserEntityOwner(stock2 as Stock, currentUserId)).toBe(false);
   });
 
   it('should find all stocks', async () => {
