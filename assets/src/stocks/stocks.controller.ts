@@ -14,7 +14,7 @@ import { CreateStockDto } from './dtos/create-stock.dto';
 import { StocksService } from './stocks.service';
 import { UpdateStockDto } from './dtos/update-stock.dto';
 import { StockDto } from './dtos/stock.dto';
-import { Serialize } from '../incerceptors/serialize.interceptors';
+import { Serialize } from '../interceptors/serialize.interceptors';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { JwtUser } from '../types/JwtUser';
 import { BASE } from '../contants/routes';

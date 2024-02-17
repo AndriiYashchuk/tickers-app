@@ -2,8 +2,8 @@ import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { JwtUser } from './types/JwtUser';
-import { CheckUserInterceptor } from './incerceptors/check-user-interceptor.service';
-import { IsCurrentUserAdminInterceptor } from './incerceptors/is-current-user-admin.interceptor';
+import { CheckUserInterceptor } from './interceptors/check-user-interceptor.service';
+import { IsCurrentUserAdminInterceptor } from './interceptors/is-current-user-admin.interceptor';
 import { BASE } from './contants/routes';
 
 @Controller({
