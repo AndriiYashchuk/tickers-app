@@ -1,4 +1,5 @@
-import { Expose } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
+import { Label } from '../../labels/label.entity';
 
 export class StockDto {
   @Expose()
@@ -14,11 +15,17 @@ export class StockDto {
   price: number;
 
   @Expose()
-  label: string;
-
-  @Expose()
   notice: string;
 
   @Expose()
   userId: string;
+
+  // eslint-disable-next-line
+  @Transform(({ value }) =>
+    value
+      ? value.map((label: Label) => ({ name: label.name, id: label.id }))
+      : [],
+  )
+  @Expose()
+  labels: Label[];
 }

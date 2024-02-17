@@ -7,12 +7,13 @@ import {
   Param,
   Patch,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
 import { LabelsService } from './labels.service';
 import { BASE } from '../contants/routes';
 import { CurrentUser } from '../decorators/current-user.decorator';
-import { User } from '../types/User';
+import { JwtUser } from '../types/JwtUser';
 import { LabelDto } from './dtos/label.dto';
 import { Label } from './label.entity';
 
@@ -22,7 +23,7 @@ export class LabelsController {
 
   @Post()
   createLabel(
-    @CurrentUser() user: User,
+    @CurrentUser() user: JwtUser,
     @Body() body: LabelDto,
   ): Promise<Label> {
     return this.labelsService.create(body, user.id);
@@ -30,7 +31,7 @@ export class LabelsController {
 
   @Get('/:id')
   async findLabel(
-    @CurrentUser() user: User,
+    @CurrentUser() user: JwtUser,
     @Param('id') id: string,
   ): Promise<Label | null> {
     const label = await this.labelsService.findOne(id, user.id);
@@ -43,7 +44,7 @@ export class LabelsController {
 
   @Get()
   findAllLabels(
-    @CurrentUser() user: User,
+    @CurrentUser() user: JwtUser,
     @Query('name') name?: string,
   ): Promise<Label[]> {
     return this.labelsService.find(user.id, name);
@@ -51,7 +52,7 @@ export class LabelsController {
 
   @Delete('/:id')
   async removeLabel(
-    @CurrentUser() user: User,
+    @CurrentUser() user: JwtUser,
     @Param('id') id: string,
   ): Promise<Label | null> {
     return this.labelsService.remove(id, user.id);
@@ -59,7 +60,7 @@ export class LabelsController {
 
   @Patch('/:id')
   async updateLabel(
-    @CurrentUser() user: User,
+    @CurrentUser() user: JwtUser,
     @Param('id') id: string,
     @Body() attrs: LabelDto,
   ): Promise<Label | null> {

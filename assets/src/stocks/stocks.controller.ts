@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
 import { CreateStockDto } from './dtos/create-stock.dto';
@@ -15,7 +16,7 @@ import { UpdateStockDto } from './dtos/update-stock.dto';
 import { StockDto } from './dtos/stock.dto';
 import { Serialize } from '../incerceptors/serialize.interceptors';
 import { CurrentUser } from '../decorators/current-user.decorator';
-import { User } from '../types/User';
+import { JwtUser } from '../types/JwtUser';
 import { BASE } from '../contants/routes';
 
 @Controller(`${BASE}/stocks`)
@@ -24,7 +25,7 @@ export class StocksController {
 
   @Post()
   createStock(
-    @CurrentUser() user: User,
+    @CurrentUser() user: JwtUser,
     @Body() body: CreateStockDto,
   ): Promise<StockDto> {
     return this.stocksService.create(body, user.id);
@@ -33,7 +34,7 @@ export class StocksController {
   @Get('/:id')
   @Serialize(StockDto)
   async findStock(
-    @CurrentUser() user: User,
+    @CurrentUser() user: JwtUser,
     @Param('id') id: string,
   ): Promise<StockDto | null> {
     const stock = await this.stocksService.findOne(id, user.id);
@@ -47,26 +48,44 @@ export class StocksController {
   @Get()
   @Serialize(StockDto)
   findAllStocks(
-    @CurrentUser() user: User,
+    @CurrentUser() user: JwtUser,
     @Query('ticker') ticker?: string,
   ): Promise<StockDto[]> {
     return this.stocksService.find(user.id, ticker);
   }
 
   @Delete('/:id')
-  async removeStock(
-    @CurrentUser() user: User,
+  removeStock(
+    @CurrentUser() user: JwtUser,
     @Param('id') id: string,
   ): Promise<StockDto | null> {
     return this.stocksService.remove(id, user.id);
   }
 
   @Patch('/:id')
-  async updateStock(
-    @CurrentUser() user: User,
+  updateStock(
+    @CurrentUser() user: JwtUser,
     @Param('id') id: string,
     @Body() attrs: UpdateStockDto,
   ): Promise<StockDto | null> {
     return this.stocksService.update(id, attrs, user.id);
+  }
+
+  @Put('/:id/labels/:labelId')
+  bindLabelToStock(
+    @CurrentUser() user: JwtUser,
+    @Param('id') id: string,
+    @Param('labelId') labelId: string,
+  ): Promise<StockDto | null> {
+    return this.stocksService.bindLabelToStock(id, labelId, user.id);
+  }
+
+  @Delete('/:id/labels/:labelId')
+  unbindLabelFromStock(
+    @CurrentUser() user: JwtUser,
+    @Param('id') id: string,
+    @Param('labelId') labelId: string,
+  ): Promise<StockDto | null> {
+    return this.stocksService.unbindLabelFromStock(id, labelId, user.id);
   }
 }

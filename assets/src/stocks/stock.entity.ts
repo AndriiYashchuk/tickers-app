@@ -1,5 +1,13 @@
-import { Entity, Column, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  BeforeInsert,
+  BeforeUpdate,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { AssetEntity } from '../entities/asset.entity';
+// eslint-disable-next-line import/no-cycle
 import { Label } from '../labels/label.entity';
 
 @Entity()
@@ -19,6 +27,7 @@ export class Stock extends AssetEntity {
     this.ticker = this.ticker.toUpperCase();
   }
 
-  @OneToMany(() => Label, (label: Label) => label.stock)
+  @ManyToMany(() => Label, (label: Label) => label.stocks)
+  @JoinTable()
   labels: Label[];
 }

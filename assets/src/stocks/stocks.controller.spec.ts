@@ -2,18 +2,18 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { StocksController } from './stocks.controller';
 import { StocksService } from './stocks.service';
-import { User } from '../types/User';
+import { JwtUser } from '../types/JwtUser';
 import { CreateStockDto } from './dtos/create-stock.dto';
 import { Stock } from './stock.entity';
 import { StockDto } from './dtos/stock.dto';
 import { UpdateStockDto } from './dtos/update-stock.dto';
 
-const userOwner: User = {
+const userOwner: JwtUser = {
   id: 'userId',
   email: 'test123@gmail.com',
   iat: 1244,
 };
-const userNotOwner: User = {
+const userNotOwner: JwtUser = {
   id: 'userId1',
   email: 'test@gmail.com',
   iat: 245,
