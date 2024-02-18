@@ -83,7 +83,7 @@ module.exports = class initialSchema1625847615203 {
           },
           {
             name: 'price',
-            type: 'integer',
+            type: 'money',
           },
         ],
       }),
