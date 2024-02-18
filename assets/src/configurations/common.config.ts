@@ -1,3 +1,3 @@
 export default {
-  jwtSecret: process.env.JWT_KEY!,
+  jwtSecret: 'yashchuk.tickers-app.com',
 };

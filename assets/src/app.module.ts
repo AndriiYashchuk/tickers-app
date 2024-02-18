@@ -6,22 +6,21 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StocksModule } from './stocks/stocks.module';
-import { Stock } from './stocks/stock.entity';
 import { CheckUserInterceptor } from './interceptors/check-user-interceptor.service';
 import { AuthGuard } from './guards/auth.guard';
 import { IsCurrentUserAdminInterceptor } from './interceptors/is-current-user-admin.interceptor';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { LabelsModule } from './labels/labels.module';
-import { Label } from './labels/label.entity';
 import { CurrentUserMiddleware } from './middlewares/current-user.middlewares';
 import developmentConfig from './configurations/development.config';
 import productionConfig from './configurations/production.config';
 import { Config } from './configurations/Config';
+import typeOrmConfig from '../ormconfig';
 
 const config: Config =
-  process.env.npm_lifecycle_event === 'start:dev'
-    ? developmentConfig
-    : productionConfig;
+  process.env.NODE_ENV === 'development' ? developmentConfig : productionConfig;
+
+console.log(typeOrmConfig);
 
 @Module({
   imports: [
@@ -29,12 +28,7 @@ const config: Config =
       isGlobal: true,
       load: [(): Config => config],
     }),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.sqlite',
-      entities: [Stock, Label],
-      synchronize: config.isDevEnv,
-    }),
+    TypeOrmModule.forRoot(typeOrmConfig),
     StocksModule,
     PortfoliosModule,
     LabelsModule,
