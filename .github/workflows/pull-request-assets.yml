@@ -40,7 +40,7 @@ jobs:
 
       # install dependencies in assets service
       - name: Install dependencies in assets service
-        run: npm run ci
+        run: npm run ci:assets
 
       # install @tickers-app/common dependencies // TODO: remove this step after
       - name: install @tickers-app/common dependencies
@@ -68,7 +68,7 @@ jobs:
 
       # install dependencies in assets service
       - name: Install dependencies in assets service
-        run: npm run ci
+        run: npm run ci:assets
 
       # install @tickers-app/common dependencies // TODO: remove this step after
       - name: install @tickers-app/common dependencies
@@ -96,7 +96,7 @@ jobs:
 
       # install dependencies in assets service
       - name: Install dependencies in assets service
-        run: npm run ci
+        run: npm run ci:assets
 
       # install @tickers-app/common dependencies // TODO: remove this step after
       - name: install @tickers-app/common dependencies
