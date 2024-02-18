@@ -19,7 +19,7 @@ const prodConfig = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   migrationsRun: true,
-  entities: ['**/*.entity.ts'],
+  entities: ['**/*.entity.js'],
   ssl: false
 };
 
