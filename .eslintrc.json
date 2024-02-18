@@ -111,6 +111,19 @@
     },
     {
       "files": [
+        "assets/**/*.ts"
+      ],
+      "parserOptions": {
+        "project": "assets/tsconfig.json"
+      },
+      "extends": [
+        "./ts-eslint-config.json",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ]
+    },
+    {
+      "files": [
         "auth/**/*.test.{ts,tsx}",
         "auth/src/test/*.{ts,tsx}",
         "auth/**/__mocks__/*.{ts,tsx}",

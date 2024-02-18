@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd mail && docker build -t iandrew/mail --build-arg WEB_APP_DOMAIN=${{ secrets.WEB_APP_DOMAIN  }} .        # build new image of mail
+      - run: cd mail && docker build -t iandrew/mail .        # build new image of mail
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD # login to docker hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}

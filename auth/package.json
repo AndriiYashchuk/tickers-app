@@ -1,5 +1,6 @@
 {
   "name": "auth",
+  "author": "Andrii Yashchuk",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -25,7 +26,6 @@
       ]
     }
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@tickers-app/common-server": "1.0.32",

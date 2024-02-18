@@ -1,0 +1,59 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-depl-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assets-postgres-depl
+spec:
+  selector:
+    matchLabels:
+      app: postgres-depl
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: postgres-depl
+    spec:
+      containers:
+        - name: postgres-depl
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: assets-db
+            - name: POSTGRES_USER
+              value: tickers-app-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: assets-postgres-secret
+                  key: ASSETS_POSTGRES_PASS
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: postgres-depl-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: assets-postgres-srv
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: postgres-depl
+  type: ClusterIP
