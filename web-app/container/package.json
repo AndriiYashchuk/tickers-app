@@ -1,5 +1,6 @@
 {
   "name": "container",
+  "author": "Andrii Yashchuk",
   "version": "1.0.0",
   "scripts": {
     "clear:all": "rm -rf dist && rm -rf node_modules",
