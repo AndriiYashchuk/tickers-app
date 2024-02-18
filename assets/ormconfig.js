@@ -1,15 +1,15 @@
 const dbConfig = {
   synchronize: false,
-};
-
-const devConfig = {
-  type: 'sqlite',
-  database: 'db.sqlite',
   migrationsRun: true,
   migrations: ['migrations/*.js'],
   cli: {
     migrationsDir: 'migrations',
   }
+};
+
+const devConfig = {
+  type: 'sqlite',
+  database: 'db.sqlite',
 };
 
 const prodConfig = {
@@ -21,9 +21,6 @@ const prodConfig = {
   migrationsRun: true,
   entities: ['**/*.entity.js'],
   ssl: false,
-  cli: {
-    migrationsDir: 'migrations',
-  }
 };
 
 switch (process.env.NODE_ENV) {
