@@ -12,6 +12,19 @@ const devConfig = {
   }
 };
 
+const prodConfig = {
+  type: 'postgres',
+  host: process.env.DATABASE_HOST,
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
+  migrationsRun: true,
+  entities: ['**/*.entity.ts'],
+  ssl: {
+    rejectUnauthorized: false,
+  }
+};
+
 switch (process.env.NODE_ENV) {
   case 'development':
     Object.assign(dbConfig, {
@@ -26,11 +39,7 @@ switch (process.env.NODE_ENV) {
     });
     break;
   case 'production':
-    Object.assign(dbConfig, {
-      type: 'sqlite',
-      database: 'db.sqlite',
-      entities: ['**/*.entity.ts'],
-    });
+    Object.assign(dbConfig, prodConfig);
     break;
   default:
     throw new Error('No environment specified');

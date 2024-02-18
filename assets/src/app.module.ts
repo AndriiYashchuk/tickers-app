@@ -20,8 +20,6 @@ import typeOrmConfig from '../ormconfig';
 const config: Config =
   process.env.NODE_ENV === 'development' ? developmentConfig : productionConfig;
 
-console.log(typeOrmConfig);
-
 @Module({
   imports: [
     ConfigModule.forRoot({

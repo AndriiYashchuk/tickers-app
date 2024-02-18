@@ -1,23 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-depl
+  name: assets-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: assets
   template:
     metadata:
       labels:
-        app: auth
+        app: assets
     spec:
       containers:
-        - name: auth
-          image: iandrew/auth
+        - name: assets
+          image: iandrew/assets
           env:
-            - name: MONGO_URI
-              value: 'mongodb://auth-mongo-srv:27017/auth'
+            - name: DATABASE_HOST
+              value: assets-postgres-srv
+            - name: POSTGRES_DB
+              value: assets-db
+            - name: POSTGRES_USER
+              value: tickers-app-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: assets-postgres-secret
+                  key: ASSETS_POSTGRES_PASS
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -36,20 +45,18 @@ spec:
                 secretKeyRef:
                   name: recaptcha-secret
                   key: RECAPTCHA_KEY
-            - name: REDIS_HOST
-              value: auth-redis-srv
             - name: ADMIN_EMAIL
               value: tickersapp@gmail.com
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-srv
+  name: assets-srv
 spec:
   selector:
-    app: auth
+    app: assets
   ports:
-    - name: auth
+    - name: assets
       protocol: TCP
       port: 3000
       targetPort: 3000
