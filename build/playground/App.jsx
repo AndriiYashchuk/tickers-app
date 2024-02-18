@@ -39,8 +39,8 @@ export const App = () => {
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         setTimeout(() => {
-            // setIsLoading(false);
-            // setUser(UserWithEmailOnly)
+            setIsLoading(false);
+            setUser(UserWithEmailOnly);
         }, 3000);
     }, []);
     const handleClick = (link) => {

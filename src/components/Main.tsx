@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@mui/system';
+import Container from '@mui/material/Container';
 
 export const Main = ({ children }: { children?: React.ReactNode }): JSX.Element => (
   <main>

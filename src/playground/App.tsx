@@ -48,8 +48,8 @@ export const App = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      // setIsLoading(false);
-      // setUser(UserWithEmailOnly)
+      setIsLoading(false);
+      setUser(UserWithEmailOnly)
     }, 3000)
   }, []);
 
