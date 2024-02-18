@@ -18,7 +18,7 @@ export class Stock extends AssetEntity {
   @Column({ name: 'purchase_date' })
   purchaseDate: number;
 
-  @Column({ type: 'double' })
+  @Column({ type: 'double precision' })
   price: number;
 
   @BeforeInsert()
