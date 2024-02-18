@@ -20,9 +20,7 @@ const prodConfig = {
   database: process.env.POSTGRES_DB,
   migrationsRun: true,
   entities: ['**/*.entity.ts'],
-  ssl: {
-    rejectUnauthorized: false,
-  }
+  ssl: false
 };
 
 switch (process.env.NODE_ENV) {
