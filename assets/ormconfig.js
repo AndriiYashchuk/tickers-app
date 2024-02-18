@@ -20,7 +20,10 @@ const prodConfig = {
   database: process.env.POSTGRES_DB,
   migrationsRun: true,
   entities: ['**/*.entity.js'],
-  ssl: false
+  ssl: false,
+  cli: {
+    migrationsDir: 'migrations',
+  }
 };
 
 switch (process.env.NODE_ENV) {
