@@ -9,7 +9,8 @@
     "client",
     "auth",
     "web-app/container",
-    "web-app/dashboard"
+    "web-app/dashboard",
+    "packages/*"
   ],
   "scripts": {
     "ci:assets": "npm run ci -w assets",
