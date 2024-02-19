@@ -1,0 +1,15 @@
+{
+  "extends": "@tickers-app/common/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./build",
+    "target": "ES2015",
+    "declaration": true,
+    "skipLibCheck": true,
+    "module": "ES2015",
+    "esModuleInterop": true,
+    "lib": ["es5", "es6", "dom"]
+  },
+  "files": [
+    "src/index.ts"
+  ]
+}
