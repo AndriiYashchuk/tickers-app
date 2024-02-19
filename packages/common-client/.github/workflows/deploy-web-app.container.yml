@@ -1,0 +1,46 @@
+name: deploy-web-app.container
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "web-app/container/**"
+
+defaults:
+  run:
+    working-directory: web-app/container
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # delete package-lock.json https://stackoverflow.com/questions/67114659/npm-err-code-e401-npm-err-incorrect-or-missing-password
+      - run: rm package-lock.json
+      - run: npm install --registry https://registry.npmjs.org
+      - run: npm run build
+        env:
+          PRODUCTION_DOMAIN: ${{ secrets.WEB_APP_DOMAIN }}
+
+      - uses: shinyinc/action-aws-cli@v1.2
+      # clean s3 bucket before download new build
+      - run: aws s3 rm s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest --recursive
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-north-1"
+          PATH_TO_DELETE: '/container/latest/'
+      # copy to s3 bucket js source files
+      - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-north-1"
+      # invalidate cloudfront cache
+      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --path "/container/latest/index.html"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-north-1"

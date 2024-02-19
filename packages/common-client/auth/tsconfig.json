@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "files": [
+    "src/index.ts",
+    "src/declared-types/express.d.ts",
+    "src/declared-types/global.d.ts"
+  ]
+}

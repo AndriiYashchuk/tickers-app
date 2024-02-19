@@ -1,0 +1,18 @@
+{
+  "name": "dashboard",
+  "author": "Andrii Yashchuk",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "clear:all": "rm -rf dist && rm -rf node_modules",
+    "clear": "rm -rf dist",
+    "ci": "npm ci",
+    "start": "webpack serve --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.prod.js",
+    "build:dev": "npm run clear && cross-env MODE=\"development\" webpack --config config/webpack.prod.js",
+    "build:remote-dev": "npm run clear && cross-env MODE=\"development\" PRODUCTION_DOMAIN=\"https://tickers-app.dev\" webpack --config config/webpack.prod.js"
+  },
+  "dependencies": {
+    "@tickers-app/common-client": "1.0.53"
+  }
+}
