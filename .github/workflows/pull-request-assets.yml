@@ -1,0 +1,110 @@
+name: Check assets service on Pull Requests
+
+on:
+  pull_request:
+    paths:
+      - 'assets/**'
+
+jobs:
+  lint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+
+      # Run ESLint
+      - name: Run ESLint for assets service
+        run:  npx eslint --c .eslintrc.json ./assets/
+
+  compilation:
+    name: Compile assets service by Typescript
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+
+      # install dependencies in assets service
+      - name: Install dependencies in assets service
+        run: npm run ci:assets
+
+      # install @tickers-app/common dependencies // TODO: remove this step after
+      - name: install @tickers-app/common dependencies
+        run: |
+            cd ./assets
+            npm install @tickers-app/common
+
+      # Compile service by Typescript
+      - name: Run Typescript compiler for assets service
+        run: npm run compile:assets
+
+  unit-tests:
+    name: Run unit tests for assets service
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+
+      # install dependencies in assets service
+      - name: Install dependencies in assets service
+        run: npm run ci:assets
+
+      # install @tickers-app/common dependencies // TODO: remove this step after
+      - name: install @tickers-app/common dependencies
+        run: |
+          cd ./assets
+          npm install @tickers-app/common
+
+      # Run unit tests
+      - name: Run tests for assets service
+        run: npm run test:assets
+
+  e2e-tests:
+    name: Run e2e tests for assets service
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+
+      # install dependencies in assets service
+      - name: Install dependencies in assets service
+        run: npm run ci:assets
+
+      # install @tickers-app/common dependencies // TODO: remove this step after
+      - name: install @tickers-app/common dependencies
+        run: |
+          cd ./assets
+          npm install @tickers-app/common
+
+      # Run e2e tests
+      - name: Run e2e tests for assets service
+        run: npm run test:assets:e2e
+

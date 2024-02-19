@@ -1,0 +1,56 @@
+{
+  "name": "tickers-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "assets",
+    "mail",
+    "client",
+    "auth",
+    "web-app/container",
+    "web-app/dashboard"
+  ],
+  "scripts": {
+    "ci:assets": "npm run ci -w assets",
+    "ci:auth": "npm run ci -w auth",
+    "ci:mail": "npm run ci -w mail",
+    "ci:client": "npm run ci -w client",
+    "ci:web-app/container": "npm run ci -w web-app/container",
+    "ci:web-app/dashboard": "npm run ci -w web-app/dashboard",
+    "compile:auth": "npm run compile -w auth",
+    "compile:mail": "npm run compile -w mail",
+    "compile:assets": "npm run build -w assets",
+    "build:client": "npm run build -w client",
+    "build:web-app/container": "npm run build -w web-app/container",
+    "build:web-app/dashboard": "npm run build -w web-app/dashboard",
+    "test:auth": "npm run test:check -w auth",
+    "test:assets": "npm run test -w assets",
+    "test:assets:e2e": "npm run test:e2e -w assets"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndriiYashchuk/tickers-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndriiYashchuk/tickers-app/issues"
+  },
+  "homepage": "https://github.com/AndriiYashchuk/tickers-app#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-next": "^14.0.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint": "8.22.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0"
+  }
+}

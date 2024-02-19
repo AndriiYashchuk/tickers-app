@@ -1,0 +1,51 @@
+apiVersion: skaffold/v4beta5
+kind: Config
+metadata:
+  name: tickers-app
+manifests:
+  rawYaml:
+    - infra/k8s/*
+    - infra/k8s-dev/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: iandrew/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: iandrew/client
+      context: client
+      docker:
+        dockerfile: DockerfileDev
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+          - src: '**/*.ts'
+            dest: .
+          - src: '**/*.tsx'
+            dest: .
+    - image: iandrew/mail
+      context: mail
+      docker:
+        dockerfile: DockerfileDev
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: iandrew/assets
+      context: assets
+      docker:
+        dockerfile: DockerfileDev
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+
+
+

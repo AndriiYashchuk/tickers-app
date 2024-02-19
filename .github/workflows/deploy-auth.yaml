@@ -1,0 +1,25 @@
+name: deploy-auth
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'auth/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd auth && docker build -t iandrew/auth .        # build new image of auth
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD # login to docker hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push iandrew/auth                           # push new built image to docker hub
+      - uses: digitalocean/action-doctl@v2                        # deploy image to digital ocean cluster
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - run: doctl kubernetes cluster kubeconfig save ticker-app-cluster # kubeconfig name "tickers-app" get from digital ocean cluster
+      - run: kubectl rollout restart deployment auth-depl       # restart auth deployment "auth-depl" name getting from infra/k8s/auth-depl.yaml file

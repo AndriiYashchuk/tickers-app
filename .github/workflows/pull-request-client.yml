@@ -1,0 +1,47 @@
+name: Check client service on Pull Requests
+
+on:
+  pull_request:
+    paths:
+      - 'client/**'
+
+jobs:
+  lint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+
+      # Run ESLint
+      - name: Run ESLint for client service
+        run:  npx eslint --c .eslintrc.json ./client/
+
+  build:
+    name: Build client service by Next.js
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+
+      # install dependencies in client service
+      - name: Install dependencies in client service
+        run: npm run ci:client
+
+      # Compile service by Typescript
+      - name: Run build for client service
+        run: npm run build:client
