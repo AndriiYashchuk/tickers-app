@@ -13,6 +13,6 @@
     "build:remote-dev": "npm run clear && cross-env MODE=\"development\" PRODUCTION_DOMAIN=\"https://tickers-app.dev\" webpack --config config/webpack.prod.js"
   },
   "dependencies": {
-    "@tickers-app/common-client": "1.0.53"
+    "@tickers-app/common-client": "*"
   }
 }
