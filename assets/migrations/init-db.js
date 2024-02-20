@@ -10,7 +10,7 @@ module.exports = class initialSchema1625847615203 {
         columns: [
           {
             name: 'id',
-            type: 'string',
+            type: 'uuid', // Changed for PostgreSQL
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'uuid',
@@ -21,7 +21,7 @@ module.exports = class initialSchema1625847615203 {
           },
           {
             name: 'user_id',
-            type: 'varchar',
+            type: 'varchar', // Assuming you want to use UUIDs for user IDs as well
           },
           {
             name: 'notice',
@@ -49,7 +49,7 @@ module.exports = class initialSchema1625847615203 {
         columns: [
           {
             name: 'id',
-            type: 'string',
+            type: 'uuid', // Changed for PostgreSQL
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'uuid',
@@ -66,7 +66,7 @@ module.exports = class initialSchema1625847615203 {
           },
           {
             name: 'user_id',
-            type: 'varchar',
+            type: 'varchar', // Assuming you want to use UUIDs for user IDs as well
           },
           {
             name: 'notice',
@@ -78,12 +78,12 @@ module.exports = class initialSchema1625847615203 {
             type: 'varchar',
           },
           {
-            name: 'purchase_Date',
-            type: 'integer',
+            name: 'purchase_date',
+            type: 'bigint', // Assuming this is a timestamp, bigint can be used for UNIX timestamps
           },
           {
             name: 'price',
-            type: 'double precision',
+            type: 'double precision', // No change needed, valid in PostgreSQL
           },
         ],
       }),
@@ -95,11 +95,11 @@ module.exports = class initialSchema1625847615203 {
         columns: [
           {
             name: 'stockId',
-            type: 'string',
+            type: 'uuid', // Changed for consistency with other IDs
           },
           {
             name: 'labelId',
-            type: 'varchar',
+            type: 'uuid', // Changed for consistency with other IDs
           },
         ],
       }),
@@ -107,8 +107,8 @@ module.exports = class initialSchema1625847615203 {
   }
 
   async down(queryRunner) {
-    await queryRunner.query('DROP TABLE ""label""');
-    await queryRunner.query('DROP TABLE ""stock""');
-    await queryRunner.query('DROP TABLE ""stock_labels_label""');
+    await queryRunner.query('DROP TABLE "label"');
+    await queryRunner.query('DROP TABLE "stock"');
+    await queryRunner.query('DROP TABLE "stock_labels_label"');
   }
 };
