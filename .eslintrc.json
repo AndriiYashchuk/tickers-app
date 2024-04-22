@@ -3,7 +3,8 @@
     "airbnb"
   ],
   "ignorePatterns": [
-    "node_modules/**",
+    "/**/node_modules/**",
+    "/**/dist/**",
     "mail/node_modules/**",
     "client/node_modules/**",
     "client/public/**",

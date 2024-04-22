@@ -39,13 +39,24 @@ build:
           - src: 'src/**/*.ts'
             dest: .
     - image: iandrew/assets
-      context: assets
+      context: .
       docker:
-        dockerfile: DockerfileDev
+        dockerfile: ./assets/Dockerfile
       sync:
         manual:
-          - src: 'src/**/*.ts'
+          - src: 'assets/src/**/*.ts'
+            dest: .
+          - src: 'packages/server/**/*.ts'
             dest: .
 
+profiles:
+  - name: development
+    build:
+      artifacts:
+        - image: iandrew/assets
+          docker:
+            dockerfile: ./assets/Dockerfile
+            buildArgs:
+              NODE_ENV: "development"
 
 

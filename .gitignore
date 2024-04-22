@@ -2,3 +2,4 @@ configs
 .idea
 .DS_Store
 node_modules
+.npmrc

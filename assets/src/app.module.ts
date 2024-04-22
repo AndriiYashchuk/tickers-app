@@ -11,7 +11,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { IsCurrentUserAdminInterceptor } from './interceptors/is-current-user-admin.interceptor';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { LabelsModule } from './labels/labels.module';
-import { CurrentUserMiddleware } from './middlewares/current-user.middlewares';
+import { CurrentUserMiddleware } from '@tickers-app/server/src/middlewares/current-user.middlewares';
 import developmentConfig from './configurations/development.config';
 import productionConfig from './configurations/production.config';
 import { Config } from './configurations/Config';
