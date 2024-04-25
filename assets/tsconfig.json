@@ -20,9 +20,9 @@
     "lib": ["esnext"],
     "allowJs": true,
     "paths": {
-        "@tickers-app/server/*": ["../packages/server/*"]
+        "@tickers-app/server/*": ["../packages/server/*"],
     }
   },
-    "include": ["./**/*.ts", "../packages/server/src/**/*.ts"],
+    "include": ["./**/*.ts"],
     "exclude": ["**/*spec.ts"]
 }

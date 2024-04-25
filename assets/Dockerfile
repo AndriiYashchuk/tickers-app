@@ -25,7 +25,5 @@ RUN chmod +x start.sh
 # Set environment variable from the build argument
 ENV NODE_ENV=${NODE_ENV}
 
-RUN ls -la
-
 # Run the script when the container starts
 CMD ["sh", "./start.sh"]

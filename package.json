@@ -5,6 +5,7 @@
   "main": "index.js",
   "workspaces": [
     "assets",
+    "auth",
     "client",
     "packages/*"
   ],

@@ -1,3 +1,3 @@
-import { NatsWrapper } from '@tickers-app/common-server';
+import { NatsWrapper } from '@tickers-app/server/src/nats-wrapper';
 
 export const natsWrapper = new NatsWrapper();

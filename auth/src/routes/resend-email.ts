@@ -1,4 +1,5 @@
-import { BadRequestError, validateRequest } from '@tickers-app/common-server';
+import { BadRequestError } from '@tickers-app/server/src/errors/bad-request-error';
+import { validateRequest } from '@tickers-app/server/src/middlewares/validate-request';
 import { body } from 'express-validator';
 import express, { Request, Response } from 'express';
 

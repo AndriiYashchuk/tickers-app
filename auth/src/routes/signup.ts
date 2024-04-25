@@ -1,7 +1,5 @@
-import {
-  BadRequestError,
-  validateRequest,
-} from '@tickers-app/common-server';
+import { BadRequestError, } from '@tickers-app/server/src/errors/bad-request-error';
+import { validateRequest } from '@tickers-app/server/src/middlewares/validate-request';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { User as UserModel, UserAttrs } from '../models/user';

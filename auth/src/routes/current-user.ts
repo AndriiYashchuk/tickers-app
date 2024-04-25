@@ -1,4 +1,4 @@
-import { currentUser } from '@tickers-app/common-server';
+import { currentUser } from '@tickers-app/server/src/middlewares/current-user';
 import express from 'express';
 
 const router = express.Router();
