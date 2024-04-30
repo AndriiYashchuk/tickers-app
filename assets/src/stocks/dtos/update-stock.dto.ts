@@ -10,9 +10,11 @@ import {
 } from 'class-validator';
 import {
   MAX_NOTICE_LENGTH,
-  MAX_PRICE, MAX_TICKER_LENGTH,
+  MAX_PRICE,
+  MAX_TICKER_LENGTH,
   MIN_NOTICE_LENGTH,
-  MIN_PRICE, MIN_TICKER_LENGTH,
+  MIN_PRICE,
+  MIN_TICKER_LENGTH,
 } from '../../contants/min-max-values';
 
 export class UpdateStockDto {

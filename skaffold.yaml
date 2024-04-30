@@ -20,6 +20,8 @@ build:
             dest: .
           - src: 'packages/server/**/*.ts'
             dest: .
+          - src: 'packages/common/**/*.ts'
+            dest: .
     - image: iandrew/client
       context: client
       docker:
