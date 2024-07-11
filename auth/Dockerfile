@@ -8,10 +8,11 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Copy the necessary monorepo directories
-COPY packages ./packages
+COPY packages/common ./packages/common
+COPY packages/server ./packages/server
+
 COPY auth ./auth
 
-RUN ls -la
 RUN npm ci
 # Navigate into the auth directory and install dependencies
 WORKDIR /app/auth

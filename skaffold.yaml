@@ -16,12 +16,12 @@ build:
         dockerfile: ./auth/Dockerfile
       sync:
         manual:
-          - src: 'auth/src/**/*.ts'
-            dest: .
-          - src: 'packages/server/**/*.ts'
-            dest: .
-          - src: 'packages/common/**/*.ts'
-            dest: .
+          - src: './auth/src/**/*.ts'
+            dest: './auth/src'
+          - src: './packages/server/**/*.ts'
+            dest: './packages/server'
+          - src: './packages/common/**/*.ts'
+            dest: './packages/common'
     - image: iandrew/client
       context: client
       docker:
@@ -48,10 +48,12 @@ build:
         dockerfile: ./assets/Dockerfile
       sync:
         manual:
-          - src: 'assets/src/**/*.ts'
-            dest: .
-          - src: 'packages/server/**/*.ts'
-            dest: .
+          - src: './assets/src/**/*.ts'
+            dest: './assets/src'
+          - src: './packages/server/**/*.ts'
+            dest: './packages/server'
+          - src: './packages/common/**/*.ts'
+            dest: './packages/common'
 
 profiles:
   - name: development

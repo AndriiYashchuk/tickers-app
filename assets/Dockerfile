@@ -8,11 +8,12 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Copy the necessary monorepo directories
-COPY packages ./packages
+COPY packages/common ./packages/common
+COPY packages/server ./packages/server
+
 COPY assets ./assets
 
 # Navigate into the assets directory and install dependencies
-WORKDIR /app/assets
 RUN npm ci
 
 # Copy the assets service source code
@@ -20,6 +21,9 @@ COPY assets/src ./src
 
 # Copy the start script into the image
 COPY assets/start.sh ./
+
+WORKDIR /app/assets
+
 RUN chmod +x start.sh
 
 # Set environment variable from the build argument
