@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strictPropertyInitialization": true,
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types/",
+      "./declared-types",
+      "../node_modules/@types/"
+    ]
+  },
+  "exclude": [
+    "**/*.test.ts"
+  ],
+  "include": [
+    "**/*.tsx",
+    "**/*.ts",
+    "./declared-types/express.d.ts"
+  ]
+}
