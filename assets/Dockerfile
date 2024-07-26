@@ -12,6 +12,9 @@ RUN npm ci
 # Stage 2: creating build image
 FROM base AS build
 
+COPY assets/package.json ./assets/
+RUN npm ci
+
 COPY assets ./assets
 
 WORKDIR /app/assets
@@ -19,13 +22,11 @@ WORKDIR /app/assets
 RUN npm run build
 
 # Stage 3: creating production image
-FROM node:16-alpine AS production
+FROM build AS production
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-COPY packages/common ./packages/common
-COPY packages/server ./packages/server
+# Копируем только необходимые файлы для production
 COPY --from=build /app/assets/dist ./assets/dist
 COPY assets/package.json ./assets/
 
@@ -40,11 +41,7 @@ FROM base AS development
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-COPY packages/common ./packages/common
-COPY packages/server ./packages/server
 COPY assets/package.json ./assets/
-
 RUN npm ci
 
 COPY assets ./assets

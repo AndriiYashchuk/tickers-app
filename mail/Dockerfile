@@ -12,6 +12,9 @@ RUN npm ci
 # Stage 2: creating build image
 FROM base AS build
 
+COPY mail/package.json ./mail/
+RUN npm ci
+
 COPY mail ./mail
 
 WORKDIR /app/mail
@@ -19,13 +22,10 @@ WORKDIR /app/mail
 RUN npm run build
 
 # Stage 3: creating production image
-FROM node:16-alpine AS production
+FROM build AS production
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-COPY packages/common ./packages/common
-COPY packages/server ./packages/server
 COPY --from=build /app/mail/dist ./mail/dist
 COPY mail/package.json ./mail/
 
@@ -40,11 +40,7 @@ FROM base AS development
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-COPY packages/common ./packages/common
-COPY packages/server ./packages/server
 COPY mail/package.json ./mail/
-
 RUN npm ci
 
 COPY mail ./mail

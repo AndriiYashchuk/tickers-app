@@ -6,13 +6,15 @@ on:
       - main
     paths:
       - 'auth/**'
+      - 'packages/common/**'
+      - 'packages/server/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd auth && docker build -t iandrew/auth .        # build new image of auth
+      - run: docker build --build-arg NODE_ENV=production -f ./auth/Dockerfile -t iandrew/auth .        # build new image of auth
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD # login to docker hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}

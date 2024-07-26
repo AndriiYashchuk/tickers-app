@@ -23,9 +23,9 @@ build:
           - src: './packages/common/**/*.ts'
             dest: './packages/common'
     - image: iandrew/client
-      context: client
+      context: .
       docker:
-        dockerfile: Dockerfile
+        dockerfile: ./client/Dockerfile
       sync:
         manual:
           - src: '**/*.js'
@@ -34,6 +34,8 @@ build:
             dest: .
           - src: '**/*.tsx'
             dest: .
+          - src: './packages/common/**/*.ts'
+            dest: './packages/common'
     - image: iandrew/mail
       context: .
       docker:
