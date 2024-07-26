@@ -25,7 +25,7 @@ build:
     - image: iandrew/client
       context: client
       docker:
-        dockerfile: DockerfileDev
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: '**/*.js'
@@ -35,13 +35,17 @@ build:
           - src: '**/*.tsx'
             dest: .
     - image: iandrew/mail
-      context: mail
+      context: .
       docker:
-        dockerfile: DockerfileDev
+        dockerfile: ./mail/Dockerfile
       sync:
         manual:
-          - src: 'src/**/*.ts'
-            dest: .
+          - src: './mail/src/**/*.ts'
+            dest: './mail/src'
+          - src: './packages/server/**/*.ts'
+            dest: './packages/server'
+          - src: './packages/common/**/*.ts'
+            dest: './packages/common'
     - image: iandrew/assets
       context: .
       docker:
@@ -70,6 +74,14 @@ profiles:
         - image: iandrew/assets
           docker:
             dockerfile: ./assets/Dockerfile
+            buildArgs:
+              NODE_ENV: "development"
+  - name: development
+    build:
+      artifacts:
+        - image: iandrew/mail
+          docker:
+            dockerfile: ./mail/Dockerfile
             buildArgs:
               NODE_ENV: "development"
 
