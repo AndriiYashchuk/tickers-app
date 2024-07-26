@@ -1,33 +1,57 @@
-# Use an official Node.js runtime as a parent image
-FROM node:16-alpine
+# Stage 1: creating base image
+FROM node:16-alpine AS base
 
-# Set the working directory to /app in the container
 WORKDIR /app
 
-# Copy the root package.json and package-lock.json if needed (optional based on your setup)
-COPY package.json package-lock.json* ./
-
-# Copy the necessary monorepo directories
+COPY package.json package-lock.json ./
 COPY packages/common ./packages/common
 COPY packages/server ./packages/server
 
-COPY assets ./assets
-
-# Navigate into the assets directory and install dependencies
 RUN npm ci
 
-# Copy the assets service source code
-COPY assets/src ./src
+# Stage 2: creating build image
+FROM base AS build
 
-# Copy the start script into the image
-COPY assets/start.sh ./
+COPY assets ./assets
 
 WORKDIR /app/assets
 
-RUN chmod +x start.sh
+RUN npm run build
 
-# Set environment variable from the build argument
-ENV NODE_ENV=${NODE_ENV}
+# Stage 3: creating production image
+FROM node:16-alpine AS production
 
-# Run the script when the container starts
-CMD ["sh", "./start.sh"]
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY packages/common ./packages/common
+COPY packages/server ./packages/server
+COPY --from=build /app/assets/dist ./assets/dist
+COPY assets/package.json ./assets/
+
+RUN npm ci --only=production
+
+WORKDIR /app/assets
+
+CMD ["npm", "run", "start:prod"]
+
+# Stage 4: creating development image
+FROM base AS development
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY packages/common ./packages/common
+COPY packages/server ./packages/server
+COPY assets/package.json ./assets/
+
+RUN npm ci
+
+COPY assets ./assets
+
+WORKDIR /app/assets
+
+CMD ["npm", "run", "start:dev"]
+
+# Default stage for building the development image it will be using for skaffold
+FROM development AS default

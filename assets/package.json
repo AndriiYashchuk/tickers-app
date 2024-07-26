@@ -10,7 +10,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "cross-env NODE_ENV=development nest start --exec 'node -r tsconfig-paths/register -r ts-node/register ./src/main.ts'",
-    "start:dev": "cross-env NODE_ENV=production nest start --exec 'node -r tsconfig-paths/register -r ts-node/register ./src/main.ts'",
+    "start:dev": "cross-env NODE_ENV=development nest start --exec 'node -r tsconfig-paths/register -r ts-node/register ./src/main.ts'",
     "start:local": "cross-env NODE_ENV=development nest start --watch --exec 'node -r tsconfig-paths/register -r ts-node/register ./src/main.ts'",
     "start:debug": "cross-env NODE_ENV=development nest start --debug --watch --exec 'node -r tsconfig-paths/register -r ts-node/register ./src/main.ts'",
     "start:prod": "cross-env NODE_ENV=production node dist/assets/src/main",
