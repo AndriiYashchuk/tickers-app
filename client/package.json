@@ -8,9 +8,8 @@
     "build:dev": "sh scripts/start.sh",
     "build:remote-dev": "sh scripts/start.sh true",
     "build": "next build",
-    "start": "next build && next start",
-    "lint": "next lint",
-    "ci": "npm ci"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@babel/preset-react": "^7.22.15",
@@ -24,7 +23,7 @@
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "jsonwebtoken": "^9.0.2",
-    "next": "13.4.19",
+    "next": "^13.4.19",
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",
