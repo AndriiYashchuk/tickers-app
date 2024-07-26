@@ -1,14 +1,7 @@
-// @ts-ignore
 import { createTransport, SendMailOptions, Transporter } from 'nodemailer';
-
-import { DEV_DOMAIN, PROD_DOMAIN } from './constants/fomains';
 
 export class Mailer {
   private static instance: Transporter;
-
-  public static domain = process.env.MODE === 'development'
-    ? DEV_DOMAIN
-    : PROD_DOMAIN;
 
   static getMailer(): Transporter {
     if (!this.instance) {

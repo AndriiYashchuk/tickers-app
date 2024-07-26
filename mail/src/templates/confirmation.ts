@@ -1,4 +1,5 @@
-import { getNameString } from '../utils';
+import { getNameString } from '../utils/get-name-string';
+
 
 interface Params {
   domain: string;

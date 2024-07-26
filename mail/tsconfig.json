@@ -1,17 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es2016",
     "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
     "skipLibCheck": true,
-    "typeRoots": [
-      "node_modules/@types/"
-    ]
-  },
-  "files": [
-    "src/index.ts",
-    "node_modules/@types/nodemailer/index.d.ts"
-  ]
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@tickers-app/server/*": ["../packages/server/*"],
+      "@tickers-app/common/*": ["../packages/common/*"],
+    }
+  }
 }
