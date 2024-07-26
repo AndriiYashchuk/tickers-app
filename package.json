@@ -7,6 +7,7 @@
     "assets",
     "auth",
     "client",
+    "mail",
     "packages/*"
   ],
   "scripts": {
@@ -43,6 +44,7 @@
     "@babel/eslint-parser": "^7.22.15",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
+    "cross-env": "^7.0.3",
     "eslint": "8.22.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",

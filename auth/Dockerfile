@@ -20,8 +20,5 @@ WORKDIR /app/auth
 # Copy the auth service source code
 COPY auth/src ./src
 
-# Set environment variable from the build argument
-ENV NODE_ENV=${NODE_ENV}
-
 # Run the script when the container starts
 CMD ["npm", "start"]
