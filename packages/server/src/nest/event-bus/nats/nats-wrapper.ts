@@ -1,5 +1,8 @@
-import nats, { Stan } from 'node-nats-streaming';
+import * as nats from 'node-nats-streaming';
+import { Stan } from 'node-nats-streaming';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class NatsWrapper {
   private _client?: Stan;
 
