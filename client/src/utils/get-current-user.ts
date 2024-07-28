@@ -1,6 +1,6 @@
-import { User } from '@tickers-app/common/types/User';
 import { buildAuthClient } from '../../api/build-auth-client';
 import { logResponseError } from './log-response-error';
+import { User } from '@tickers-app/common/types/User';
 
 export const getCurrentUser = async (): Promise<null | User> => {
   const client = buildAuthClient();

@@ -2,15 +2,14 @@ FROM node:16-alpine AS base
 
 WORKDIR /app
 COPY package.json package-lock.json ./
+COPY client/package.json ./client/
+COPY packages/common ./packages/common
 
 RUN npm ci
 
 FROM base AS build
 
-COPY client/package.json ./client/
-RUN npm ci
-
-COPY client ./client
+COPY ./client ./client
 
 WORKDIR /app/client
 
@@ -18,14 +17,16 @@ RUN npm run build
 
 FROM build AS production
 
-COPY --from=build /app/client/.next ./.next
+COPY --from=build /app/client/package.json /app/client/package-lock.json ./client/
+COPY --from=build /app/client/.next client/.next
+
+WORKDIR /app/client
 
 CMD ["npm", "run", "start"]
 
 FROM base AS development
 
-COPY client/package.json client/package-lock.json ./client/
-RUN npm ci
+COPY --from=build /app/client ./client/
 
 WORKDIR /app/client
 
