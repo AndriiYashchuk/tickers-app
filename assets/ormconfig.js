@@ -1,6 +1,9 @@
+const path = require('node:path');
+
 const dbConfig = {
   synchronize: false,
   migrationsRun: true,
+  entities: [path.join(__dirname, '..', 'assets', '**', '*.entity{.ts,.js}')],
   migrations: ['migrations/*.js'],
   cli: {
     migrationsDir: 'migrations',
@@ -19,7 +22,6 @@ const prodConfig = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   migrationsRun: true,
-  entities: ['**/*.entity.js'],
   ssl: false,
 };
 
@@ -27,13 +29,11 @@ switch (process.env.NODE_ENV) {
   case 'development':
     Object.assign(dbConfig, {
       ...devConfig,
-      entities: ['**/*.entity.js'],
     });
     break;
   case 'test':
     Object.assign(dbConfig, {
       ...devConfig,
-      entities: ['**/*.entity.ts'],
     });
     break;
   case 'production':

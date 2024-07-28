@@ -1,4 +1,5 @@
-import { withRetry } from '@tickers-app/common';
+import { withRetry } from '@tickers-app/common/src';
+
 import mongoose from 'mongoose';
 import { redisClientInstance } from './services/redis';
 

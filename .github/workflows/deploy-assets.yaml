@@ -6,13 +6,15 @@ on:
       - main
     paths:
       - 'assets/**'
+      - 'packages/common/**'
+      - 'packages/server/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd assets && docker build -t iandrew/assets .        # build new image of assets
+      - run: docker build --build-arg NODE_ENV=production --target production -f ./assets/Dockerfile -t iandrew/assets .        # build new image of assets
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD # login to docker hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}

@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@tickers-app/common/*": ["../packages/common/*"]
     }
   },
   "include": [

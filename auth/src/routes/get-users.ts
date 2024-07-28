@@ -1,4 +1,5 @@
-import { checkIsAdmin, currentUser } from '@tickers-app/common-server';
+import { currentUser } from '@tickers-app/server/src/middlewares/current-user';
+import { checkIsAdmin } from '@tickers-app/server/src/middlewares/check-is-admin';
 import express, { Request, Response } from 'express';
 import { User } from '../models/user';
 

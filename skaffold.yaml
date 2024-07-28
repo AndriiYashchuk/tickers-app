@@ -11,17 +11,21 @@ build:
     push: false
   artifacts:
     - image: iandrew/auth
-      context: auth
+      context: .
       docker:
-        dockerfile: Dockerfile
+        dockerfile: ./auth/Dockerfile
       sync:
         manual:
-          - src: 'src/**/*.ts'
-            dest: .
+          - src: './auth/src/**/*.ts'
+            dest: './auth/src'
+          - src: './packages/server/**/*.ts'
+            dest: './packages/server'
+          - src: './packages/common/**/*.ts'
+            dest: './packages/common'
     - image: iandrew/client
-      context: client
+      context: .
       docker:
-        dockerfile: DockerfileDev
+        dockerfile: ./client/Dockerfile
       sync:
         manual:
           - src: '**/*.js'
@@ -30,22 +34,57 @@ build:
             dest: .
           - src: '**/*.tsx'
             dest: .
+          - src: './packages/common/**/*.ts'
+            dest: './packages/common'
     - image: iandrew/mail
-      context: mail
+      context: .
       docker:
-        dockerfile: DockerfileDev
+        dockerfile: ./mail/Dockerfile
       sync:
         manual:
-          - src: 'src/**/*.ts'
-            dest: .
+          - src: './mail/src/**/*.ts'
+            dest: './mail/src'
+          - src: './packages/server/**/*.ts'
+            dest: './packages/server'
+          - src: './packages/common/**/*.ts'
+            dest: './packages/common'
     - image: iandrew/assets
-      context: assets
+      context: .
       docker:
-        dockerfile: DockerfileDev
+        dockerfile: ./assets/Dockerfile
       sync:
         manual:
-          - src: 'src/**/*.ts'
-            dest: .
+          - src: './assets/src/**/*.ts'
+            dest: './assets/src'
+          - src: './packages/server/**/*.ts'
+            dest: './packages/server'
+          - src: './packages/common/**/*.ts'
+            dest: './packages/common'
 
+profiles:
+  - name: development
+    build:
+      artifacts:
+        - image: iandrew/auth
+          docker:
+            dockerfile: ./auth/Dockerfile
+            buildArgs:
+              NODE_ENV: "development"
+  - name: development
+    build:
+      artifacts:
+        - image: iandrew/assets
+          docker:
+            dockerfile: ./assets/Dockerfile
+            buildArgs:
+              NODE_ENV: "development"
+  - name: development
+    build:
+      artifacts:
+        - image: iandrew/mail
+          docker:
+            dockerfile: ./mail/Dockerfile
+            buildArgs:
+              NODE_ENV: "development"
 
 

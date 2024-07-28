@@ -19,5 +19,10 @@
     "noFallthroughCasesInSwitch": false,
     "lib": ["esnext"],
     "allowJs": true,
-  }
+    "paths": {
+        "@tickers-app/server/*": ["../packages/server/*"],
+    }
+  },
+    "include": ["./**/*.ts"],
+    "exclude": ["**/*spec.ts"]
 }

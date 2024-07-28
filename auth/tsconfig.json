@@ -2,10 +2,22 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@tickers-app/server/*": ["../packages/server/*"],
+      "@tickers-app/common/*": ["../packages/common/*"],
+      "*": [
+        "*",
+        "../node_modules/@types/*",
+        "../node_modules/*"
+      ]
+    }
   },
   "files": [
     "src/index.ts",

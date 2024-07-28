@@ -5,15 +5,14 @@
   "main": "index.js",
   "workspaces": [
     "assets",
-    "mail",
-    "client",
     "auth",
-    "web-app/container",
-    "web-app/dashboard",
+    "client",
+    "mail",
     "packages/*"
   ],
   "scripts": {
-    "ci:assets": "npm run ci -w assets",
+    "start": "chmod +x start.sh && sh start.sh",
+    "ci:assets": "npm ci -w assets",
     "ci:auth": "npm run ci -w auth",
     "ci:mail": "npm run ci -w mail",
     "ci:client": "npm run ci -w client",
@@ -23,6 +22,7 @@
     "compile:mail": "npm run compile -w mail",
     "compile:assets": "npm run build -w assets",
     "build:client": "npm run build -w client",
+    "start:assets": "npm run start -w assets",
     "build:web-app/container": "npm run build -w web-app/container",
     "build:web-app/dashboard": "npm run build -w web-app/dashboard",
     "test:auth": "npm run test:check -w auth",
@@ -40,18 +40,17 @@
     "url": "https://github.com/AndriiYashchuk/tickers-app/issues"
   },
   "homepage": "https://github.com/AndriiYashchuk/tickers-app#readme",
-  "dependencies": {
-  },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "eslint-config-airbnb-typescript": "^17.1.0",
-    "eslint-config-next": "^14.0.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "cross-env": "^7.0.3",
     "eslint": "8.22.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-next": "^14.0.1",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0"
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

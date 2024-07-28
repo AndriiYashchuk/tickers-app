@@ -47,5 +47,4 @@ then
       next dev
 else
       cd ../
-      skaffold dev
 fi
