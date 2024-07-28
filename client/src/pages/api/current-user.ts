@@ -19,6 +19,8 @@ const currentUser = (req: NextApiRequest, res: NextApiResponse) => {
         .json({ currentUser: user });
     } catch (err) {
       console.error(err);
+      return res.status(200)
+        .json({ currentUser: null });
     }
   }
 

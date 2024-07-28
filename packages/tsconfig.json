@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strictPropertyInitialization": true,
     "experimentalDecorators": true,
+    "strictNullChecks": true,
     "typeRoots": [
       "node_modules/@types/",
       "./declared-types",

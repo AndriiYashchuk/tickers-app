@@ -11,6 +11,7 @@
     "packages/*"
   ],
   "scripts": {
+    "skaffold": "docker system prune -a && skaffold dev",
     "start": "chmod +x start.sh && sh start.sh",
     "ci:assets": "npm ci -w assets",
     "ci:auth": "npm run ci -w auth",

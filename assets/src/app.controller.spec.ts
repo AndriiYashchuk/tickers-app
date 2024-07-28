@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { JwtService } from '@nestjs/jwt';
+import { JwtUser } from '@tickers-app/common/types/domain/JwtUser';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CheckUserInterceptor } from './interceptors/check-user-interceptor.service';
 import { MockCurrentUserFromJwtInterceptor } from './interceptors/__mocks__/current-user-from-jwt.interceptor';
 import { IsCurrentUserAdminInterceptor } from './interceptors/is-current-user-admin.interceptor';
 import { MockIsCurrentUserAdminInterceptor } from './interceptors/__mocks__/is-current-user-admin.interceptor';
-import { JwtUser } from './types/JwtUser';
 
 describe('AppController', () => {
   let appController: AppController;

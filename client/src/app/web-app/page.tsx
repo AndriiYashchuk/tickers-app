@@ -22,16 +22,16 @@ const WebApp = () => {
   }, []);
 
   useEffect(() => {
-    // @ts-ignore // TODO: add d.ts declaration
+    // @ts-ignore // TODO: add d.ts declaration in common-client package
     window.onWebAppIsReady = () => {
-      // @ts-ignore // TODO: add d.ts declaration
+      // @ts-ignore // TODO: add d.ts declaration common-client package
       window.initWebApp({ currentUser: user });
     };
 
     return () => {
-      // @ts-ignore // TODO: add d.ts declaration
+      // @ts-ignore // TODO: add d.ts declaration common-client package
       window.onWebAppIsReady = undefined;
-      // @ts-ignore // TODO: add d.ts declaration
+      // @ts-ignore // TODO: add d.ts declaration common-client package
       window.initWebApp = undefined;
     };
   }, [user]);

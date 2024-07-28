@@ -21,8 +21,12 @@
     "allowJs": true,
     "paths": {
         "@tickers-app/server/*": ["../packages/server/*"],
+        "@tickers-app/common/*": ["../packages/common/*"]
     }
   },
-    "include": ["./**/*.ts"],
+    "include": [
+      "./**/*.ts",
+      "src/declared-types/express.d.ts"
+    ],
     "exclude": ["**/*spec.ts"]
 }

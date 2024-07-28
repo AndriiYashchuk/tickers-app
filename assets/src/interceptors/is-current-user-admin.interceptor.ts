@@ -5,7 +5,7 @@ import {
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
-import { JwtUser } from '../types/JwtUser';
+import { JwtUser } from '@tickers-app/common/types/domain/JwtUser';
 
 @Injectable()
 export class IsCurrentUserAdminInterceptor implements NestInterceptor {

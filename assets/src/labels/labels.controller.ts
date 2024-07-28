@@ -13,9 +13,9 @@ import {
 import { LabelsService } from './labels.service';
 import { BASE } from '../contants/routes';
 import { CurrentUser } from '../decorators/current-user.decorator';
-import { JwtUser } from '../types/JwtUser';
 import { LabelDto } from './dtos/label.dto';
 import { Label } from './label.entity';
+import { JwtUser } from '@tickers-app/common/types/domain/JwtUser';
 
 @Controller(`${BASE}/labels`)
 export class LabelsController {

@@ -1,8 +1,9 @@
+import { JwtUser } from '@tickers-app/common/types/domain/JwtUser';
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { StocksController } from './stocks.controller';
 import { StocksService } from './stocks.service';
-import { JwtUser } from '../types/JwtUser';
+
 import { CreateStockDto } from './dtos/create-stock.dto';
 import { Stock } from './stock.entity';
 import { StockDto } from './dtos/stock.dto';

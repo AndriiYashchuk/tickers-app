@@ -1,7 +1,7 @@
 import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { JwtUser } from './types/JwtUser';
+import { JwtUser } from '@tickers-app/common/types/domain/JwtUser';
 import { CheckUserInterceptor } from './interceptors/check-user-interceptor.service';
 import { IsCurrentUserAdminInterceptor } from './interceptors/is-current-user-admin.interceptor';
 import { BASE } from './contants/routes';

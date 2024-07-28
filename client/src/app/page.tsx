@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import React, { Metadata } from 'next';
 import LandingPageComponent from '@tickers-app/common-client/build/components/LandingPage';
 import Layout from '../components/layouts/main';
 
