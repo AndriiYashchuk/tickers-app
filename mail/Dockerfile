@@ -4,6 +4,7 @@ FROM node:16-alpine AS base
 WORKDIR /app
 
 COPY package.json package-lock.json ./
+COPY mail/package.json ./mail/
 COPY packages/common ./packages/common
 COPY packages/server ./packages/server
 
@@ -11,9 +12,6 @@ RUN npm ci
 
 # Stage 2: creating build image
 FROM base AS build
-
-COPY mail/package.json ./mail/
-RUN npm ci
 
 COPY mail ./mail
 
@@ -29,8 +27,6 @@ WORKDIR /app
 COPY --from=build /app/mail/dist ./mail/dist
 COPY mail/package.json ./mail/
 
-RUN npm ci --only=production
-
 WORKDIR /app/mail
 
 CMD ["npm", "run", "start:prod"]
@@ -39,9 +35,6 @@ CMD ["npm", "run", "start:prod"]
 FROM base AS development
 
 WORKDIR /app
-
-COPY mail/package.json ./mail/
-RUN npm ci
 
 COPY mail ./mail
 
