@@ -17,7 +17,7 @@ RUN npm run build
 
 FROM build AS production
 
-COPY --from=build /app/client/package.json /app/client/package-lock.json ./client/
+COPY --from=build /app/client/package.json ./client/
 COPY --from=build /app/client/.next client/.next
 
 WORKDIR /app/client
