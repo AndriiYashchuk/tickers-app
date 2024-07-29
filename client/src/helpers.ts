@@ -1,9 +1,9 @@
-import { domain } from './constants';
+import { scriptUrl } from './constants';
 
 type ScriptSetter = (script: string) => void;
 
 export const fetchWebAppScript = (setScript: ScriptSetter): void => {
-  fetch(domain)
+  fetch(scriptUrl)
     .then(response => response.json())
     .then(data => {
       setScript(data.mainScript);
