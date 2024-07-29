@@ -7,7 +7,7 @@ import { CONTAINER_PREFIX } from '../../constants';
 import { config } from '../../config';
 
 export const scanInRemote = async (): Promise<string | undefined> => {
-  const response = await fetch(`${config.domain}`);
+  const response = await fetch(`${process.env.WEB_APP_DOMAIN}`);
   const reader = response?.body?.getReader();
 
   if (reader) {
