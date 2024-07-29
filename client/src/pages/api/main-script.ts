@@ -7,7 +7,7 @@ import { CONTAINER_PREFIX } from '../../constants';
 import { config } from '../../config';
 
 export const scanInRemote = async (): Promise<string | undefined> => {
-  const response = await fetch(`${process.env.WEB_APP_DOMAIN}`);
+  const response = await fetch(config.clientScriptDomain);
   const reader = response?.body?.getReader();
 
   if (reader) {
@@ -17,7 +17,7 @@ export const scanInRemote = async (): Promise<string | undefined> => {
       const match = data.match(/main.(\w+).js/);
       const result = match && match[0];
 
-      return `${config.domain}${CONTAINER_PREFIX}/${result}`;
+      return `${config.clientScriptDomain}${CONTAINER_PREFIX}/${result}`;
     } catch (e) {
       console.error(e);
     }
