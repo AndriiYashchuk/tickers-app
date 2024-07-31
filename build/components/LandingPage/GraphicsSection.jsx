@@ -18,23 +18,23 @@ const GraphicsSection = () => {
 
         <Grid container spacing={4} mt={4}>
           <Grid item xs={12} md={4}>
-            <FeatureCard title={'Real-time Data'} description={"Get real-time updates on stock prices, ensuring you're always ahead."} icon={QueryStatsIcon}/>
+            <FeatureCard title={'Real-time Data'} description={"Get real-time updates on stock prices, ensuring you're always ahead."} icon={QueryStatsIcon} badgeContent=''/>
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <FeatureCard title={'Portfolio Management'} description={"Organize and manage your stocks in one place with our intuitive tools."} icon={LibraryBooksIcon}/>
+            <FeatureCard title={'Portfolio Management'} description={"Organize and manage your stocks in one place with our intuitive tools."} icon={LibraryBooksIcon} badgeContent={'Will be ready soon'}/>
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <FeatureCard title={'Analysis & Reports'} description={"Get detailed insights and analytics to make informed investment decisions."} icon={AssessmentIcon}/>
+            <FeatureCard title={'Analysis & Reports'} description={"Get detailed insights and analytics to make informed investment decisions."} icon={AssessmentIcon} badgeContent={'Will be ready soon'}/>
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <FeatureCard title={'Historical Analysis'} description={"Access past data of your stocks to analyze your portfolio's performance over time."} icon={TimelineIcon}/>
+            <FeatureCard title={'Historical Analysis'} description={"Access past data of your stocks to analyze your portfolio's performance over time."} icon={TimelineIcon} badgeContent={'Will be ready soon'}/>
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <FeatureCard title={'Intuitive Design'} description={"Our user-friendly interface ensures you have a smooth experience managing your portfolio."} icon={PolylineIcon}/>
+            <FeatureCard title={'Intuitive Design'} description={"Our user-friendly interface ensures you have a smooth experience managing your portfolio."} icon={PolylineIcon} badgeContent={'Will be ready soon'}/>
           </Grid>
 
         </Grid>

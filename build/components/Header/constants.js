@@ -1,5 +1,6 @@
 export const BASE_HEADER_OPTIONS = [
     { title: 'dashboard', to: 'web-app' },
+    { title: 'pricing', to: 'pricing' },
     { title: 'about', to: 'about' },
 ];
 const SIGN_IN_OPTION = { title: 'signin', to: 'signin' };

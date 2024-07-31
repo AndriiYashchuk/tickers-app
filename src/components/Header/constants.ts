@@ -2,6 +2,7 @@ import { Link } from '../../types/Link';
 
 export const BASE_HEADER_OPTIONS = [
   { title: 'dashboard', to: 'web-app' },
+  { title: 'pricing', to: 'pricing' },
   { title: 'about', to: 'about' },
 ]
 
