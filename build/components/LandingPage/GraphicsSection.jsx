@@ -9,7 +9,17 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import PolylineIcon from '@mui/icons-material/Polyline';
 import { FeatureCard } from './FeatureCard';
+const WaitingFeature = () => (<>
+    <Grid item xs={12} md={4}>
+      <FeatureCard title={'Analysis & Reports'} description={"Get detailed insights and analytics to make informed investment decisions."} icon={AssessmentIcon} badgeContent={'Will be ready soon'}/>
+    </Grid>
+
+    <Grid item xs={12} md={4}>
+      <FeatureCard title={'Historical Analysis'} description={"Access past data of your stocks to analyze your portfolio's performance over time."} icon={TimelineIcon} badgeContent={'Will be ready soon'}/>
+    </Grid>
+  </>);
 const GraphicsSection = () => {
+    const renderWaitingFeatures = () => (<WaitingFeature />);
     return (<Box mt={5} py={5} style={{ backgroundColor: '#f2f2f2' }}>
       <Container>
         <Typography variant="h4" align="center" gutterBottom>
@@ -18,24 +28,18 @@ const GraphicsSection = () => {
 
         <Grid container spacing={4} mt={4}>
           <Grid item xs={12} md={4}>
-            <FeatureCard title={'Real-time Data'} description={"Get real-time updates on stock prices, ensuring you're always ahead."} icon={QueryStatsIcon} badgeContent=''/>
+            <FeatureCard title={'Real-time Data'} description={"Get real-time updates on stock prices, ensuring you're always ahead."} icon={QueryStatsIcon} badgeContent=""/>
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <FeatureCard title={'Intuitive Design'} description={"Our user-friendly interface ensures you have a smooth experience managing your portfolio."} icon={PolylineIcon} badgeContent=""/>
           </Grid>
 
           <Grid item xs={12} md={4}>
             <FeatureCard title={'Portfolio Management'} description={"Organize and manage your stocks in one place with our intuitive tools."} icon={LibraryBooksIcon} badgeContent={'Will be ready soon'}/>
           </Grid>
 
-          <Grid item xs={12} md={4}>
-            <FeatureCard title={'Analysis & Reports'} description={"Get detailed insights and analytics to make informed investment decisions."} icon={AssessmentIcon} badgeContent={'Will be ready soon'}/>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <FeatureCard title={'Historical Analysis'} description={"Access past data of your stocks to analyze your portfolio's performance over time."} icon={TimelineIcon} badgeContent={'Will be ready soon'}/>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <FeatureCard title={'Intuitive Design'} description={"Our user-friendly interface ensures you have a smooth experience managing your portfolio."} icon={PolylineIcon} badgeContent={'Will be ready soon'}/>
-          </Grid>
+          {/*{renderWaitingFeatures()}*/}
 
         </Grid>
       </Container>
