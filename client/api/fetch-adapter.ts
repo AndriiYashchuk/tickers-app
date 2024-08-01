@@ -1,8 +1,7 @@
 import { AxiosAdapter, AxiosPromise, AxiosResponse } from 'axios';
 
-const fetchAdapter: AxiosAdapter = (config): AxiosPromise<AxiosResponse> => {
-  // @ts-ignore
-  return fetch(`${config.baseURL ? config.baseURL : ''}${config.url}`, {
+const fetchAdapter: AxiosAdapter = (config): AxiosPromise<AxiosResponse> =>
+  fetch(`${config.baseURL ? config.baseURL : ''}${config.url}`, {
     method: config.method,
     headers: config.headers,
     body: config.data,
@@ -20,11 +19,7 @@ const fetchAdapter: AxiosAdapter = (config): AxiosPromise<AxiosResponse> => {
       headers: response.headers,
       config,
       request: response,
-    };
-  })
-    .catch(error => {
-      console.error('Fetch adapter error:', error);
-    });
-};
+    } as unknown as AxiosPromise<AxiosResponse>;
+  });
 
 export default fetchAdapter;

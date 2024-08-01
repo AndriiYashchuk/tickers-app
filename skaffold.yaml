@@ -1,4 +1,4 @@
-apiVersion: skaffold/v4beta5
+apiVersion: skaffold/v4beta11
 kind: Config
 metadata:
   name: tickers-app
@@ -28,11 +28,11 @@ build:
         dockerfile: ./client/Dockerfile
       sync:
         manual:
-          - src: '**/*.js'
+          - src: './client/**/*.js'
             dest: .
-          - src: '**/*.ts'
+          - src: './client/**/*.ts'
             dest: .
-          - src: '**/*.tsx'
+          - src: './client/**/*.tsx'
             dest: .
           - src: './packages/common/**/*.ts'
             dest: './packages/common'

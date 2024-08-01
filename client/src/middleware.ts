@@ -1,63 +1,53 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import axios, { AxiosRequestConfig } from 'axios';
+import { withCache } from '@tickers-app/common/src/utils/withCache';
+import { User } from '@tickers-app/common/types/User';
+
 import fetchAdapter from '../api/fetch-adapter';
 import { logResponseError } from './utils/log-response-error';
+import { CONFIG } from './config';
 
-const domain = process.env.NODE_ENV === 'development' ? 'https://tickers-app.dev' : 'https://tickers-app.com';
-
-const withCache = (fn: Function, cacheTime = 1000) => {
-  let res: any;
-
-  return async (request: NextRequest) => {
-    if (!res) {
-      res = await fn(request);
-      setTimeout(() => {
-        res = null;
-      }, cacheTime);
-    }
-    return res;
-  };
+const getSessionCookie = (request: NextRequest): string => {
+  const sessionCookie = request.cookies.get('session');
+  return `${sessionCookie?.name}=${sessionCookie?.value}`;
 };
 
-const fetchCurrentUser = withCache(async (request: NextRequest) => {
-  const sessionCookie = request.cookies.get('session');
-  const cookie = `${sessionCookie?.name}=${sessionCookie?.value}`;
-  const config = {
-    adapter: fetchAdapter,
-    headers: {
-      cookie
+const fetchCurrentUser: (request: NextRequest) => Promise<{ currentUser: User }> =
+  withCache(async (request: NextRequest) => {
+    const cookie = getSessionCookie(request);
+    const config = {
+      adapter: fetchAdapter,
+      headers: {
+        cookie
+      }
+    } as AxiosRequestConfig;
+
+    try {
+      const { data } = await axios.get(`${CONFIG.clientServiceDomain}/api/current-user`, config);
+
+      return data;
+    } catch (error) {
+      logResponseError(error);
     }
-  } as AxiosRequestConfig;
 
-  try {
-    const { data } = await axios.get('http://client-srv:3000/api/current-user', config);
-
-    return data;
-  } catch (error) {
-    logResponseError(error);
-  }
-
-  return {
-    currentUser: null
-  };
-});
+    return {
+      currentUser: null
+    };
+  }, 1000, getSessionCookie);
 
 export async function middleware(request: NextRequest) {
-  const { currentUser } = await fetchCurrentUser(request);
   const isWebAppPage = request.nextUrl.pathname.startsWith('/web-app');
-  const isSigninPage = request.nextUrl.pathname.startsWith('/signin');
-  const isSignupPage = request.nextUrl.pathname.startsWith('/signup');
-  const isConfirmEmailPage = request.nextUrl.pathname.startsWith('/email-confirmation');
-  const isResendEmailPage = request.nextUrl.pathname.startsWith('/resend-email');
 
-  if (isWebAppPage && !currentUser) {
-    return NextResponse.redirect(`${domain}/signin`);
-  }
+  if (isWebAppPage) {
+    try {
+      const { currentUser } = await fetchCurrentUser(request);
 
-  if (currentUser) {
-    if (isSigninPage || isSignupPage || isConfirmEmailPage || isResendEmailPage) {
-      return NextResponse.redirect(domain);
+      if (!currentUser) {
+        return NextResponse.redirect(`${CONFIG.domain}/signin`);
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 

@@ -5,6 +5,8 @@ import { User } from '@tickers-app/common/types/User';
 
 type ApiItem<T> = () => Promise<AxiosResponse<T>>
 
+const isBackendSide = typeof window === 'undefined';
+
 interface Api {
   getCurrentUser: ApiItem<{ currentUser: User}>
   signOut: ApiItem<void>
@@ -32,13 +34,18 @@ const getApi = (instance: AxiosInstance): Api => ({
       },
     };
 
-    return instance.get('/api/users/currentuser', config);
+    return instance.get('/api/users/currentuser', config)
+      .catch(() => {
+        return {
+          data: { currentUser: null }
+        } as unknown as AxiosResponse<{ currentUser: User}>;
+      });
   },
   signOut: () => instance.post('/api/users/signout')
 });
 
 const initAuthClient = () => {
-  if (typeof window === 'undefined') {
+  if (isBackendSide) {
     const instance = axios.create({
       // TODO: change to http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
       baseURL: 'http://auth-srv:3000',

@@ -4,18 +4,19 @@
   "author": "Andrii Yashchuk",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "start:local": "cross-env ENV=local next dev",
+    "dev": "cross-env ENV=developmen next dev",
     "build:dev": "sh scripts/start.sh",
     "build:remote-dev": "sh scripts/start.sh true",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/node": "^22.0.2",
     "@babel/preset-react": "^7.22.15",
     "@tickers-app/common": "*",
-    "@tickers-app/common-client": "latest",
-    "@types/node": "20.5.7",
+    "@tickers-app/common-client": "1.0.56",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
