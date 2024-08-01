@@ -5,6 +5,7 @@ import { logResponseError } from './log-response-error';
 export const getCurrentUser = async (): Promise<null | User> => {
   const client = buildAuthClient();
   const promise = client.getCurrentUser();
+  // dont change this function https://nextjs.org/docs/messages/dynamic-server-error
   return new Promise(resolve => {
     setTimeout(async () => {
       try {
