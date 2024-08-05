@@ -7,7 +7,6 @@ import { NatsWrapper } from './nats-wrapper';
 export const natsClientProvider: Provider = {
   provide: 'NATS_CLIENT',
   useFactory: async (natsWrapper: NatsWrapper): Promise<Stan> => {
-
     if (!process.env.NATS_CLIENT_ID) {
       throw new Error('NATS_CLIENT_ID must be defined');
     }

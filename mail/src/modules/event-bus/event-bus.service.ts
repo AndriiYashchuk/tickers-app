@@ -1,10 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Stan } from 'node-nats-streaming';
-import { UserCreatedListener } from './listeners/user-created-listener';
 import { ConfigService } from '@nestjs/config';
-import {
-  UserResendEmailConfirmationListener
-} from './listeners/user-resend-email-confirmation-listener';
+import { UserCreatedListener } from './listeners/user-created-listener';
+import { UserResendEmailConfirmationListener } from './listeners/user-resend-email-confirmation-listener';
 
 @Injectable()
 export class EventBusService {
@@ -13,6 +11,9 @@ export class EventBusService {
     configService: ConfigService,
   ) {
     new UserCreatedListener(this.stan, configService.get('domain')).listen();
-    new UserResendEmailConfirmationListener(this.stan, configService.get('domain')).listen();
+    new UserResendEmailConfirmationListener(
+      this.stan,
+      configService.get('domain'),
+    ).listen();
   }
 }

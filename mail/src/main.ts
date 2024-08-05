@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { withRetry } from '@tickers-app/common/src/utils/withRetry';
-
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

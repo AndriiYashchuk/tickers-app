@@ -10,7 +10,7 @@ export class Mailer {
         auth: {
           user: process.env.EMAIL,
           pass: process.env.EMAIL_KEY,
-        }
+        },
       });
     }
 
@@ -21,14 +21,17 @@ export class Mailer {
     const instance = this.getMailer();
     const options = {
       ...mailOptions,
-      from: 'tickerapp@gmail.com'
+      from: 'tickerapp@gmail.com',
     };
-    instance.sendMail(options, (error: Error | null, info: { response: string }) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(`Email sent: ${info.response}`);
-      }
-    });
+    instance.sendMail(
+      options,
+      (error: Error | null, info: { response: string }) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(`Email sent: ${info.response}`);
+        }
+      },
+    );
   }
 }

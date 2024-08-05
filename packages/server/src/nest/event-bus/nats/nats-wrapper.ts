@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import * as nats from 'node-nats-streaming';
 import { Stan } from 'node-nats-streaming';
 import { Injectable } from '@nestjs/common';
@@ -22,7 +23,7 @@ export class NatsWrapper {
         console.log('Connected to NATS');
         resolve();
       });
-      this.client.on('error', (err) => {
+      this.client.on('error', err => {
         reject(err);
       });
     });
