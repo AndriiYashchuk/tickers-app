@@ -109,7 +109,9 @@
       "excludedFiles": [
         "**/__mocks__/*.ts",
         "**/*.spec.ts",
-        "**/*.test.ts"
+        "**/*.test.ts",
+        "**/is-include-error-message.ts",
+        "**/test/*.ts"
       ],
       "parserOptions": {
         "project": "auth/tsconfig.json"
@@ -119,6 +121,11 @@
     {
       "files": [
         "assets/**/*.ts"
+      ],
+      "excludedFiles": [
+        "assets/migrations/**/*",
+        "**/*.spec.ts",
+        "**/*-spec.ts"
       ],
       "parserOptions": {
         "project": "assets/tsconfig.json"
