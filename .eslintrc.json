@@ -3,12 +3,13 @@
     "airbnb"
   ],
   "ignorePatterns": [
-    "/**/node_modules/**",
-    "/**/dist/**",
+    "**/node_modules/**",
+    "**/dist/**",
     "mail/node_modules/**",
     "client/node_modules/**",
     "client/public/**",
     "client/next/**",
+    "client/.next/**",
     "auth/node_modules/**",
     "web-app/container/node_modules/**",
     "web-app/container/dist/**",
@@ -152,7 +153,10 @@
       "parserOptions": {
         "project": "client/tsconfig.json"
       },
-      "extends": ["next/core-web-vitals"]
+      "extends": ["next/core-web-vitals"],
+      "rules": {
+        "@next/next/no-html-link-for-pages": ["error", "client/src/pages"]
+      }
     },
     {
       "files": "web-app/container/**/*.{ts,tsx}",

@@ -38,19 +38,13 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
 
-      # install dependencies in assets service
-      - name: Install dependencies in assets service
-        run: npm run ci:assets
-
-      # install @tickers-app/common dependencies // TODO: remove this step after
-      - name: install @tickers-app/common dependencies
-        run: |
-            cd ./assets
-            npm install @tickers-app/common
+      # install dependencies
+      - name: Install dependencies
+        run: npm run ci
 
       # Compile service by Typescript
       - name: Run Typescript compiler for assets service
-        run: npm run compile:assets
+        run: npm run build:assets
 
   unit-tests:
     name: Run unit tests for assets service
@@ -66,15 +60,9 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
 
-      # install dependencies in assets service
-      - name: Install dependencies in assets service
-        run: npm run ci:assets
-
-      # install @tickers-app/common dependencies // TODO: remove this step after
-      - name: install @tickers-app/common dependencies
-        run: |
-          cd ./assets
-          npm install @tickers-app/common
+      # install dependencies
+      - name: Install dependencies
+        run: npm run ci
 
       # Run unit tests
       - name: Run tests for assets service
@@ -94,15 +82,9 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
 
-      # install dependencies in assets service
-      - name: Install dependencies in assets service
-        run: npm run ci:assets
-
-      # install @tickers-app/common dependencies // TODO: remove this step after
-      - name: install @tickers-app/common dependencies
-        run: |
-          cd ./assets
-          npm install @tickers-app/common
+      # install dependencies
+      - name: Install dependencies
+        run: npm run ci
 
       # Run e2e tests
       - name: Run e2e tests for assets service

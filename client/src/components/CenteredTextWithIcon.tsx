@@ -6,9 +6,6 @@ interface Props {
   text: string
 }
 
-
-
-
 export const CenteredTextWithIcon = ({ text }: Props) => {
   return (
     <div style={{ display: 'flex' }}>
