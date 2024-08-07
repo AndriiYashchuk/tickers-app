@@ -44,4 +44,4 @@ jobs:
 
       # Compile service by Typescript
       - name: Run build for client service
-        run: npm run build:client
+        run: cd ./client && npm run build
