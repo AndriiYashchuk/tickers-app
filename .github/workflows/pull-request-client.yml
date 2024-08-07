@@ -40,7 +40,7 @@ jobs:
 
       # install dependencies in client service
       - name: Install dependencies in client service
-        run: npm run ci:client
+        run: npm ci
 
       # Compile service by Typescript
       - name: Run build for client service

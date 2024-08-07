@@ -40,7 +40,7 @@ jobs:
 
       # install dependencies
       - name: Install dependencies
-        run: npm run ci
+        run: npm ci
 
       # Compile service by Typescript
       - name: Run Typescript compiler for assets service
@@ -62,7 +62,7 @@ jobs:
 
       # install dependencies
       - name: Install dependencies
-        run: npm run ci
+        run: npm ci
 
       # Run unit tests
       - name: Run tests for assets service
@@ -84,7 +84,7 @@ jobs:
 
       # install dependencies
       - name: Install dependencies
-        run: npm run ci
+        run: npm ci
 
       # Run e2e tests
       - name: Run e2e tests for assets service
