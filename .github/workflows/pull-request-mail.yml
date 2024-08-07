@@ -40,7 +40,7 @@ jobs:
 
       # install dependencies in mail service
       - name: Install dependencies in mail service
-        run: npm run ci:mail
+        run: npm ci
 
       # Compile service by Typescript
       - name: Run Typescript compiler for mail service

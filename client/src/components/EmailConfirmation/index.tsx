@@ -32,7 +32,7 @@ const EmailConfirmation = ({ token, userId }: Props) => {
   useEffect(() => {
     // Send a request to your server to confirm the email based on the token
     doRequest();
-  }, [token, userId]);
+  }, [token, userId, doRequest]);
 
   useEffect(() => {
     setEmailInUse(

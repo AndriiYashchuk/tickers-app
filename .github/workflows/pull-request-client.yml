@@ -38,10 +38,10 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
 
-      # install dependencies in client service
-      - name: Install dependencies in client service
-        run: npm run ci:client
+      # install dependencies
+      - name: Install dependencies
+        run: npm ci
 
       # Compile service by Typescript
       - name: Run build for client service
-        run: npm run build:client
+        run: cd ./client && npm run build

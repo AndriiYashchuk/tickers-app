@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { AssetEntity } from '@tickers-app/server//src/entities/asset.entity';
+// eslint-disable-next-line import/no-cycle
 import { Stock } from '../stocks/stock.entity';
 
 @Entity()
