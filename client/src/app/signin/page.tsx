@@ -8,7 +8,7 @@ import {
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import AuthForm from '../../components/AuthForm';
-import { SIGN_IN_PROPS } from '../../components/constants';
+import { SIGN_IN_PROPS } from './config';
 import { ToSignUpFromLink } from '../../components/ToSignUpFromLink';
 import DynamicLayout from '../../components/layouts/main/DynamicLayout';
 import { useSignupForm } from '../../hooks/useSignupForm';

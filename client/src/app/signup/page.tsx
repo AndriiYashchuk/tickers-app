@@ -8,7 +8,7 @@ import {
 
 import Link from 'next/link';
 import AuthForm from '../../components/AuthForm';
-import { SIGN_UP_PROPS } from '../../components/constants';
+import { SIGN_UP_PROPS } from './config';
 import { ToSignUpFromLink } from '../../components/ToSignUpFromLink';
 import DynamicLayout from '../../components/layouts/main/DynamicLayout';
 import { useSignupForm } from '../../hooks/useSignupForm';

@@ -1,9 +1,8 @@
-import React, { Metadata } from 'next';
 import LandingPageComponent from '@tickers-app/common-client/build/components/LandingPage';
 import { Box, Button, Container, Link } from '@mui/material';
 import Layout from '../components/layouts/main';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Tickers App',
   description: 'Landing page',
 };
