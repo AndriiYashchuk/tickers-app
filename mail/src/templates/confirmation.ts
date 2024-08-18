@@ -1,6 +1,5 @@
 import { getNameString } from '../utils/get-name-string';
 
-
 interface Params {
   domain: string;
   name: string;
@@ -14,7 +13,9 @@ export const getBody = ({ domain, name, token, userId }: Params): string => `
 </h1>
 <h3>Email confirmation</h3>
 <p style="font-weight: 400; font-size: 18px;">
-  Hello${getNameString(name)}, could you please confirm you email to have all access of application?
+  Hello${getNameString(
+    name,
+  )}, could you please confirm you email to have all access of application?
 </p>
 <a style="text-decoration: none;
 background-color: #F45D09EA;

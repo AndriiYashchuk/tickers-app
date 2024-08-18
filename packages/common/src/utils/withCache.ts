@@ -7,7 +7,6 @@ export const withCache = <T extends [], R>(
   cacheTime = 1000,
   getCacheFomParams: HashFunction = IDX
 ) => {
-
   const cache = new Map();
 
   return async (...args: T): Promise<R> => {
@@ -17,7 +16,7 @@ export const withCache = <T extends [], R>(
       cache.set(hashFromParams, res);
 
       setTimeout(() => {
-        cache.delete(hashFromParams)
+        cache.delete(hashFromParams);
       }, cacheTime);
     }
 

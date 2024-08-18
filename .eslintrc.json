@@ -3,11 +3,13 @@
     "airbnb"
   ],
   "ignorePatterns": [
-    "/**/node_modules/**",
-    "/**/dist/**",
+    "**/node_modules/**",
+    "**/dist/**",
     "mail/node_modules/**",
     "client/node_modules/**",
     "client/public/**",
+    "client/next/**",
+    "client/.next/**",
     "auth/node_modules/**",
     "web-app/container/node_modules/**",
     "web-app/container/dist/**",
@@ -105,6 +107,13 @@
       "files": [
         "auth/**/*.{ts,tsx}"
       ],
+      "excludedFiles": [
+        "**/__mocks__/*.ts",
+        "**/*.spec.ts",
+        "**/*.test.ts",
+        "**/is-include-error-message.ts",
+        "**/test/*.ts"
+      ],
       "parserOptions": {
         "project": "auth/tsconfig.json"
       },
@@ -113,6 +122,11 @@
     {
       "files": [
         "assets/**/*.ts"
+      ],
+      "excludedFiles": [
+        "assets/migrations/**/*",
+        "**/*.spec.ts",
+        "**/*-spec.ts"
       ],
       "parserOptions": {
         "project": "assets/tsconfig.json"
@@ -125,18 +139,6 @@
     },
     {
       "files": [
-        "auth/**/*.test.{ts,tsx}",
-        "auth/src/test/*.{ts,tsx}",
-        "auth/**/__mocks__/*.{ts,tsx}",
-        "auth/src/helpers/is-include-error-message.ts"
-      ],
-      "parserOptions": {
-        "project": "auth/tsconfig-test.json"
-      },
-      "extends": ["./ts-eslint-config.json"]
-    },
-    {
-      "files": [
         "mail/**/*.{ts,tsx}"
       ],
       "parserOptions": {
@@ -146,12 +148,15 @@
     },
     {
       "files": [
-        "client/client/**/*.{ts,tsx}"
+        "client/**/*.{ts,tsx}"
       ],
       "parserOptions": {
         "project": "client/tsconfig.json"
       },
-      "extends": ["next/core-web-vitals"]
+      "extends": ["next/core-web-vitals"],
+      "rules": {
+        "@next/next/no-html-link-for-pages": ["error", "client/src/pages"]
+      }
     },
     {
       "files": "web-app/container/**/*.{ts,tsx}",

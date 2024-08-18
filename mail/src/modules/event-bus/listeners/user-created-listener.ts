@@ -1,5 +1,4 @@
-import { Stan } from 'node-nats-streaming';
-import { Message } from 'node-nats-streaming';
+import { Stan, Message } from 'node-nats-streaming';
 import { Listener } from '@tickers-app/server/src/events/base/listener';
 import { UserCreatedEvent } from '@tickers-app/server/src/events/UserCreatedEvent';
 import { Subjects } from '@tickers-app/server/src/events/base/subjects';
@@ -13,12 +12,15 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
 
   subject: Subjects.UserCreated = Subjects.UserCreated;
 
-  constructor(natsClient: Stan, private domain: string) {
+  constructor(
+    natsClient: Stan,
+    private domain: string,
+  ) {
     super(natsClient);
   }
 
   async onMessage(data: UserCreatedEvent['data'], msg: Message): Promise<void> {
-    console.log(data)
+    console.log(data);
     Mailer.sendMessage({
       to: data.email,
       subject: 'Email confirmation',
@@ -26,8 +28,8 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
         name: data.name,
         domain: this.domain,
         token: data.token,
-        userId: data.userId
-      })
+        userId: data.userId,
+      }),
     });
     msg.ack();
   }

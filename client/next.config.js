@@ -14,7 +14,7 @@ const nextConfig = {
       options: { presets },
     });
 
-    config.module.rules.push(        {
+    config.module.rules.push({
       test: /\.ts(x?)$/,
       include: path.resolve(__dirname, '../packages/common'),
       use: [

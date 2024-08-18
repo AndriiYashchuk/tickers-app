@@ -8,8 +8,11 @@ interface Event {
 
 export abstract class Listener<T extends Event> {
   abstract subject: T['subject'];
+
   abstract queueGroupName: string;
+
   protected client: Stan;
+
   protected ackWait = 5 * 1000;
 
   abstract onMessage(data: T['data'], msg: Message): void;
@@ -43,12 +46,12 @@ export abstract class Listener<T extends Event> {
   parseMessage(msg: Message) {
     const data = msg.getData();
     let parsedData = null;
-    try{
+    try {
       parsedData = typeof data === 'string'
         ? JSON.parse(data)
         : JSON.parse(data.toString('utf8'));
-    } catch (error){
-      console.error(error)
+    } catch (error) {
+      console.error(error);
     }
 
     return parsedData;

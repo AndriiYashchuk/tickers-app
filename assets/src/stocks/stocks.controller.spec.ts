@@ -51,13 +51,13 @@ describe('StocksController', () => {
         (userId, ticker): Stock[] =>
           (ticker
             ? [
-                { ...stock1, id: '1', userId, ticker },
-                { ...stock2, id: '2', userId, ticker },
-              ]
+              { ...stock1, id: '1', userId, ticker },
+              { ...stock2, id: '2', userId, ticker },
+            ]
             : [
-                { ...stock1, id: '1', userId },
-                { ...stock2, id: '2', userId },
-              ]) as Stock[],
+              { ...stock1, id: '1', userId },
+              { ...stock2, id: '2', userId },
+            ]) as Stock[],
       ),
       remove: jest.fn(),
     };

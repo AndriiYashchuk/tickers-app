@@ -38,15 +38,9 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
 
-      # install dependencies in auth service
-      - name: Install dependencies in auth service
-        run: npm run ci:auth
-
-      # install @tickers-app/common dependencies // TODO: remove this step after
-      - name: install @tickers-app/common dependencies
-        run: |
-            cd ./auth
-            npm install @tickers-app/common
+      # install dependencies
+      - name: install dependencies
+        run: npm ci
 
       # Compile service by Typescript
       - name: Run Typescript compiler for auth service
@@ -68,7 +62,7 @@ jobs:
 
       # install dependencies in auth service
       - name: Install dependencies in auth service
-        run: npm run ci:auth
+        run: npm ci
 
       # install @tickers-app/common dependencies // TODO: remove this step after
       - name: install @tickers-app/common dependencies
