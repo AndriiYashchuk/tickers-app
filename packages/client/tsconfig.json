@@ -1,21 +1,21 @@
 {
-  "extends": "@tickers-app/common/tsconfig.json",
   "compilerOptions": {
-    "outDir": "./build",
     "target": "ES2015",
     "declaration": true,
     "skipLibCheck": true,
     "module": "ES2022",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
+    "jsx": "react",
     "lib": ["es5", "es6", "dom"]
   },
+  "exclude": [
+    "**/*.test.ts"
+  ],
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "declares/init-web-app.d.ts",
     "declares/svg-icons.d.ts"
-  ],
-  "files": [
-    "src/index.ts"
   ]
 }

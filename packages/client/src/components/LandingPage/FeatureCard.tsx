@@ -9,7 +9,7 @@ export const FeatureCard = ({
   description,
   icon: IconComponent,
   badgeContent,
-}) => (
+}: any) => (
   <Paper elevation={3}>
     <Box p={2}>
       {badgeContent && (

@@ -8,14 +8,15 @@
     "auth",
     "client",
     "mail",
+    "web-app/*",
     "packages/*"
   ],
   "scripts": {
     "skaffold": "docker system prune -a && skaffold dev",
     "start": "chmod +x start.sh && sh start.sh",
+    "start:web-app:container": "npm run start -w web-app/container",
+    "start:web-app:dashboard": "npm run start -w web-app/dashboard",
     "build:assets": "npm run build -w assets",
-    "ci:web-app/container": "npm run ci -w web-app/container",
-    "ci:web-app/dashboard": "npm run ci -w web-app/dashboard",
     "compile:auth": "npm run compile -w auth",
     "compile:mail": "npm run compile -w mail",
     "compile:assets": "npm run build -w assets",

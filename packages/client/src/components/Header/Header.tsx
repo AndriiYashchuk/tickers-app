@@ -16,12 +16,14 @@ export const Header = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
   const handleClose = (link: Link) => {
     setAnchorEl(null);
-    onClick(link);
-  }
+    if (onClick) {
+      onClick(link);
+    }
+  };
 
   return (
     <HeaderStatic
@@ -37,5 +39,5 @@ export const Header = ({
       handleClose={handleClose}
       isLoading={isLoading}
     />
-  )
-}
+  );
+};

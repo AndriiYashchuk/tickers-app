@@ -39,7 +39,7 @@ export const HeaderStatic = ({
   const isFullName = !!(name && surname);
   const avatarProps = isFullName
     ? generateAvatarColor(`${name} ${surname}`)
-    : { children: `${email[0]}` }
+    : { children: `${email[0]}` };
 
   return (
     <AppBar position={'static'}>
@@ -49,24 +49,24 @@ export const HeaderStatic = ({
             onClick={
               !isRenderFromSSR ? () => onClick && onClick(logo) : undefined
             }
-            size={"large"}
-            edge={"start"}
-            color={"inherit"}
-            aria-label={"logo"}
+            size={'large'}
+            edge={'start'}
+            color={'inherit'}
+            aria-label={'logo'}
           >
             {logo.icon || <TrendingUpIcon />}
           </IconButton>)
         }
         {logo && logo.title && (
           <Typography
-            variant={"h6"}
-            component={"div"}
+            variant={'h6'}
+            component={'div'}
             sx={{ flexGrow: 1 }}
           >
             <LinkComponent
               underline={'none'}
               href={logo.to}
-              color={"inherit"}
+              color={'inherit'}
             >
               {logo.title}
             </LinkComponent>
@@ -74,7 +74,7 @@ export const HeaderStatic = ({
         )
         }
         <Stack
-          direction={"row"}
+          direction={'row'}
           spacing={2}
         >
           {links.map(({ title, key, to }) => (
@@ -91,11 +91,11 @@ export const HeaderStatic = ({
               sx={{ paddingLeft: '16px' }}
               variant="subtitle2"
               underline="hover"
-              component={to ? "a" : "button"}
+              component={to ? 'a' : 'button'}
               key={key || title || to}
-              color={"inherit"}
+              color={'inherit'}
               onClick={
-                !isRenderFromSSR ? () => onClick({ title, key, to }) : undefined
+                (!isRenderFromSSR && onClick) ? () => onClick({ title, key, to }) : undefined
               }
             >
               {title.toUpperCase()}
@@ -105,14 +105,14 @@ export const HeaderStatic = ({
             <Button
               style={AVATAR_BUTTON_STYLE}
               size="small"
-              id='avatar-button'
-              onClick={!isRenderFromSSR && handleClick}
+              id="avatar-button"
+              onClick={!isRenderFromSSR ? handleClick : undefined}
               aria-controls={isOpen ? 'avatar-menu' : undefined}
               aria-haspopup={'true'}
               aria-expanded={isOpen || undefined}
               //            endIcon={<KeyboardArrowDown color={"secondary"} />}
             >
-              <Avatar  {...avatarProps} />
+              <Avatar {...avatarProps} />
             </Button>)}
           {
             isLoading && (
@@ -130,8 +130,8 @@ export const HeaderStatic = ({
         </Stack>
         {user && (
           <Menu
-            id='avatar-menu'
-            open={isOpen}
+            id="avatar-menu"
+            open={!!isOpen}
             anchorEl={anchorEl}
             MenuListProps={{
               'aria-labelledby': 'avatar-button'
@@ -169,5 +169,5 @@ export const HeaderStatic = ({
           </Menu>)}
       </Toolbar>
     </AppBar>
-  )
-}
+  );
+};

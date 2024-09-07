@@ -1,8 +1,8 @@
 import React from 'react';
-import { AUTHORIZED_HEADER, LOGO, MENU } from '@tickers-app/common-client/build/components/Header/constants';
-import { Footer } from '@tickers-app/common-client/build/components/Footer';
-import { Header } from '@tickers-app/common-client/build/components/Header';
-import { Main } from '@tickers-app/common-client/build/components/Main';
+import { AUTHORIZED_HEADER, LOGO, MENU } from '@tickers-app/common-client/src/components/Header/constants';
+import { Footer } from '@tickers-app/common-client/src/components/Footer';
+import { Header } from '@tickers-app/common-client/src/components/Header';
+import { Main } from '@tickers-app/common-client/src/components/Main';
 import axios from 'axios';
 import { User } from '@tickers-app/common/types/User';
 import DashboardApp from './apps/DashboardApp';
