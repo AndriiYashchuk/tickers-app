@@ -150,12 +150,27 @@
       "files": [
         "client/**/*.{ts,tsx}"
       ],
+      "excludedFiles": [
+        "packages/client/**/*"
+      ],
       "parserOptions": {
-        "project": "client/tsconfig.json"
+        "project": "./tsconfig.json"
       },
       "extends": ["next/core-web-vitals"],
       "rules": {
-        "@next/next/no-html-link-for-pages": ["error", "client/src/pages"]
+        "@next/next/no-html-link-for-pages": ["error", "next-app/src/pages"]
+      }
+    },
+    {
+      "files": [
+        "packages/client/**/*.{ts,tsx}"
+      ],
+      "parserOptions": {
+        "project": "packages/client/tsconfig.json"
+      },
+      "extends": ["plugin:@typescript-eslint/recommended"],
+      "rules": {
+        "no-console": "warn"
       }
     },
     {

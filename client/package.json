@@ -13,9 +13,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.22.15",
     "@tickers-app/common": "*",
-    "@tickers-app/common-client": "1.0.56",
+    "@tickers-app/common-client": "*",
     "@types/jsonwebtoken": "^9.0.3",
     "@types/node": "^22.0.2",
     "@types/react": "18.2.21",

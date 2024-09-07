@@ -1,38 +1,14 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-const presets = [
-  '@babel/preset-env',
-  '@babel/preset-react',
-];
-
 const nextConfig = {
+  transpilePackages: ['@tickers-app/common', '@tickers-app/common-client'],
   webpack: config => {
-    config.module.rules.push({
-      test: /node_modules\/@tickers-app\/common-client\//,
-      loader: 'babel-loader',
-      options: { presets },
-    });
-
-    config.module.rules.push({
-      test: /\.ts(x?)$/,
-      include: path.resolve(__dirname, '../packages/common'),
-      use: [
-        {
-          loader: 'babel-loader',
-          options: { presets },
-        },
-        {
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true,
-            allowTsInNodeModules: true,
-            logLevel: 'info',
-            configFile: path.resolve(__dirname, '../packages/tsconfig.json'),
-          }
-        }
-      ]
-    });
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@tickers-app/common': path.resolve(__dirname, '../packages/common'),
+      '@tickers-app/common-client': path.resolve(__dirname, '../packages/client'),
+    };
 
     return config;
   }

@@ -1,16 +1,21 @@
-FROM node:16-alpine AS base
+FROM node:20-alpine AS base
 
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY client/package.json ./client/
 COPY packages/common ./packages/common
-COPY packages/tsconfig.json ./packages/tsconfig.json
+COPY packages/client ./packages/client
 
 RUN npm ci
 
 FROM base AS build
 
-COPY ./client ./client
+COPY client/tsconfig.json client/next.config.js client/postcss.config.js client/tailwind.config.ts ./client/
+COPY client/src ./client/src
+COPY client/public ./client/public
+COPY client/api ./client/api
+COPY client/declared-types ./client/declared-types
+COPY .eslintrc.json ./
 
 WORKDIR /app/client
 

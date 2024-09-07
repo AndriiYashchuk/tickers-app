@@ -1,4 +1,4 @@
-import LandingPageComponent from '@tickers-app/common-client/build/components/LandingPage';
+import LandingPageComponent from '@tickers-app/common-client/src/components/LandingPage';
 import { Box, Button, Container, Link } from '@mui/material';
 import Layout from '../components/layouts/main';
 

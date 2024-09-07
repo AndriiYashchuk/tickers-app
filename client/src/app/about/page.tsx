@@ -1,5 +1,5 @@
 import React, { Metadata } from 'next';
-import AboutPageComponent from '@tickers-app/common-client/build/components/AboutPage';
+import AboutPageComponent from '@tickers-app/common-client/src/components/AboutPage';
 import Layout from '../../components/layouts/main';
 
 export const metadata: Metadata = {

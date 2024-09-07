@@ -2,18 +2,18 @@
 
 import { User } from '@tickers-app/common/types/User';
 import React from 'react';
-import { Footer } from '@tickers-app/common-client/build/components/Footer';
-import { Header } from '@tickers-app/common-client/build/components/Header/Header';
+import { Footer } from '@tickers-app/common-client/src/components/Footer';
+import { Header } from '@tickers-app/common-client/src/components/Header/Header';
 import {
   LOGO,
   MENU,
   UNAUTHORIZED_HEADER,
   AUTHORIZED_HEADER, BASE_HEADER_OPTIONS,
-} from '@tickers-app/common-client/build/components/Header/constants';
-import { Main } from '@tickers-app/common-client/build/components/Main';
+} from '@tickers-app/common-client/src/components/Header/constants';
+import { Main } from '@tickers-app/common-client/src/components/Main';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { Link } from '@tickers-app/common-client/build/types/Link';
+import { Link } from '@tickers-app/common-client/src/types/Link';
 
 interface Props {
   currentUser: User | null;
