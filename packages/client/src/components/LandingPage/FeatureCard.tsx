@@ -22,8 +22,7 @@ export const FeatureCard = ({
           }}
           overlap="circular"
           sx={{ position: 'relative', top: '-10px', left: '25px', width: '140px' }}
-        >
-        </Badge>
+        />
       )}
       <IconComponent style={{ fontSize: 100, color: '#3f51b5', display: 'block', margin: '0 auto' }} />
       <Typography variant="h6" align="center" mt={2}>{title}</Typography>

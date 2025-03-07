@@ -1,7 +1,7 @@
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack/webpack.common');
 
-const PORT = 8080
+const PORT = 8080;
 
 const tsLoaderOptions = {
   configFile: 'tsconfig-dev.json',
@@ -23,11 +23,11 @@ const devConfig = {
       overlay: false
     },
   },
-  output:{
+  output: {
     publicPath: `http://localhost:${PORT}/`
   },
 };
 const mergedConfig = merge(commonConfig, devConfig);
 // was changed ts-loader options to use tsconfig-dev.json
-mergedConfig.module.rules[3].use[1].options = tsLoaderOptions
+mergedConfig.module.rules[3].use[1].options = tsLoaderOptions;
 module.exports = mergedConfig;

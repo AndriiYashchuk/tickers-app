@@ -10,13 +10,12 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import PolylineIcon from '@mui/icons-material/Polyline';
 import { FeatureCard } from './FeatureCard';
 
-
 const WaitingFeature = () => (
   <>
     <Grid item xs={12} md={4}>
       <FeatureCard
         title={'Analysis & Reports'}
-        description={"Get detailed insights and analytics to make informed investment decisions."}
+        description={'Get detailed insights and analytics to make informed investment decisions.'}
         icon={AssessmentIcon}
         badgeContent={'Will be ready soon'}
       />
@@ -31,7 +30,7 @@ const WaitingFeature = () => (
       />
     </Grid>
   </>
-)
+);
 
 const GraphicsSection = () => {
   const renderWaitingFeatures = () => (
@@ -58,7 +57,7 @@ const GraphicsSection = () => {
           <Grid item xs={12} md={4}>
             <FeatureCard
               title={'Intuitive Design'}
-              description={"Our user-friendly interface ensures you have a smooth experience managing your portfolio."}
+              description={'Our user-friendly interface ensures you have a smooth experience managing your portfolio.'}
               icon={PolylineIcon}
               badgeContent=""
             />
@@ -67,18 +66,18 @@ const GraphicsSection = () => {
           <Grid item xs={12} md={4}>
             <FeatureCard
               title={'Portfolio Management'}
-              description={"Organize and manage your stocks in one place with our intuitive tools."}
+              description={'Organize and manage your stocks in one place with our intuitive tools.'}
               icon={LibraryBooksIcon}
               badgeContent={'Will be ready soon'}
             />
           </Grid>
 
-          {/*{renderWaitingFeatures()}*/}
+          {/* {renderWaitingFeatures()} */}
 
         </Grid>
       </Container>
     </Box>
   );
-}
+};
 
 export default GraphicsSection;

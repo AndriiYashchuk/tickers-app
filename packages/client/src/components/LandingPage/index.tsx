@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper';
 import GraphicsSection from './GraphicsSection';
 import { Faq } from './Faq';
 
-
 const Landing = () => (
   <Container>
     <Box my={4}>
@@ -22,7 +21,7 @@ const Landing = () => (
       </Typography>
       <Box mt={3} display="flex" justifyContent="center">
         <Button variant="contained" color="primary">
-          <Link href={"/web-app"} color={"inherit"} underline={"none"}>
+          <Link href={'/web-app'} color={'inherit'} underline={'none'}>
             Manage My Portfolio
           </Link>
         </Button>

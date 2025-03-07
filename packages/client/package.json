@@ -18,6 +18,14 @@
   "license": "ISC",
   "dependencies": {
     "@mui/material": "^5.16.7",
+    "sass": "^1.66.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/system": "^5.14.11"
+  },
+  "devDependencies": {
     "@tickers-app/client-packages": "1.0.2"
   }
 }

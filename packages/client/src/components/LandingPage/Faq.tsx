@@ -11,14 +11,15 @@ interface QuestionSectionProps {
   description: string;
 }
 
-const QuestionSection = ({title, description}: QuestionSectionProps) => (
+const QuestionSection = ({ title, description }: QuestionSectionProps) => (
   <Accordion>
     <AccordionSummary
       expandIcon={<ExpandMoreIcon />}
     >
       <Typography>
         {title
-        }</Typography>
+        }
+      </Typography>
     </AccordionSummary>
     <AccordionDetails>
       <Typography>
@@ -26,7 +27,7 @@ const QuestionSection = ({title, description}: QuestionSectionProps) => (
       </Typography>
     </AccordionDetails>
   </Accordion>
-)
+);
 
 export const Faq = () => (
   <Box my={5}>
@@ -48,4 +49,4 @@ export const Faq = () => (
           methods to ensure your portfolio data remains private.`}
     />
   </Box>
-)
+);

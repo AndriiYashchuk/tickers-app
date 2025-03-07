@@ -16,7 +16,7 @@ const stringToColor = (string: string) => {
   /* eslint-enable no-bitwise */
 
   return color;
-}
+};
 
 export const generateAvatarColor = (name: string) => {
   return {
@@ -25,4 +25,4 @@ export const generateAvatarColor = (name: string) => {
     },
     children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
   };
-}
+};
