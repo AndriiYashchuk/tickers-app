@@ -1,5 +1,5 @@
 # Stage 1: creating base image
-FROM node:16-alpine AS base
+FROM node:18-alpine AS base
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ COPY package.json package-lock.json ./
 COPY packages/common ./packages/common
 COPY packages/server ./packages/server
 
-RUN npm ci
+RUN npm ci --omit=dev && npm cache clean --force
 
 # Stage 2: creating build image
 FROM base AS build

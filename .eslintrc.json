@@ -154,7 +154,7 @@
         "packages/client/**/*"
       ],
       "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": "client/tsconfig.json"
       },
       "extends": ["next/core-web-vitals"],
       "rules": {

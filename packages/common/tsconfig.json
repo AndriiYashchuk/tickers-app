@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
@@ -11,7 +10,9 @@
     "skipLibCheck": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "types/**/*.ts",
+    "declares/**/*.d.ts"
   ],
   "files": [
     "./declares/dashboard.d.ts",

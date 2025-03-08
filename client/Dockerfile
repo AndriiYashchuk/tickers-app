@@ -3,36 +3,41 @@ FROM node:20-alpine AS base
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY client/package.json ./client/
-COPY packages/common ./packages/common
-COPY packages/client ./packages/client
+COPY packages/common/package.json ./packages/common/
+COPY packages/client/package.json ./packages/client/
 
-RUN npm ci
+RUN npm ci --omit=dev && npm cache clean --force
 
 FROM base AS build
 
-COPY client/tsconfig.json client/next.config.js client/postcss.config.js client/tailwind.config.ts ./client/
-COPY client/src ./client/src
-COPY client/public ./client/public
-COPY client/api ./client/api
-COPY client/declared-types ./client/declared-types
-COPY .eslintrc.json ./
+WORKDIR /app
+
+COPY client/ ./client/
+COPY packages/common ./packages/common/
+COPY packages/client ./packages/client/
 
 WORKDIR /app/client
 
 RUN npm run build
 
-FROM build AS production
-
-COPY --from=build /app/client/package.json ./client/
-COPY --from=build /app/client/.next client/.next
+FROM node:20-alpine AS production
 
 WORKDIR /app/client
+
+COPY --from=build /app/client/.next ./.next
+COPY --from=build /app/client/public ./public
+COPY --from=build /app/client/package.json ./
+COPY --from=base /app/node_modules ./node_modules
 
 CMD ["npm", "run", "start"]
 
 FROM base AS development
 
-COPY --from=build /app/client ./client/
+WORKDIR /app
+
+COPY client/ ./client/
+COPY packages/common ./packages/common/
+COPY packages/client ./packages/client/
 
 WORKDIR /app/client
 

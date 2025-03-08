@@ -17,6 +17,7 @@
     "start:web-app:container": "npm run start -w web-app/container",
     "start:web-app:dashboard": "npm run start -w web-app/dashboard",
     "build:assets": "npm run build -w assets",
+    "clean": "rm -rf node_modules && rm -rf assets/node_modules && rm -rf auth/node_modules && rm -rf client/node_modules && rm -rf mail/node_modules",
     "compile:auth": "npm run compile -w auth",
     "compile:mail": "npm run compile -w mail",
     "compile:assets": "npm run build -w assets",

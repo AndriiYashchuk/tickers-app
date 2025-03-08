@@ -48,7 +48,11 @@ jobs:
 
       # install dependencies in web-app/container service
       - name: Install dependencies in web-app/container service
-        run: npm run ci:web-app/container
+        uses: ./.github/actions/install_deps_client_services
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
+          service-name: container
 
       # Build service web-app/container
       - name: Run build for web-app/container service by webpack
