@@ -6,6 +6,7 @@ import { Label } from './label.entity';
 
 describe('LabelsController', () => {
   let controller: LabelsController;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let service: LabelsService;
 
   beforeEach(async () => {

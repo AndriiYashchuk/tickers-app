@@ -1,11 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { LabelsService } from './labels.service';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { LabelsService } from './labels.service';
 import { Label } from './label.entity';
 
 describe('LabelsService', () => {
   let service: LabelsService;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let repo: Repository<Label>;
 
   beforeEach(async () => {
