@@ -44,4 +44,4 @@ jobs:
 
       # Compile service by Typescript
       - name: Run Typescript compiler for mail service
-        run: npm run compile:mail
+        run: npm run build:mail

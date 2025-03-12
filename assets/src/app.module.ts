@@ -24,7 +24,7 @@ const config: Config =
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [(): Config => config],
+      load: [(): Config => ({ ...config, jwtSecret: process.env.JWT_KEY })],
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
     StocksModule,

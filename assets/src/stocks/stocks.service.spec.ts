@@ -21,6 +21,7 @@ const userId = 'userId';
 
 describe('StocksService', () => {
   let service: StocksService;
+
   const fakeStocksRepo = {
     // Mock implementation of find method
     find: jest.fn().mockResolvedValue([
@@ -33,14 +34,19 @@ describe('StocksService', () => {
       .mockImplementation(({ id }) =>
         Promise.resolve({ id, userId, ...stockAAPLDto }),
       ),
-    // eslint-disable-next-line prettier/prettier
     create: jest.fn().mockImplementation(stock => stock),
     save: jest
       .fn()
-      // eslint-disable-next-line prettier/prettier
       .mockImplementation(stock => Promise.resolve({ ...stock, id: '1' })),
-    // eslint-disable-next-line
     remove: jest.fn().mockImplementation(stock => stock),
+  };
+
+  const fakeLabelsRepo = {
+    find: jest.fn().mockResolvedValue([]),
+    findOneBy: jest.fn().mockResolvedValue(null),
+    create: jest.fn(),
+    save: jest.fn(),
+    remove: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -50,6 +56,10 @@ describe('StocksService', () => {
         {
           provide: 'StockRepository',
           useValue: fakeStocksRepo,
+        },
+        {
+          provide: 'LabelRepository',
+          useValue: fakeLabelsRepo,
         },
       ],
     }).compile();
