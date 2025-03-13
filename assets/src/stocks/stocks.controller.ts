@@ -55,7 +55,7 @@ export class StocksController {
   }
 
   @Delete('/:id')
-  removeStock(
+  async removeStock(
     @CurrentUser() user: JwtUser,
     @Param('id') id: string,
   ): Promise<StockDto | null> {
