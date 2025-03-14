@@ -67,9 +67,7 @@ describe('StocksController', () => {
       create: jest.fn(),
       findOne: jest.fn(),
       find: jest.fn(),
-      remove: jest.fn().mockImplementation(() => {
-        throw new NotFoundException();
-      }),
+      remove: jest.fn().mockImplementation(() => Promise.reject(new NotFoundException())),
       update: jest
         .fn()
         .mockImplementation(
@@ -81,7 +79,7 @@ describe('StocksController', () => {
             if (attrs.id === id && userId === userOwner.id) {
               return Promise.resolve({ id, ...attrs, userId } as Stock);
             }
-            throw new NotFoundException();
+            return Promise.reject(new NotFoundException());
           },
         ),
     };

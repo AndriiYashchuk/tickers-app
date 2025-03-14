@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import CheckIcon from '@mui/icons-material/Check';
+import CheckIcon from '@mui/icons-material/FactCheck';
 
 interface Props {
   text: string

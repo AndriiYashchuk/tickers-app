@@ -14,5 +14,8 @@
   },
   "dependencies": {
     "@tickers-app/common-client": "*"
+  },
+  "devDependencies": {
+    "@tickers-app/client-packages": "1.0.2"
   }
 }

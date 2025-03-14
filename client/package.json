@@ -13,13 +13,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.22.15",
     "@tickers-app/common": "*",
-    "@tickers-app/common-client": "1.0.56",
-    "@types/jsonwebtoken": "^9.0.3",
-    "@types/node": "^22.0.2",
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.7",
+    "@tickers-app/common-client": "*",
     "autoprefixer": "10.4.15",
     "axios": "^1.5.1",
     "eslint": "8.48.0",
@@ -29,9 +24,13 @@
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "3.3.3",
+    "@types/jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^14.2.5"
+    "@next/eslint-plugin-next": "^14.2.5",
+    "@types/node": "^22.0.2",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7"
   }
 }

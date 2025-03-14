@@ -1,0 +1,31 @@
+{
+  "name": "@tickers-app/common-client",
+  "version": "1.0.57",
+  "description": "",
+  "files": [
+    "build"
+  ],
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "start": "webpack serve --config ./src/webpack.dev.js",
+    "clean": "rm -rf build",
+    "build": "npm run clean && tsc",
+    "pub": "npm run build && npm version patch && npm publish && git add ./ && git commit -m \"Updates common-client package\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mui/material": "^5.16.7",
+    "sass": "^1.66.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/system": "^5.14.11"
+  },
+  "devDependencies": {
+    "@tickers-app/client-packages": "1.0.2"
+  }
+}

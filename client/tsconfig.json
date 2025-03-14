@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "baseUrl": ".",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,8 +24,15 @@
       }
     ],
     "paths": {
-      "@tickers-app/common/*": ["../packages/common/*"],
-      "@/*": ["./src/*"]
+      "@tickers-app/common/*": [
+        "../packages/common/*"
+      ],
+      "@tickers-app/common-client/*": [
+        "../packages/client/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "include": [
@@ -29,7 +41,13 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "node_modules/@tickers-app/common-client/declares/init-web-app.d.ts"
+    "../packages/common/**/*.ts",
+    "../packages/common/**/*.tsx",
+    "../packages/client/**/*.ts",
+    "../packages/client/**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "../packages/client/src/playground/**/*"
+  ]
 }

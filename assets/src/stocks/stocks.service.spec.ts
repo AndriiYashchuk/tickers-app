@@ -21,6 +21,7 @@ const userId = 'userId';
 
 describe('StocksService', () => {
   let service: StocksService;
+
   const fakeStocksRepo = {
     // Mock implementation of find method
     find: jest.fn().mockResolvedValue([
@@ -33,14 +34,26 @@ describe('StocksService', () => {
       .mockImplementation(({ id }) =>
         Promise.resolve({ id, userId, ...stockAAPLDto }),
       ),
-    // eslint-disable-next-line prettier/prettier
     create: jest.fn().mockImplementation(stock => stock),
     save: jest
       .fn()
-      // eslint-disable-next-line prettier/prettier
       .mockImplementation(stock => Promise.resolve({ ...stock, id: '1' })),
-    // eslint-disable-next-line
     remove: jest.fn().mockImplementation(stock => stock),
+    findOne: jest.fn().mockImplementation(({ where: { id }, }) => ({
+      ...stockAAPLDto,
+      userId,
+      id,
+      labels: [],
+    })),
+  };
+
+  const fakeLabelsRepo = {
+    find: jest.fn().mockResolvedValue([]),
+    findOneBy: jest.fn().mockImplementation(({ where: { id } }) =>
+      ({ ...stockAAPLDto, userId, id })),
+    create: jest.fn(),
+    save: jest.fn(),
+    remove: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -50,6 +63,10 @@ describe('StocksService', () => {
         {
           provide: 'StockRepository',
           useValue: fakeStocksRepo,
+        },
+        {
+          provide: 'LabelRepository',
+          useValue: fakeLabelsRepo,
         },
       ],
     }).compile();
@@ -75,11 +92,12 @@ describe('StocksService', () => {
       ...stockAAPLDto,
       userId,
       id: stockId,
+      labels: []
     };
-    expect(stock).toEqual(expected);
-    expect(fakeStocksRepo.findOneBy).toHaveBeenCalledWith({
-      userId,
-      id: stockId,
+    expect(expected).toEqual(stock);
+    expect(fakeStocksRepo.findOne).toHaveBeenCalledWith({
+      where: { id: stockId, userId },
+      relations: ['labels'],
     });
   });
 
@@ -92,6 +110,7 @@ describe('StocksService', () => {
     ]);
     expect(fakeStocksRepo.find).toHaveBeenCalledWith({
       where: { userId, ticker },
+      relations: ['labels']
     });
   });
 
@@ -121,6 +140,7 @@ describe('StocksService', () => {
       ...stockAAPLDto,
       id: '1',
       userId,
+      labels: []
     };
 
     const removedStock = await service.remove(stockId, ownerId);

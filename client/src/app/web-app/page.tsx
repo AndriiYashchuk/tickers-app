@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Script from 'next/script';
 import axios from 'axios';
-import { DashboardSkeletons } from '@tickers-app/common-client';
+import { DashboardSkeletons } from '@tickers-app/common-client/src/components/skeletons/DashboardSkeletons';
 import { fetchWebAppScript } from '../../helpers';
 import DynamicLayout from '../../components/layouts/main/DynamicLayout';
 

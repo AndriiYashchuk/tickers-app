@@ -2,10 +2,13 @@
   "extends": "@tickers-app/common-client/tsconfig.json",
   "compilerOptions": {
     "skipLibCheck": true,
+    "paths": {
+        "@tickers-app/common-client/*": ["../../packages/client/*"],
+    }
   },
   "files": [
     "src/index.ts",
-    "./node_modules/@tickers-app/common/declares/dashboard.d.ts",
-    "./node_modules/@tickers-app/common-client/declares/init-web-app.d.ts"
+    "../../packages/common/declares/dashboard.d.ts",
+    "../../packages/client/declares/init-web-app.d.ts"
   ]
 }

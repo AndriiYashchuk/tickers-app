@@ -1,33 +1,43 @@
-FROM node:16-alpine AS base
+FROM node:20-alpine AS base
 
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY client/package.json ./client/
-COPY packages/common ./packages/common
-COPY packages/tsconfig.json ./packages/tsconfig.json
+COPY packages/common/package.json ./packages/common/
+COPY packages/client/package.json ./packages/client/
 
-RUN npm ci
+RUN npm ci --omit=dev && npm cache clean --force
 
 FROM base AS build
 
-COPY ./client ./client
+WORKDIR /app
+
+COPY client/ ./client/
+COPY packages/common ./packages/common/
+COPY packages/client ./packages/client/
 
 WORKDIR /app/client
 
 RUN npm run build
 
-FROM build AS production
-
-COPY --from=build /app/client/package.json ./client/
-COPY --from=build /app/client/.next client/.next
+FROM node:20-alpine AS production
 
 WORKDIR /app/client
+
+COPY --from=build /app/client/.next ./.next
+COPY --from=build /app/client/public ./public
+COPY --from=build /app/client/package.json ./
+COPY --from=base /app/node_modules ./node_modules
 
 CMD ["npm", "run", "start"]
 
 FROM base AS development
 
-COPY --from=build /app/client ./client/
+WORKDIR /app
+
+COPY client/ ./client/
+COPY packages/common ./packages/common/
+COPY packages/client ./packages/client/
 
 WORKDIR /app/client
 
