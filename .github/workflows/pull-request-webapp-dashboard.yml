@@ -20,14 +20,6 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
 
-      # install dependencies in web-app/dashboard service
-      - name: Install dependencies in web-app/dashboard service
-        uses: ./.github/actions/install_deps_client_services
-        with:
-          npm-token: ${{ secrets.NPM_TOKEN }}
-          github-workspace: ${{ github.workspace }}
-          service-name: dashboard
-
       # Run ESLint
       - name: Run ESLint for web-app/dashboard service
         run:  npx eslint --c .eslintrc.json ./web-app/dashboard/
@@ -45,14 +37,6 @@ jobs:
         with:
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-workspace: ${{ github.workspace }}
-
-      # install dependencies in web-app/dashboard service
-      - name: Install dependencies in web-app/dashboard service
-        uses: ./.github/actions/install_deps_client_services
-        with:
-          npm-token: ${{ secrets.NPM_TOKEN }}
-          github-workspace: ${{ github.workspace }}
-          service-name: dashboard
 
       # Build service web-app/dashboard
       - name: Run build for web-app/dashboard service by webpack
