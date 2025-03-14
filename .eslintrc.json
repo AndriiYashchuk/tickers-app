@@ -151,7 +151,7 @@
         "client/**/*.{ts,tsx}"
       ],
       "excludedFiles": [
-        "packages/client/**/*"
+        "client/**/*"
       ],
       "parserOptions": {
         "project": "client/tsconfig.json"
