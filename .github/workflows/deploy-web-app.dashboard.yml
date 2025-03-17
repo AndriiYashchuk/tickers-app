@@ -16,12 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # delete package-lock.json https://stackoverflow.com/questions/67114659/npm-err-code-e401-npm-err-incorrect-or-missing-password
-      - run: rm package-lock.json
-      - run: npm install --registry https://registry.npmjs.org
-      - run: npm run build
-        env:
-          PRODUCTION_DOMAIN: ${{ secrets.WEB_APP_DOMAIN }}
+
+      # Setup environment
+      - name: Setup environment
+        uses: ./.github/actions/setup_env
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-workspace: ${{ github.workspace }}
 
       - uses: shinyinc/action-aws-cli@v1.2
       # clean s3 bucket before download new build

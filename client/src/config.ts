@@ -23,6 +23,6 @@ switch (process.env.ENV) {
 
 export const CONFIG: WebAppConfig = {
   ...baseConfig,
-  clientServiceDomain: 'http://client-srv:3000',
+  clientServiceDomain: 'http://client-srv:3000', // http://client-srv.default.svc.cluster.local:3000
   clientScriptDomain: process.env.WEB_APP_DOMAIN || baseConfig.domain,
 };
