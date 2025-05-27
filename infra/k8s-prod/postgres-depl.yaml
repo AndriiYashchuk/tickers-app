@@ -39,8 +39,8 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: assets-postgres-secret
-                  key: ASSETS_POSTGRES_PASS
+                  name: postgres-secret
+                  key: POSTGRES_PASS
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
           volumeMounts:
@@ -54,7 +54,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: assets-postgres-srv
+  name: postgres-srv
 spec:
   ports:
     - port: 5432
