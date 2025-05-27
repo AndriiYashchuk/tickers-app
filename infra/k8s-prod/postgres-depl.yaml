@@ -1,22 +1,24 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: postgres-depl-pv-claim
+  name: postgres-pvc
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
+  storageClassName: do-block-storage
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: assets-postgres-depl
+  name: postgres-depl
 spec:
   selector:
     matchLabels:
       app: postgres-depl
+  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -24,21 +26,14 @@ spec:
       labels:
         app: postgres-depl
     spec:
-      initContainers:
-        - name: clean-db-dir
-          image: busybox
-          command: [ 'sh', '-c', 'rm -rf /var/lib/postgresql/data/*' ]
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgredb
       containers:
         - name: postgres-depl
-          image: postgres:latest
+          image: postgres:15
           ports:
             - containerPort: 5432
           env:
             - name: POSTGRES_DB
-              value: assets-db
+              value: postgres-db
             - name: POSTGRES_USER
               value: tickers-app-user
             - name: POSTGRES_PASSWORD
@@ -46,13 +41,15 @@ spec:
                 secretKeyRef:
                   name: assets-postgres-secret
                   key: ASSETS_POSTGRES_PASS
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgredb
+              name: postgres-storage
       volumes:
-        - name: postgredb
+        - name: postgres-storage
           persistentVolumeClaim:
-            claimName: postgres-depl-pv-claim
+            claimName: postgres-pvc
 ---
 apiVersion: v1
 kind: Service

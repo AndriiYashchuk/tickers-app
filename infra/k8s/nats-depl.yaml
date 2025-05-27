@@ -24,7 +24,7 @@ spec:
               '-hbf', '2',             # Number of failed heartbeats before server closes the client connection
                                        # Name of the FT Group. A group can be 2 or more servers with a single active server and all sharing the same datastore
               '-SD',                   # Enable STAN debugging output
-              '-cid', 'tickers-app',    # Cluster ID (default: test-cluster)
+              '-cid', 'tickers-app',   # Cluster ID (default: test-cluster)
             ]
 ---
 apiVersion: v1

@@ -10,12 +10,12 @@ const dbConfig = {
   }
 };
 
-const devConfig = {
+const sqliteConfig = {
   type: 'sqlite',
   database: 'db.sqlite',
 };
 
-const prodConfig = {
+const postgresConfig = {
   type: 'postgres',
   host: process.env.DATABASE_HOST,
   username: process.env.POSTGRES_USER,
@@ -28,16 +28,16 @@ const prodConfig = {
 switch (process.env.NODE_ENV) {
   case 'development':
     Object.assign(dbConfig, {
-      ...devConfig,
+      ...postgresConfig,
     });
     break;
   case 'test':
     Object.assign(dbConfig, {
-      ...devConfig,
+      ...sqliteConfig,
     });
     break;
   case 'production':
-    Object.assign(dbConfig, prodConfig);
+    Object.assign(dbConfig, postgresConfig);
     break;
   default:
     throw new Error('No environment specified');
