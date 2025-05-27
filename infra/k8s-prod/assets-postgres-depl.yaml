@@ -1,13 +1,14 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-depl-pv-claim
+  name: postgres-pvc
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
+  storageClassName: standard
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -17,6 +18,7 @@ spec:
   selector:
     matchLabels:
       app: postgres-depl
+  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -24,16 +26,9 @@ spec:
       labels:
         app: postgres-depl
     spec:
-      initContainers:
-        - name: clean-db-dir
-          image: busybox
-          command: [ 'sh', '-c', 'rm -rf /var/lib/postgresql/data/*' ]
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgredb
       containers:
         - name: postgres-depl
-          image: postgres:latest
+          image: postgres:15
           ports:
             - containerPort: 5432
           env:
@@ -48,11 +43,11 @@ spec:
                   key: ASSETS_POSTGRES_PASS
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgredb
+              name: postgres-storage
       volumes:
-        - name: postgredb
+        - name: postgres-storage
           persistentVolumeClaim:
-            claimName: postgres-depl-pv-claim
+            claimName: postgres-pvc
 ---
 apiVersion: v1
 kind: Service
