@@ -17,16 +17,16 @@ spec:
           image: iandrew/assets
           env:
             - name: DATABASE_HOST
-              value: assets-postgres-srv
+              value: postgres-srv
             - name: POSTGRES_DB
-              value: assets-db
+              value: postgres-db
             - name: POSTGRES_USER
               value: tickers-app-user
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: assets-postgres-secret
-                  key: ASSETS_POSTGRES_PASS
+                  name: postgres-secret
+                  key: POSTGRES_PASS
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:

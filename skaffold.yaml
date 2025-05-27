@@ -4,8 +4,8 @@ metadata:
   name: tickers-app
 manifests:
   rawYaml:
-    - infra/k8s/*
     - infra/k8s-dev/*
+    - infra/k8s/*
 build:
   local:
     push: false
