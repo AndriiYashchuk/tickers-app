@@ -8,6 +8,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+  # storageClassName: do-block-storage
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -17,6 +18,7 @@ spec:
   selector:
     matchLabels:
       app: postgres-depl
+  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -26,7 +28,7 @@ spec:
     spec:
       containers:
         - name: postgres-depl
-          image: postgres:latest
+          image: postgres:15
           ports:
             - containerPort: 5432
           env:

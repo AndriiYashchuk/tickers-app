@@ -1,37 +1,45 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: auth-mongo-depl
+  name: mongo-depl
 spec:
-  serviceName: "auth-mongo-srv"
+  serviceName: "mongo-srv"
   replicas: 1
   selector:
     matchLabels:
-      app: auth-mongo
+      app: mongo
   template:
     metadata:
       labels:
-        app: auth-mongo
+        app: mongo
     spec:
       containers:
-        - name: auth-mongo
+        - name: mongo
           image: mongo
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: data
+              mountPath: /data/db
   volumeClaimTemplates:
     - metadata:
         name: data
       spec:
-        accessModes: ["ReadWriteOnce"]
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: do-block-storage
         resources:
           requests:
-            storage: 1Gi  # Adjust the storage size as needed
+            storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-mongo-srv
+  name: mongo-srv
 spec:
+  clusterIP: None
   selector:
-    app: auth-mongo
+    app: mongo
   ports:
     - name: db
       protocol: TCP
