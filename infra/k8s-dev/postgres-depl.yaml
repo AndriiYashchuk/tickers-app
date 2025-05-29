@@ -1,33 +1,20 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  # storageClassName: do-block-storage
----
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: postgres-depl
+  name: postgres
 spec:
+  serviceName: "postgres-srv"
+  replicas: 1
   selector:
     matchLabels:
-      app: postgres-depl
-  replicas: 1
-  strategy:
-    type: Recreate
+      app: postgres
   template:
     metadata:
       labels:
-        app: postgres-depl
+        app: postgres
     spec:
       containers:
-        - name: postgres-depl
+        - name: postgres
           image: postgres:15
           ports:
             - containerPort: 5432
@@ -44,20 +31,13 @@ spec:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgres-storage
-      volumes:
-        - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres-srv
-spec:
-  ports:
-    - port: 5432
-  selector:
-    app: postgres-depl
-  type: ClusterIP
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
