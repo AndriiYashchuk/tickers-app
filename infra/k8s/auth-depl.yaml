@@ -17,7 +17,7 @@ spec:
           image: iandrew/auth
           env:
             - name: MONGO_URI
-              value: 'mongodb://auth-mongo-srv:27017/auth'
+              value: 'mongodb://mongo-srv:27017/auth'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -37,7 +37,7 @@ spec:
                   name: recaptcha-secret
                   key: RECAPTCHA_KEY
             - name: REDIS_HOST
-              value: auth-redis-srv
+              value: redis-srv
             - name: ADMIN_EMAIL
               value: tickersapp@gmail.com
 ---
