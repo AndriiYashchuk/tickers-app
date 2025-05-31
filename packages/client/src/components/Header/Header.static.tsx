@@ -1,25 +1,11 @@
-import * as React from 'react';
-import Skeleton from '@mui/material/Skeleton';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { Avatar, IconButton, Menu, MenuItem } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/system/Stack';
-import Button from '@mui/material/Button';
-import LinkComponent from '@mui/material/Link';
+'use client';
+
+import React from 'react';
 import { generateAvatarColor } from '../../utils/generateAvatarColor';
-import { Props } from './types';
-import { Link } from '../../types/Link';
-
-interface DynamicProps {
-  handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
-  isOpen?: boolean;
-  anchorEl?: any;
-  handleClose?: (link: Link) => void
-}
-
-const AVATAR_BUTTON_STYLE = { padding: 0 };
+import { DynamicProps } from './types';
+import { HeaderMobile } from './HeaderMobile';
+import { useIsMobile } from '../../hooks/use-is-mobile';
+import { HeaderDesktop } from './HeaderDesktop';
 
 export const HeaderStatic = ({
   logo,
@@ -34,140 +20,57 @@ export const HeaderStatic = ({
   onUserClick,
   isRenderFromSSR = false,
   isLoading,
-}: Props & DynamicProps) => {
+  isMobile: isSSRMobile,
+}: DynamicProps) => {
+  const isMobileClient = useIsMobile();
+  const isMobile = isMobileClient || isSSRMobile;
+
   const { name = '', surname = '', email = '' } = user || {};
   const isFullName = !!(name && surname);
   const avatarProps = isFullName
     ? generateAvatarColor(`${name} ${surname}`)
     : { children: `${email[0]}` };
 
+  if (isMobile) {
+    return (
+      <HeaderMobile
+        user={user}
+        avatarProps={avatarProps}
+        logo={logo}
+        links={links}
+        isRenderFromSSR={isRenderFromSSR}
+        onClick={onClick}
+        handleClick={handleClick}
+        isOpen={isOpen}
+        isLoading={isLoading}
+        isFullName={isFullName}
+        surname={surname}
+        email={email}
+        usersMenu={usersMenu}
+        handleClose={handleClose}
+        name={name}
+      />);
+  }
+
   return (
-    <AppBar position={'static'}>
-      <Toolbar>
-        {logo && (
-          <IconButton
-            onClick={
-              !isRenderFromSSR ? () => onClick && onClick(logo) : undefined
-            }
-            size={'large'}
-            edge={'start'}
-            color={'inherit'}
-            aria-label={'logo'}
-          >
-            {logo.icon || <TrendingUpIcon />}
-          </IconButton>)
-        }
-        {logo && logo.title && (
-          <Typography
-            variant={'h6'}
-            component={'div'}
-            sx={{ flexGrow: 1 }}
-          >
-            <LinkComponent
-              underline={'none'}
-              href={logo.to}
-              color={'inherit'}
-            >
-              {logo.title}
-            </LinkComponent>
-          </Typography>
-        )
-        }
-        <Stack
-          direction={'row'}
-          spacing={2}
-        >
-          {links.map(({ title, key, to }) => (
-            <LinkComponent
-              href={to}
-              style={{
-                textAlign: 'center',
-                padding: '6px 8px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                minWidth: '70px',
-              }}
-              sx={{ paddingLeft: '16px' }}
-              variant="subtitle2"
-              underline="hover"
-              component={to ? 'a' : 'button'}
-              key={key || title || to}
-              color={'inherit'}
-              onClick={
-                (!isRenderFromSSR && onClick) ? () => onClick({ title, key, to }) : undefined
-              }
-            >
-              {title.toUpperCase()}
-            </LinkComponent>)
-          )}
-          {user && (
-            <Button
-              style={AVATAR_BUTTON_STYLE}
-              size="small"
-              id="avatar-button"
-              onClick={!isRenderFromSSR ? handleClick : undefined}
-              aria-controls={isOpen ? 'avatar-menu' : undefined}
-              aria-haspopup={'true'}
-              aria-expanded={isOpen || undefined}
-              //            endIcon={<KeyboardArrowDown color={"secondary"} />}
-            >
-              <Avatar {...avatarProps} />
-            </Button>)}
-          {
-            isLoading && (
-              <Button
-                style={AVATAR_BUTTON_STYLE}
-                size="small"
-              >
-                <Skeleton
-                  variant="circular"
-                  width={40}
-                  height={40}
-                />
-              </Button>)
-          }
-        </Stack>
-        {user && (
-          <Menu
-            id="avatar-menu"
-            open={!!isOpen}
-            anchorEl={anchorEl}
-            MenuListProps={{
-              'aria-labelledby': 'avatar-button'
-            }}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right'
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-          >
-            <MenuItem
-              onClick={() => onUserClick && onUserClick(user)}
-            >
-              {(user.name && user.surname)
-                ? `${user.name} ${user.surname}`
-                : user.email
-              }
-            </MenuItem>
-            {usersMenu.map(({ title, ...rest }) => (
-              <MenuItem
-                key={title}
-                onClick={() => handleClose && handleClose({ ...rest, title })}
-                style={{
-                  justifyContent: 'center',
-                  textTransform: 'uppercase'
-                }}
-              >
-                {title}
-              </MenuItem>
-            ))}
-          </Menu>)}
-      </Toolbar>
-    </AppBar>
+    <HeaderDesktop
+      logo={logo}
+      isRenderFromSSR={isRenderFromSSR}
+      onClick={onClick}
+      links={links}
+      user={user}
+      handleClick={handleClick}
+      isOpen={isOpen}
+      avatarProps={avatarProps}
+      isLoading={isLoading}
+      anchorEl={anchorEl}
+      handleClose={handleClose}
+      onUserClick={onUserClick}
+      surname={surname}
+      email={email}
+      isFullName={isFullName}
+      name={name}
+      usersMenu={usersMenu}
+    />
   );
 };
