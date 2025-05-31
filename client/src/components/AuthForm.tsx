@@ -8,6 +8,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { recaptchaPublicApiKey } from '../constants';
+import { validateEmail } from '../../utils/client/validate-email';
+import { isEmailValid } from '../utils/client/is-email-valid';
 
 export interface Props {
   icon: any;
@@ -38,6 +40,7 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
     password,
     uiErrors
   } = props;
+  const isEmailValid = email || password || isEmailValid(email);
 
   return (
     <Container
@@ -126,7 +129,7 @@ const AuthFrom = (props: React.PropsWithChildren<Props>) => {
             </Grid>)}
           <Grid marginTop="16px">
             <Button
-              disabled={!email || !password}
+              disabled={!isEmailValid}
               type="submit"
               fullWidth
               variant="outlined"

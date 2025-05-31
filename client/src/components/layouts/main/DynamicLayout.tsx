@@ -14,9 +14,11 @@ import { Main } from '@tickers-app/common-client/src/components/Main';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { Link } from '@tickers-app/common-client/src/types/Link';
+import { config } from './config';
 
 interface Props {
   currentUser: User | null;
+  isMobile?: boolean;
   isLoading?: boolean;
   links?: Link [];
   resetUser?: () => void;
@@ -27,6 +29,7 @@ const DynamicLayout = ({
   currentUser,
   isLoading,
   resetUser,
+  isMobile,
 }: React.PropsWithChildren<Props>) => {
   const { push } = useRouter();
   const signOut = async () => {
@@ -35,37 +38,36 @@ const DynamicLayout = ({
       resetUser();
     }
   };
+  const navigate = async ({ to = '/' }) => {
+    // signout
+    if (to === MENU[0].to) {
+      await signOut();
+      push('/');
+    } else {
+      push(to === 'dashboard' ? '/web-app' : to);
+    }
+  };
 
   return (
     <>
       <Header
         logo={LOGO}
         user={currentUser}
+        isMobile={isMobile}
         isLoading={isLoading}
         usersMenu={MENU}
         links={isLoading
           ? BASE_HEADER_OPTIONS
           : (currentUser ? AUTHORIZED_HEADER : UNAUTHORIZED_HEADER)}
-        onClick={async ({ to = '/' }) => {
-          // signout
-          if (to === MENU[0].to) {
-            await signOut();
-            push('/');
-          } else {
-            push(to === 'dashboard' ? '/web-app' : to);
-          }
-        }}
+        onClick={navigate}
       />
       <Main>
         {children}
       </Main>
       <Footer
-        email="tickersapp@gmail.com"
-        author={{
-          link: 'https://www.linkedin.com/in/andrii-yashchuk',
-          name: 'Andrii Yashchuk'
-        }}
-        phone="+1234567889"
+        email={config.email}
+        author={config.author}
+        phone={config.phone}
       />
     </>
   );
