@@ -110,7 +110,7 @@ export const HeaderMobile = ({
                   primary={isFullName ? `${name} ${surname}` : email}
                 />
               </ListItem>
-              {usersMenu.map(({ title, ...rest }) => (
+              {usersMenu && usersMenu.map(({ title, ...rest }) => (
                 <ListItem
                   button
                   key={title}

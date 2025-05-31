@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import EmailConfirmation from '../../../components/EmailConfirmation';
-import { useRouter } from 'next/navigation';
-import { useRequestWithUiErrors } from '../../../hooks/useRequestWithUiErrors';
 import { Button, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useRequestWithUiErrors } from '../../../hooks/useRequestWithUiErrors';
 import { CenteredTextWithIcon } from '../../../components/CenteredTextWithIcon';
 import { NotificationLayout } from '../../../components/layouts/NotificationLayout';
 
@@ -46,7 +45,10 @@ const EmailConfirmationPage = (props: Props) => {
   }, [errors]);
 
   return (
-    <NotificationLayout isLoading={isLoading} headerText={"Email Confirmation"}>
+    <NotificationLayout
+      isLoading={isLoading}
+      headerText={'Email Confirmation'}
+    >
       {isLoading && (
         <div style={{ display: 'flex' }}>
           <Typography variant="body1" sx={{ textAlign: 'center', m: 1 }}>

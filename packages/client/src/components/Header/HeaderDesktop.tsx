@@ -117,10 +117,10 @@ export const HeaderDesktop = ({
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem onClick={() => onUserClick && onUserClick(user)}>
+        <MenuItem onClick={() => onUserClick && user && onUserClick(user)}>
           {isFullName ? `${name} ${surname}` : email}
         </MenuItem>
-        {usersMenu.map(({ title, ...rest }) => (
+        {usersMenu && usersMenu.map(({ title, ...rest }) => (
           <MenuItem
             key={title}
             onClick={() => handleClose && handleClose({ ...rest, title })}

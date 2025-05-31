@@ -13,7 +13,11 @@ interface Props {
   headerText: string;
 }
 
-export const NotificationLayout = ({ children, isLoading, headerText }: PropsWithChildren<Props>) => {
+export const NotificationLayout = ({
+  children,
+  isLoading,
+  headerText
+}: PropsWithChildren<Props>) => {
   return (
     <Box
       display="flex"
@@ -43,5 +47,5 @@ export const NotificationLayout = ({ children, isLoading, headerText }: PropsWit
         />
       </Container>
     </Box>
-  )
-}
+  );
+};
